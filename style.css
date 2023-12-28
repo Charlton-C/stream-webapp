@@ -45,11 +45,17 @@ body{
 	list-style: none;
 	position: relative;
 	font-size: 2.5vw;
-	color: rgb(255, 255, 255);
+	color: #2ae7f1;
 	cursor: pointer;
+	text-decoration: underline;
+	text-underline-offset: .4vh;
+	letter-spacing: .4vw;
 	transition: .3s linear;
 }
 .music_side nav ul li:hover{
+	color: rgb(255, 255, 255);
+}
+.music_side nav ul li:active{
 	color: rgb(135, 137, 145);
 }
 
@@ -57,7 +63,7 @@ body{
 .music_side > .music_div{
     width: 100%;
     height: 94%;
-	padding: 0 .5vw 0 2vw;
+	padding: 0 2vw 0 2vw;
 	overflow: scroll;
 	scroll-behavior: smooth;
 }
@@ -70,6 +76,10 @@ body{
 	display: flex;
     align-items: center;
     justify-content: space-between;
+    transition: .3s linear;
+}
+.music_side > .music_div > .h4:hover{
+	color: #2ae7f1;
 }
 
 
@@ -80,7 +90,7 @@ body{
     transition: .3s linear;
 }
 .music_side > .music_div > .h4 .bi:hover{
-	color: rgb(255, 255, 255);
+	color: #2ae7f1;
 }
 
 
