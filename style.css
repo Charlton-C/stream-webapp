@@ -29,7 +29,7 @@ body{
 .music_side nav{
 	width: 90%;
 	height: 6%;
-	margin: auto;
+	margin: auto auto 1vh auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -45,7 +45,7 @@ body{
 	list-style: none;
 	position: relative;
 	font-size: 2.5vw;
-	color: #2ae7f1;
+	color: rgb(42, 231, 241);
 	cursor: pointer;
 	text-decoration: underline;
 	text-underline-offset: .4vh;
@@ -53,14 +53,15 @@ body{
 	transition: .3s linear;
 }
 .music_side nav ul li:hover{
-	color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255)!important;
 }
 .music_side nav ul li:active{
-	color: rgb(135, 137, 145);
+	color: rgb(106, 107, 111)!important;
 }
 
 
 .music_side > .music_div{
+	display: block;
     width: 100%;
     height: 94%;
 	padding: 0 2vw 0 2vw;
@@ -85,12 +86,7 @@ body{
 
 .music_side > .music_div > .h4 .bi{
 	font-size: 150%;
-	color: rgb(164, 168, 180);
     cursor: pointer;
-    transition: .3s linear;
-}
-.music_side > .music_div > .h4 .bi:hover{
-	color: #2ae7f1;
 }
 
 
@@ -168,6 +164,7 @@ body{
 
 
 .music_side > .songs_list_div{
+	display: none;
 	width: 100%;
 	height: 94%;
 }
