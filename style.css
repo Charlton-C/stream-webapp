@@ -13,7 +13,7 @@ body{
 	font-family: 'Poppins', sans-serif;
 	width: 100vw;
 	height: 100vh;
-	background: rgb(18, 18, 19);
+	background-color: rgb(18, 18, 19);
 	padding: 1vh 1vw 10vh 1vw;
 }
 
@@ -21,7 +21,7 @@ body{
 .music_side{
 	width: 100%;
 	height: 100%;
-	background: rgb(17, 23, 39);
+	background-color: rgb(17, 23, 39);
 	color: rgb(255, 255, 255);
 }
 
@@ -102,7 +102,7 @@ body{
     transition: .3s linear;
 }
 .music_side > .music_div > .songs > li:hover{
-	background: rgb(105, 105, 170, .1);
+	background-color: rgb(105, 105, 170, .1);
 }
 
 
@@ -154,4 +154,51 @@ body{
     white-space: nowrap;
     text-overflow: ellipsis;
     color: rgb(88, 91, 97);
+}
+
+
+.music_side > .songs_list_div{
+	width: 100%;
+	height: 94%;
+}
+
+
+.music_side > .songs_list_div > ul{
+	height: 100%;
+	list-style: none;
+	overflow: scroll;
+	scroll-behavior: smooth;
+}
+.music_side > .songs_list_div > ul::-webkit-scrollbar{
+	display: none;
+}
+
+
+.music_side > .songs_list_div > ul > li{
+	width: 100%;
+	margin: 0 0 1% 0;
+	padding: .5% 3.5% .5% 2%;
+	border-radius: 1.5%;
+	background-color: rgb(5, 73, 122);
+	font-size: 2vw;
+    display: flex;
+    align-items: center;
+}
+
+
+.music_side > .songs_list_div > ul > li > img{
+	margin: 0 3% 0 0;
+	width: 4%;
+	border-radius: 50%;
+}
+
+
+.music_side > .songs_list_div > ul > li > h5 > .subtitle{
+    color: rgb(193, 195, 201);
+}
+
+
+.music_side > .songs_list_div > ul > li > .bi{
+	margin: 0 0 0 auto;
+	font-size: 150%;
 }
