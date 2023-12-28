@@ -102,7 +102,7 @@ body{
 
 
 .music_side > .music_div > .songs > li{
-	width: 20%;
+	min-width: 20%;
     list-style: none;
     margin-right: 1%;
     transition: .3s linear;
