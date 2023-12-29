@@ -69,7 +69,7 @@ function createSongsPreviews(){
 		if(loopCount > 10){
 			clearInterval(intervalVariable);
 		}
-	}, 5);
+	}, 25);
 }
 createSongsPreviews();
 
@@ -120,5 +120,5 @@ function createSongItemsInSongsListPage(){
 		if(loopCount > 10){
 			clearInterval(intervalVariable);
 		}
-	}, 5);
+	}, 25);
 }
