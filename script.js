@@ -69,7 +69,7 @@ function createSongsPreviews(){
 		if(loopCount > 10){
 			clearInterval(intervalVariable);
 		}
-	}, 1);
+	}, 5);
 }
 createSongsPreviews();
 
