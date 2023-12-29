@@ -76,14 +76,26 @@ createSongsPreviews();
 
 function createSongItemsInSongsListPage(){
 	songsListDivUl.innerHTML = "";
-	var i = 1;
+	var loopCount = 1;
 	var intervalVariable = setInterval(()=>{
-		var songNumber = i.toString();
+		var songNumber = loopCount.toString();
 		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
 			var liElement = document.createElement("li");
 			var liElementImg = document.createElement("img");
-			liElementImg.setAttribute("src", "/resources/drifting.jpg"); // Change to match song image
+			// Get image from metadata and add it to the img tag
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				liElementImg.setAttribute("src", base64);
+			} else if(!image){
+				liElementImg.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
 			var liElementH5 = document.createElement("h5");
 			liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
 			liElementH5.innerText = tags.title;
@@ -100,10 +112,12 @@ function createSongItemsInSongsListPage(){
 			liElement.appendChild(liElementH5);
 			liElement.appendChild(liElementI);
 			songsListDivUl.appendChild(liElement);
+		}, {
+			tags: ["picture", "title", "artist"]
 		});
 
-		i++
-		if(i > 10){
+		loopCount++
+		if(loopCount > 10){
 			clearInterval(intervalVariable);
 		}
 	}, 5);
