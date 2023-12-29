@@ -190,6 +190,10 @@ body{
 	font-size: 2vw;
     display: flex;
     align-items: center;
+	transition: .2s linear;
+}
+.music_side > .songs_list_div > ul > li:hover{
+	background-color: rgb(32, 122, 186)!important;
 }
 
 
