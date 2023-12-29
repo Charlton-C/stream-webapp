@@ -90,29 +90,29 @@ body{
 }
 
 
-.music_side > .music_div > .songs{
+.music_side > .music_div > .songs > ul{
+	display: flex;
 	width: 100%;
-    display: flex;
+	list-style: none;
     overflow: scroll;
     scroll-behavior: smooth;
 }
-.music_side > .music_div > .songs::-webkit-scrollbar{
+.music_side > .music_div > .songs > ul::-webkit-scrollbar{
 	display: none;
 }
 
 
-.music_side > .music_div > .songs > li{
+.music_side > .music_div > .songs > ul > li{
 	min-width: 20%;
-    list-style: none;
     margin-right: 1%;
     transition: .3s linear;
 }
-.music_side > .music_div > .songs > li:hover{
+.music_side > .music_div > .songs > ul > li:hover{
 	background-color: rgb(105, 105, 170, .1);
 }
 
 
-.music_side > .music_div > .songs > li > .img_play{
+.music_side > .music_div > .songs > ul > li > .img_play{
 	position: relative;
     width: 100%;
     height: 70%;
@@ -122,29 +122,29 @@ body{
 }
 
 
-.music_side > .music_div > .songs > li > .img_play > img{
+.music_side > .music_div > .songs > ul > li > .img_play > img{
 	width: 100%;
     height: 100%;
     transition: .3s linear;
 }
-.music_side > .music_div > .songs > li:hover > .img_play > img{
+.music_side > .music_div > .songs > ul > li:hover > .img_play > img{
 	filter: brightness(50%);
 }
 
 
-.music_side > .music_div > .songs > li > .img_play > .bi{
+.music_side > .music_div > .songs > ul > li > .img_play > .bi{
 	position: absolute;
 	font-size: 130%;
     cursor: pointer;
     opacity: 0;
     transition: .3s linear;
 }
-.music_side > .music_div > .songs > li:hover > .img_play > .bi{
+.music_side > .music_div > .songs > ul > li:hover > .img_play > .bi{
 	opacity: 1;
 }
 
 
-.music_side > .music_div > .songs > li > h5{
+.music_side > .music_div > .songs > ul > li > h5{
 	padding: 5% 0 0 5%;
     font-size: 70%;
     width: 100%;
@@ -154,7 +154,7 @@ body{
 } 
 
 
-.music_side > .music_div > .songs > li > h5 > .subtitle{
+.music_side > .music_div > .songs > ul > li > h5 > .subtitle{
 	font-size: 95%;
     overflow: hidden;
     white-space: nowrap;
