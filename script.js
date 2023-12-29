@@ -19,7 +19,7 @@ expandSongsButton.addEventListener("click", () => {
 });
 
 
-function createSongsPreview(){
+function createSongsPreviews(){
 	var i = 1;
 	var intervalVariable = setInterval(()=>{
 		var songNumber = i.toString();
@@ -55,4 +55,4 @@ function createSongsPreview(){
 		}
 	}, 5);
 }
-createSongsPreview();
+createSongsPreviews();
