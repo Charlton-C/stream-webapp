@@ -17,6 +17,7 @@ expandSongsButton.addEventListener("click", () => {
 	document.querySelector(".songs_list_div").style.display = "block";
 	expandLibraryButton.style.color = "rgb(106, 107, 111)";
 	expandLibraryButton.style.textDecoration = "none";
+	createSongItemsInSongsListPage();
 });
 
 
@@ -60,24 +61,36 @@ createSongsPreviews();
 
 
 function createSongItemsInSongsListPage(){
-	var liElement = document.createElement("li");
-	var liElementImg = document.createElement("img");
-	liElementImg.setAttribute("src", "/resources/drifting.jpg"); // Change to match song image
-	var liElementH5 = document.createElement("h5");
-	liElementH5.setAttribute("class", "song-1-song-name");
-	liElementH5.innerText = "song 1 name";
-	var br = document.createElement("br");
-	liElementH5.appendChild(br);
-	var liElementH5Div = document.createElement("div");
-	liElementH5Div.setAttribute("class", "subtitle song-1-artist-name");
-	liElementH5Div.innerText = "song 1 artist";
-	liElementH5.appendChild(liElementH5Div);
-	var liElementI = document.createElement("i");
-	liElementI.setAttribute("class", "bi playListPlay bi-play-circle-fill");
-	liElementI.setAttribute("id", "2");
-	liElement.appendChild(liElementImg);
-	liElement.appendChild(liElementH5);
-	liElement.appendChild(liElementI);
-	songsListDivUl.appendChild(liElement);
+	songsListDivUl.innerHTML = "";
+	var i = 1;
+	var intervalVariable = setInterval(()=>{
+		var songNumber = i.toString();
+		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
+			var liElement = document.createElement("li");
+			var liElementImg = document.createElement("img");
+			liElementImg.setAttribute("src", "/resources/drifting.jpg"); // Change to match song image
+			var liElementH5 = document.createElement("h5");
+			liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
+			liElementH5.innerText = tags.title;
+			var br = document.createElement("br");
+			liElementH5.appendChild(br);
+			var liElementH5Div = document.createElement("div");
+			liElementH5Div.setAttribute("class", "subtitle song-"+songNumber+"-artist-name");
+			liElementH5Div.innerText = tags.artist;
+			liElementH5.appendChild(liElementH5Div);
+			var liElementI = document.createElement("i");
+			liElementI.setAttribute("class", "bi playListPlay bi-play-circle-fill");
+			liElementI.setAttribute("id", "2");
+			liElement.appendChild(liElementImg);
+			liElement.appendChild(liElementH5);
+			liElement.appendChild(liElementI);
+			songsListDivUl.appendChild(liElement);
+		});
+
+		i++
+		if(i > 10){
+			clearInterval(intervalVariable);
+		}
+	}, 5);
 }
-createSongItemsInSongsListPage();
