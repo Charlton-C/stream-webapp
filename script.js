@@ -2,6 +2,19 @@ var expandLibraryButton = document.querySelector("#music_side-library");
 var expandSongsButton = document.querySelector(".expand-songs-div");
 var previewSongsDivUl = document.querySelector(".songs-ul");
 var songsListDivUl = document.querySelector(".songs_list_div-ul");
+var playingSongImage = document.querySelector(".playing-song-image");
+var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
+var playingSongProgressBar = document.querySelector(".playing-song-progress-bar");
+var playingSongRemainingTimeSpan = document.querySelector(".playing-song-remaining-time-span");
+var playingSongNameSpan = document.querySelector(".playing-song-name-span");
+var playingSongArtistSpan = document.querySelector(".playing-song-artist-span");
+var previousSongButton = document.querySelector(".previous-song-button");
+var playOrPauseSongButton = document.querySelector(".play-or-pause-song-button");
+var nextSongButton = document.querySelector(".next-song-button");
+var downloadSongButton = document.querySelector(".download-song-button");
+var volumeButton = document.querySelector(".volume-button");
+var volumeBar = document.querySelector(".volume-bar");
+var playingSongNumber = 0;
 
 
 expandLibraryButton.addEventListener("click", () => {
@@ -28,6 +41,7 @@ function createSongsPreviews(){
 		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
 			var liElement = document.createElement("li");
+			liElement.setAttribute("class", songNumber);
 			var liElementDiv = document.createElement("div");
 			liElementDiv.setAttribute("class", "img_play");
 			var liElementDivImg = document.createElement("img");
@@ -45,7 +59,7 @@ function createSongsPreviews(){
 			}
 			else {}
 			var liElementDivI = document.createElement("i");
-			liElementDivI.setAttribute("class", "bi playListPlay bi-play-circle-fill");
+			liElementDivI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
 			liElementDivI.setAttribute("id", "2");
 			liElementDiv.appendChild(liElementDivImg);
 			liElementDiv.appendChild(liElementDivI);
@@ -61,6 +75,7 @@ function createSongsPreviews(){
 			liElement.appendChild(liElementDiv);
 			liElement.appendChild(liElementH5);
 			previewSongsDivUl.appendChild(liElement);
+			playSong(liElement);
 		}, {
 			tags: ["picture", "title", "artist"]
 		});
@@ -106,7 +121,7 @@ function createSongItemsInSongsListPage(){
 			liElementH5Div.innerText = tags.artist;
 			liElementH5.appendChild(liElementH5Div);
 			var liElementI = document.createElement("i");
-			liElementI.setAttribute("class", "bi playListPlay bi-play-circle-fill");
+			liElementI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
 			liElementI.setAttribute("id", "2");
 			liElement.appendChild(liElementImg);
 			liElement.appendChild(liElementH5);
@@ -121,4 +136,32 @@ function createSongItemsInSongsListPage(){
 			clearInterval(intervalVariable);
 		}
 	}, 25);
+}
+
+
+function playSong(element){
+	element.addEventListener("click", () => {
+		var songNumber = Number(element.classList[0]);
+		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
+			// Get image from metadata and add it to the img tag
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				playingSongImage.setAttribute("src", base64);
+			} else if(!image){
+				playingSongImage.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
+			playingSongNameSpan.innerText = tags.title;
+			playingSongArtistSpan.innerText = tags.artist;
+		}, {
+			tags: ["picture", "title", "artist"]
+		});
+		playingSongNumber = songNumber;
+	});
 }
