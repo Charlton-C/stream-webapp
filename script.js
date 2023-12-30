@@ -167,9 +167,13 @@ function playSong(element){
 		// Change image play or pause button to show whether a song is playing
 		if(isASongPlaying == false && playingSongNumber != songNumber){
 			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			playOrPauseSongButton.classList.toggle("bi-play-fill");
+			isASongPlaying = true;
 		}
 		else if(isASongPlaying == false && playingSongNumber == songNumber){
 			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			playOrPauseSongButton.classList.toggle("bi-play-fill");
+			isASongPlaying = true;
 		}
 		else if(isASongPlaying == true && playingSongNumber != songNumber){
 			document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
@@ -177,10 +181,10 @@ function playSong(element){
 		}
 		else if(isASongPlaying == true && playingSongNumber == songNumber){
 			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			playOrPauseSongButton.classList.toggle("bi-play-fill");
 			isASongPlaying = false;
 		}
 		else{}
 		playingSongNumber = songNumber;
-		isASongPlaying = true;
 	});
 }
