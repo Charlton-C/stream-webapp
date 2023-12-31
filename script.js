@@ -35,6 +35,22 @@ expandSongsButton.addEventListener("click", () => {
 });
 
 
+playOrPauseSongButton.addEventListener("click", () => {
+	if(playingSongNameSpan.innerText == ""){}
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		isASongPlaying = false;
+	}
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false){
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		isASongPlaying = true;
+	}
+	else{}
+});
+
+
 function createSongsPreviews(){
 	var loopCount = 1;
 	var intervalVariable = setInterval(()=>{
@@ -75,11 +91,41 @@ function createSongsPreviews(){
 			liElementH5.appendChild(liElementH5Div);
 			liElement.appendChild(liElementDiv);
 			liElement.appendChild(liElementH5);
+			liElement.addEventListener("click", () => {
+				playingSongImage.setAttribute("src", liElementDivImg.src);
+				playingSongNameSpan.innerText = tags.title;
+				playingSongArtistSpan.innerText = tags.artist;
+			
+				// Change image play or pause button to show whether a song is playing
+				if(isASongPlaying == false && playingSongNumber != songNumber){
+					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					isASongPlaying = true;
+				}
+				else if(isASongPlaying == false && playingSongNumber == songNumber){
+					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					isASongPlaying = true;
+				}
+				else if(isASongPlaying == true && playingSongNumber != songNumber){
+					document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+				}
+				else if(isASongPlaying == true && playingSongNumber == songNumber){
+					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					isASongPlaying = false;
+				}
+				else{}
+				playingSongNumber = songNumber;
+			});
+
+
 			previewSongsDivUl.appendChild(liElement);
-			playSong(liElement);
 		}, {
 			tags: ["picture", "title", "artist"]
 		});
+
 
 		loopCount++
 		if(loopCount > 10){
@@ -137,54 +183,4 @@ function createSongItemsInSongsListPage(){
 			clearInterval(intervalVariable);
 		}
 	}, 25);
-}
-
-
-function playSong(element){
-	element.addEventListener("click", () => {
-		var songNumber = Number(element.classList[0]);
-		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
-			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
-			// Get image from metadata and add it to the img tag
-			var image = tags.picture;
-			if(image){
-				var base64String = "";
-				for (var i = 0; i < image.data.length; i++){
-					base64String += String.fromCharCode(image.data[i]);
-				}
-				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-				playingSongImage.setAttribute("src", base64);
-			} else if(!image){
-				playingSongImage.setAttribute("src", "/resources/no-image.png");
-			}
-			else {}
-			playingSongNameSpan.innerText = tags.title;
-			playingSongArtistSpan.innerText = tags.artist;
-		}, {
-			tags: ["picture", "title", "artist"]
-		});
-
-		// Change image play or pause button to show whether a song is playing
-		if(isASongPlaying == false && playingSongNumber != songNumber){
-			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
-			isASongPlaying = true;
-		}
-		else if(isASongPlaying == false && playingSongNumber == songNumber){
-			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
-			isASongPlaying = true;
-		}
-		else if(isASongPlaying == true && playingSongNumber != songNumber){
-			document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-		}
-		else if(isASongPlaying == true && playingSongNumber == songNumber){
-			document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
-			isASongPlaying = false;
-		}
-		else{}
-		playingSongNumber = songNumber;
-	});
 }
