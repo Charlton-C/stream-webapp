@@ -14,8 +14,15 @@ var nextSongButton = document.querySelector(".next-song-button");
 var downloadSongButton = document.querySelector(".download-song-button");
 var volumeButton = document.querySelector(".volume-button");
 var volumeBar = document.querySelector(".volume-bar");
+var songsArray = [];
 var playingSongNumber = 0;
 var isASongPlaying = false;
+
+
+// Set songs in the songs array
+for(var i = 1; i <= 10; i++){
+	songsArray[i] = new Audio("/songs/"+i+".mp3");
+}
 
 
 expandLibraryButton.addEventListener("click", () => {
@@ -36,15 +43,20 @@ expandSongsButton.addEventListener("click", () => {
 
 
 playOrPauseSongButton.addEventListener("click", () => {
+	// No song plays as the user has not selected a song
 	if(playingSongNameSpan.innerText == ""){}
+	// To pause the current playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		playOrPauseSong(playingSongNumber, playingSongNumber);
 		isASongPlaying = false;
 	}
+	// To play the current playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false){
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		playOrPauseSong(playingSongNumber, playingSongNumber);
 		isASongPlaying = true;
 	}
 	else{}
@@ -97,23 +109,31 @@ function createSongsPreviews(){
 				playingSongArtistSpan.innerText = tags.artist;
 			
 				// Change image play or pause button to show whether a song is playing
+				// To play the first song or to play a different song while the previous one is paused
 				if(isASongPlaying == false && playingSongNumber != songNumber){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
 					isASongPlaying = true;
 				}
+				// To continue to play the same song
 				else if(isASongPlaying == false && playingSongNumber == songNumber){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
 					isASongPlaying = true;
 				}
+				// To play a different song while another one is still playing(pause this other one)
 				else if(isASongPlaying == true && playingSongNumber != songNumber){
 					document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
 				}
+				// To pause a song
 				else if(isASongPlaying == true && playingSongNumber == songNumber){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
 					isASongPlaying = false;
 				}
 				else{}
@@ -183,4 +203,31 @@ function createSongItemsInSongsListPage(){
 			clearInterval(intervalVariable);
 		}
 	}, 25);
+}
+
+
+function playOrPauseSong(playingSongNumber, songNumber){
+	var previousSong = songsArray[playingSongNumber];
+	var currentSong = songsArray[songNumber];
+
+	// To play the first song or to play a different song while the previous one is paused
+	if(isASongPlaying == false && playingSongNumber != songNumber){
+		currentSong.currentTime = 0;
+		currentSong.play();
+	}
+	// To continue to play the same song
+	else if(isASongPlaying == false && playingSongNumber == songNumber){
+		currentSong.play();
+	}
+	// To play a different song while another one is still playing(pause this other one)
+	else if(isASongPlaying == true && playingSongNumber != songNumber){
+		previousSong.pause();
+		currentSong.currentTime = 0;
+		currentSong.play();
+	}
+	// To pause a song
+	else if(isASongPlaying == true && playingSongNumber == songNumber){
+		currentSong.pause();
+	}
+	else{}
 }
