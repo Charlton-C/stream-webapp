@@ -17,10 +17,11 @@ var volumeBar = document.querySelector(".volume-bar");
 var songsArray = [];
 var playingSongNumber = 0;
 var isASongPlaying = false;
+var numberOfSongs = 10;
 
 
 // Set songs in the songs array
-for(var i = 1; i <= 10; i++){
+for(var i = 1; i <= numberOfSongs; i++){
 	songsArray[i] = new Audio("/songs/"+i+".mp3");
 }
 
@@ -66,7 +67,7 @@ playOrPauseSongButton.addEventListener("click", () => {
 nextSongButton.addEventListener("click", () => {
 	// No song plays as the user has not selected a song
 	if(playingSongNameSpan.innerText == ""){}
-	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber < numberOfSongs){
 		// To pause the current playing song
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
@@ -186,7 +187,7 @@ function createSongsPreviews(){
 
 
 		loopCount++
-		if(loopCount > 10){
+		if(loopCount > numberOfSongs){
 			clearInterval(intervalVariable);
 		}
 	}, 80);
@@ -237,7 +238,7 @@ function createSongItemsInSongsListPage(){
 		});
 
 		loopCount++
-		if(loopCount > 10){
+		if(loopCount > numberOfSongs){
 			clearInterval(intervalVariable);
 		}
 	}, 25);
