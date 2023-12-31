@@ -63,6 +63,44 @@ playOrPauseSongButton.addEventListener("click", () => {
 });
 
 
+nextSongButton.addEventListener("click", () => {
+	// No song plays as the user has not selected a song
+	if(playingSongNameSpan.innerText == ""){}
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
+		// To pause the current playing song
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		isASongPlaying = false;
+		playingSongNumber = Number(playingSongNumber) + 1;
+		// To play the next song
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
+			// Get image from next song metadata and change the playing song image
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				playingSongImage.setAttribute("src", base64);
+			} else if(!image){
+				playingSongImage.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
+			playingSongNameSpan.innerText = tags.title;
+			playingSongArtistSpan.innerText = tags.artist;
+		});
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		isASongPlaying = true;
+	}
+	else{}
+});
+
+
 function createSongsPreviews(){
 	var loopCount = 1;
 	var intervalVariable = setInterval(()=>{
@@ -151,7 +189,7 @@ function createSongsPreviews(){
 		if(loopCount > 10){
 			clearInterval(intervalVariable);
 		}
-	}, 25);
+	}, 80);
 }
 createSongsPreviews();
 
