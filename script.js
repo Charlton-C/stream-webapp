@@ -15,8 +15,8 @@ var downloadSongButton = document.querySelector(".download-song-button");
 var volumeButton = document.querySelector(".volume-button");
 var volumeBar = document.querySelector(".volume-bar");
 var songsArray = [];
-var playingSongNumber = 0;
 var isASongPlaying = false;
+var playingSongNumber = 0;
 var numberOfSongs = 10;
 
 
@@ -308,6 +308,12 @@ function playOrPauseSong(playingSongNumber, songNumber){
 	// To pause a song
 	else if(isASongPlaying == true && playingSongNumber == songNumber){
 		currentSong.pause();
+		updateSongProgressBar(currentSong);
 	}
 	else{}
+}
+
+
+function updateSongProgressBar(currentSong){
+    playingSongProgressBar.value = ((currentSong.currentTime / currentSong.duration) * 100);
 }
