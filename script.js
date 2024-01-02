@@ -213,6 +213,7 @@ function createSongsPreviews(){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
 					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
 					isASongPlaying = true;
 				}
 				// To continue to play the same song
@@ -220,19 +221,23 @@ function createSongsPreviews(){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
 					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
 					isASongPlaying = true;
 				}
 				// To play a different song while another one is still playing(pause this other one)
 				else if(isASongPlaying == true && playingSongNumber != songNumber){
 					document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					updateSongProgress(playingSongNumber, 0);
 					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
 				}
 				// To pause a song
 				else if(isASongPlaying == true && playingSongNumber == songNumber){
 					document.querySelector("[class='"+songNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					playOrPauseSongButton.classList.toggle("bi-play-fill");
 					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(playingSongNumber, 0);
 					isASongPlaying = false;
 				}
 				else{}
