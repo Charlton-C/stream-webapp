@@ -16,6 +16,7 @@ var volumeButton = document.querySelector(".volume-button");
 var volumeBar = document.querySelector(".volume-bar");
 var songsArray = [];
 var isASongPlaying = false;
+var updateSongProgressInterval = null;
 var playingSongNumber = 0;
 var numberOfSongs = 10;
 
@@ -41,6 +42,22 @@ expandSongsButton.addEventListener("click", () => {
 	expandLibraryButton.style.textDecoration = "none";
 	createSongItemsInSongsListPage();
 });
+
+
+// Function to change the song progress info every second
+function updateSongProgress(playingSongNumber, turnOnOrOff){
+	var currentSong = songsArray[playingSongNumber];
+	if(turnOnOrOff == 1){
+		updateSongProgressInterval = setInterval(()=>{
+			updateSongProgressBar(currentSong);
+			updateSongElapsedAndRemainingTime(currentSong);
+		}, 1000);
+	}
+	else if(turnOnOrOff == 0){
+		clearInterval(updateSongProgressInterval);
+	}
+	else{}
+};
 
 
 previousSongButton.addEventListener("click", () => {
@@ -91,6 +108,7 @@ playOrPauseSongButton.addEventListener("click", () => {
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
 	}
 	// To play the current playing song
@@ -98,6 +116,7 @@ playOrPauseSongButton.addEventListener("click", () => {
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	}
 	else{}
@@ -308,8 +327,6 @@ function playOrPauseSong(playingSongNumber, songNumber){
 	// To pause a song
 	else if(isASongPlaying == true && playingSongNumber == songNumber){
 		currentSong.pause();
-		updateSongElapsedAndRemainingTime(currentSong);
-		updateSongProgressBar(currentSong);
 	}
 	else{}
 }
