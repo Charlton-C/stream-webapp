@@ -63,11 +63,13 @@ function updateSongProgress(playingSongNumber, turnOnOrOff){
 previousSongButton.addEventListener("click", () => {
 	// No song plays as the user has not selected a song
 	if(playingSongNameSpan.innerText == ""){}
+	// To play the previous song when the user is currently listening to another song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == true){
 		// To pause the current playing song
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
 		playingSongNumber = Number(playingSongNumber) - 1;
 		songsArray[playingSongNumber].currentTime = 0;
@@ -93,9 +95,38 @@ previousSongButton.addEventListener("click", () => {
 			playingSongArtistSpan.innerText = tags.artist;
 		});
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	}
-	else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == true){}
+	// To play the previous song when the user has paused the currently listening to song
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == false){
+		// To play the next song
+		playingSongNumber = Number(playingSongNumber) - 1;
+		songsArray[playingSongNumber].currentTime = 0;
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
+			// Get image from next song metadata and change the playing song image
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				playingSongImage.setAttribute("src", base64);
+			} else if(!image){
+				playingSongImage.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
+			playingSongNameSpan.innerText = tags.title;
+			playingSongArtistSpan.innerText = tags.artist;
+		});
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
+		isASongPlaying = true;
+	}
 	else{}
 });
 
@@ -126,11 +157,13 @@ playOrPauseSongButton.addEventListener("click", () => {
 nextSongButton.addEventListener("click", () => {
 	// No song plays as the user has not selected a song
 	if(playingSongNameSpan.innerText == ""){}
+	// To play the next song when the user is listening to the currently playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber < numberOfSongs){
 		// To pause the current playing song
 		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
 		playingSongNumber = Number(playingSongNumber) + 1;
 		songsArray[playingSongNumber].currentTime = 0;
@@ -156,6 +189,36 @@ nextSongButton.addEventListener("click", () => {
 			playingSongArtistSpan.innerText = tags.artist;
 		});
 		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
+		isASongPlaying = true;
+	}
+	// To play the next song when the user has paused the currently playing song
+	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false && playingSongNumber < numberOfSongs){
+		// To play the next song
+		playingSongNumber = Number(playingSongNumber) + 1;
+		songsArray[playingSongNumber].currentTime = 0;
+		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSongButton.classList.toggle("bi-play-fill");
+		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
+			// Get image from next song metadata and change the playing song image
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				playingSongImage.setAttribute("src", base64);
+			} else if(!image){
+				playingSongImage.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
+			playingSongNameSpan.innerText = tags.title;
+			playingSongArtistSpan.innerText = tags.artist;
+		});
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	}
 	else{}
