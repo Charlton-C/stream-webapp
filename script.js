@@ -240,6 +240,15 @@ nextSongButton.addEventListener("click", () => {
 });
 
 
+downloadSongButton.addEventListener("click", ()=>{
+	var aElement = document.createElement("a");
+	aElement.setAttribute("href", "/songs/"+playingSongNumber+".mp3");
+	aElement.download = playingSongNameSpan.innerText;
+	aElement.click();
+});
+
+
+
 volumeButton.addEventListener("click", ()=>{
 	if(isCurrentPlayingSongMute == false){
 		songsArray[playingSongNumber].volume = 0.0;
