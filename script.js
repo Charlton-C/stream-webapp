@@ -473,7 +473,7 @@ function createSongItemsInSongsListPage(){
 		if(loopCount > numberOfSongs){
 			clearInterval(intervalVariable);
 		}
-	}, 25);
+	}, 80);
 }
 createSongItemsInSongsListPage();
 
