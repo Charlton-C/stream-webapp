@@ -13,7 +13,7 @@ var playOrPauseSongButton = document.querySelector(".play-or-pause-song-button")
 var nextSongButton = document.querySelector(".next-song-button");
 var downloadSongButton = document.querySelector(".download-song-button");
 var volumeButton = document.querySelector(".volume-button");
-var volumeBar = document.querySelector(".volume-bar");
+var volumeLevelBar = document.querySelector(".volume-level-bar");
 var songsArray = [];
 var isASongPlaying = false;
 var isCurrentPlayingSongMute = false;
@@ -250,6 +250,11 @@ volumeButton.addEventListener("click", ()=>{
 		isCurrentPlayingSongMute = false;
 	}
 	else{}
+});
+
+
+volumeLevelBar.addEventListener("change", ()=>{
+	songsArray[playingSongNumber].volume = (volumeLevelBar.value/100);
 });
 
 
