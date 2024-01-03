@@ -282,6 +282,6 @@ body{
 }
 
 
-.playing_song_div > .volume-control-div > .volume-bar{
+.playing_song_div > .volume-control-div > .volume-level-bar{
 	width: 90%;
 }
