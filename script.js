@@ -44,6 +44,20 @@ expandSongsButton.addEventListener("click", () => {
 });
 
 
+playingSongProgressBar.addEventListener("change", ()=>{
+	// To pause the song
+	playOrPauseSong(playingSongNumber, playingSongNumber);
+	updateSongProgress(playingSongNumber, 0);
+	isASongPlaying = false;
+	// To change the time of the song to the time the user has slide the slider to
+	songsArray[playingSongNumber].currentTime = Math.floor((playingSongProgressBar.value/100)*songsArray[playingSongNumber].duration);
+	// To continue to play the song from the new position
+	playOrPauseSong(playingSongNumber, playingSongNumber);
+	updateSongProgress(playingSongNumber, 1);
+	isASongPlaying = true;
+});
+
+
 // Function to change the song progress info every second
 function updateSongProgress(playingSongNumber, turnOnOrOff){
 	var currentSong = songsArray[playingSongNumber];
