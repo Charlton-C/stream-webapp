@@ -80,7 +80,8 @@ previousSongButton.addEventListener("click", () => {
 	// To play the previous song when the user is currently listening to another song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == true){
 		// To pause the current playing song
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
@@ -88,7 +89,8 @@ previousSongButton.addEventListener("click", () => {
 		playingSongNumber = Number(playingSongNumber) - 1;
 		songsArray[playingSongNumber].currentTime = 0;
 		// To play the next song
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
@@ -117,7 +119,8 @@ previousSongButton.addEventListener("click", () => {
 		// To play the next song
 		playingSongNumber = Number(playingSongNumber) - 1;
 		songsArray[playingSongNumber].currentTime = 0;
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
@@ -150,7 +153,8 @@ playOrPauseSongButton.addEventListener("click", () => {
 	if(playingSongNameSpan.innerText == ""){}
 	// To pause the current playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
@@ -158,7 +162,8 @@ playOrPauseSongButton.addEventListener("click", () => {
 	}
 	// To play the current playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false){
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
@@ -174,7 +179,8 @@ nextSongButton.addEventListener("click", () => {
 	// To play the next song when the user is listening to the currently playing song
 	else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber < numberOfSongs){
 		// To pause the current playing song
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
@@ -182,7 +188,8 @@ nextSongButton.addEventListener("click", () => {
 		playingSongNumber = Number(playingSongNumber) + 1;
 		songsArray[playingSongNumber].currentTime = 0;
 		// To play the next song
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
@@ -211,7 +218,8 @@ nextSongButton.addEventListener("click", () => {
 		// To play the next song
 		playingSongNumber = Number(playingSongNumber) + 1;
 		songsArray[playingSongNumber].currentTime = 0;
-		document.querySelector("[class='"+playingSongNumber+"'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 		playOrPauseSongButton.classList.toggle("bi-play-fill");
 		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
@@ -437,7 +445,6 @@ function createSongItemsInSongsListPage(){
 					document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 					liElementI.classList.toggle("bi-play-circle-fill");
 					document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-					playOrPauseSongButton.classList.toggle("bi-play-fill");
 					updateSongProgress(playingSongNumber, 0);
 					playOrPauseSong(playingSongNumber, songNumber);
 					updateSongProgress(songNumber, 1);
