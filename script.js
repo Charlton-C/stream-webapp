@@ -373,6 +373,7 @@ function createSongItemsInSongsListPage(){
 		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
 			var liElement = document.createElement("li");
+			liElement.setAttribute("class", "song-"+songNumber+"-list-item");
 			var liElementImg = document.createElement("img");
 			// Get image from metadata and add it to the img tag
 			var image = tags.picture;
@@ -402,6 +403,51 @@ function createSongItemsInSongsListPage(){
 			liElement.appendChild(liElementImg);
 			liElement.appendChild(liElementH5);
 			liElement.appendChild(liElementI);
+			liElement.addEventListener("click", () => {
+				playingSongImage.setAttribute("src", liElementImg.src);
+				playingSongNameSpan.innerText = tags.title;
+				playingSongArtistSpan.innerText = tags.artist;
+			
+				// Change image play or pause button to show whether a song is playing
+				// To play the first song or to play a different song while the previous one is paused
+				if(isASongPlaying == false && playingSongNumber != songNumber){
+					liElementI.classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+					isASongPlaying = true;
+				}
+				// To continue to play the same song
+				else if(isASongPlaying == false && playingSongNumber == songNumber){
+					liElementI.classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+					isASongPlaying = true;
+				}
+				// To play a different song while another one is still playing(pause this other one)
+				else if(isASongPlaying == true && playingSongNumber != songNumber){
+					document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					liElementI.classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					updateSongProgress(playingSongNumber, 0);
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+				}
+				// To pause a song
+				else if(isASongPlaying == true && playingSongNumber == songNumber){
+					liElementI.classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(playingSongNumber, 0);
+					isASongPlaying = false;
+				}
+				else{}
+
+				playingSongNumber = songNumber;
+			});
+
+
 			songsListDivUl.appendChild(liElement);
 		}, {
 			tags: ["picture", "title", "artist"]
