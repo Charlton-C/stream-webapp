@@ -65,6 +65,7 @@ function updateSongProgress(playingSongNumber, turnOnOrOff){
 		updateSongProgressInterval = setInterval(()=>{
 			updateSongProgressBar(currentSong);
 			updateSongElapsedAndRemainingTime(currentSong);
+			playNextSongWhenCurrentSongEnds(currentSong);
 		}, 1000);
 	}
 	else if(turnOnOrOff == 0){
@@ -547,4 +548,48 @@ function updateSongElapsedAndRemainingTime(currentSong){
 
 function updateSongProgressBar(currentSong){
     playingSongProgressBar.value = ((currentSong.currentTime/currentSong.duration)*100);
+}
+
+
+function playNextSongWhenCurrentSongEnds(currentSong){
+	if(currentSong.currentTime == currentSong.duration && playingSongNumber < numberOfSongs){
+		// To pause and end the current song progress update
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 0);
+		isASongPlaying = false;
+		// To play the next song
+		playingSongNumber = Number(playingSongNumber) + 1;
+		songsArray[playingSongNumber].currentTime = 0;
+		document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+		ID3.loadTags("/songs/"+playingSongNumber+".mp3", () => {
+			var tags = ID3.getAllTags("/songs/"+playingSongNumber+".mp3");
+			// Get image from next song metadata and change the playing song image
+			var image = tags.picture;
+			if(image){
+				var base64String = "";
+				for (var i = 0; i < image.data.length; i++){
+					base64String += String.fromCharCode(image.data[i]);
+				}
+				var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+				playingSongImage.setAttribute("src", base64);
+			} else if(!image){
+				playingSongImage.setAttribute("src", "/resources/no-image.png");
+			}
+			else {}
+			playingSongNameSpan.innerText = tags.title;
+			playingSongArtistSpan.innerText = tags.artist;
+		});
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 1);
+		isASongPlaying = true;
+	}
+	// To end songs playing when played the last song available
+	else if(currentSong.currentTime == currentSong.duration && playingSongNumber == numberOfSongs){
+		playOrPauseSong(playingSongNumber, playingSongNumber);
+		updateSongProgress(playingSongNumber, 0);
+		isASongPlaying = false;
+	}
 }
