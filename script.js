@@ -16,6 +16,7 @@ var volumeButton = document.querySelector(".volume-button");
 var volumeBar = document.querySelector(".volume-bar");
 var songsArray = [];
 var isASongPlaying = false;
+var isCurrentPlayingSongMute = false;
 var updateSongProgressInterval = null;
 var playingSongNumber = 0;
 var numberOfSongs = 10;
@@ -234,6 +235,19 @@ nextSongButton.addEventListener("click", () => {
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
+	}
+	else{}
+});
+
+
+volumeButton.addEventListener("click", ()=>{
+	if(isCurrentPlayingSongMute == false){
+		songsArray[playingSongNumber].volume = 0.0;
+		isCurrentPlayingSongMute = true;
+	}
+	else if(isCurrentPlayingSongMute == true){
+		songsArray[playingSongNumber].volume = 1.0;
+		isCurrentPlayingSongMute = false;
 	}
 	else{}
 });
