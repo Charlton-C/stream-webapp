@@ -26,6 +26,7 @@ body{
 }
 
 
+/* For the library heading */
 .music_side nav{
 	width: 90%;
 	height: 6%;
@@ -90,6 +91,8 @@ body{
 }
 
 
+
+/* For the song previews */
 .music_side > .music_div > .songs > ul{
 	display: flex;
 	width: 100%;
@@ -163,6 +166,7 @@ body{
 }
 
 
+/* For the songs list page */
 .music_side > .songs_list_div{
 	display: none;
 	width: 100%;
@@ -212,6 +216,62 @@ body{
 .music_side > .songs_list_div > ul > li > .bi{
 	margin: 0 0 0 auto;
 	font-size: 150%;
+}
+
+
+/* For the album previews */
+.music_side > .music_div > .albums > ul{
+	display: flex;
+	width: 100%;
+	list-style: none;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+.music_side > .music_div > .albums > ul::-webkit-scrollbar{
+	display: none;
+}
+
+
+.music_side > .music_div > .albums > ul > li{
+	min-width: 20%;
+    margin-right: 1%;
+    transition: .3s linear;
+}
+.music_side > .music_div > .albums > ul > li:hover{
+	background-color: rgb(105, 105, 170, .1);
+}
+
+
+.music_side > .music_div > .albums > ul > li > img{
+	position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	transition: .3s linear;
+}
+.music_side > .music_div > .albums > ul > li:hover > img{
+	filter: brightness(50%);
+}
+
+
+.music_side > .music_div > .albums > ul > li > h5{
+	padding: 5% 0 0 5%;
+    font-size: 70%;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} 
+
+
+.music_side > .music_div > .albums > ul > li > h5 > .subtitle{
+	font-size: 95%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: rgb(88, 91, 97);
 }
 
 
