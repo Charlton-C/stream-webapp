@@ -1,5 +1,6 @@
 var expandLibraryButton = document.querySelector("#music_side-library");
 var expandSongsButton = document.querySelector(".expand-songs-div");
+var expandAlbumsButton = document.querySelector(".expand-albums-div");
 var previewSongsDivUl = document.querySelector(".songs-ul");
 var songsListDivUl = document.querySelector(".songs_list_div-ul");
 var playingSongImage = document.querySelector(".playing-song-image");
@@ -31,6 +32,7 @@ for(var i = 1; i <= numberOfSongs; i++){
 // Show the songs preview page when the user clicks the library button
 expandLibraryButton.addEventListener("click", () => {
 	document.querySelector(".songs_list_div").style.display = "none";
+	document.querySelector(".albums_list_div").style.display = "none";
 	document.querySelector(".music_div").style.display = "block";
 	expandLibraryButton.style.color = "rgb(42, 231, 241)";
 	expandLibraryButton.style.textDecoration = "underline";
@@ -41,6 +43,15 @@ expandLibraryButton.addEventListener("click", () => {
 expandSongsButton.addEventListener("click", () => {
 	document.querySelector(".music_div").style.display = "none";
 	document.querySelector(".songs_list_div").style.display = "block";
+	expandLibraryButton.style.color = "rgb(106, 107, 111)";
+	expandLibraryButton.style.textDecoration = "none";
+});
+
+
+// Show the albums list page when the user clicks the albums button
+expandAlbumsButton.addEventListener("click", () => {
+	document.querySelector(".music_div").style.display = "none";
+	document.querySelector(".albums_list_div").style.display = "block";
 	expandLibraryButton.style.color = "rgb(106, 107, 111)";
 	expandLibraryButton.style.textDecoration = "none";
 });
