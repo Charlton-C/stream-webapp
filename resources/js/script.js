@@ -16,7 +16,7 @@ var downloadSongButton = document.querySelector(".download-song-button");
 var volumeButton = document.querySelector(".volume-button");
 var volumeLevelBar = document.querySelector(".volume-level-bar");
 var songsArray = [];
-var albumsArray = [];
+var albumsDictionary = {};
 var isASongPlaying = false;
 var isCurrentPlayingSongMute = false;
 var updateSongProgressInterval = null;
@@ -31,26 +31,33 @@ for(var i = 1; i <= numberOfSongs; i++){
 
 
 // Function to add album names to the albumsArray when the website loads
-function addAlbumNamesToAlbumsArray(){
+function addAlbumNamesAndSongFileNumbersToAlbumsDictionary(){
 	var loopCount = 1;
 	var intervalVariable = setInterval(()=>{
 		var songNumber = loopCount.toString();
 		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
-			if(albumsArray.includes(tags.album) == false)
-			{ albumsArray.push(tags.album); }
+			// Add album name if not present and song file number
+			if(tags.album in albumsDictionary == false){
+				albumsDictionary[tags.album] = [songNumber];
+			}
+			// Add song file number to album key value
+			else if(tags.album in albumsDictionary == true){
+				albumsDictionary[tags.album].push(songNumber);
+			}
+			else{}
 		}, {
 			tags: ["album"]
 		});
-
-
+		
+		
 		loopCount++
 		if(loopCount > numberOfSongs){
 			clearInterval(intervalVariable);
 		}
 	}, 80);
 }
-addAlbumNamesToAlbumsArray();
+addAlbumNamesAndSongFileNumbersToAlbumsDictionary();
 
 
 // Show the songs preview page when the user clicks the library button
