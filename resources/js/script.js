@@ -2,6 +2,7 @@ var expandLibraryButton = document.querySelector("#music_side-library");
 var expandSongsButton = document.querySelector(".expand-songs-div");
 var expandAlbumsButton = document.querySelector(".expand-albums-div");
 var previewSongsDivUl = document.querySelector(".songs-ul");
+var previewAlbumsDivUl = document.querySelector(".albums-ul");
 var songsListDivUl = document.querySelector(".songs_list_div-ul");
 var playingSongImage = document.querySelector(".playing-song-image");
 var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
@@ -298,6 +299,57 @@ setTimeout(() => {
 		}, 80);
 	}
 	createSongItemsInSongsListPage();
+
+
+	// Function to create the albums previews when the website loads
+	function createAlbumsPreviews(){
+		var loopCount = 0;
+		var albumName;
+		var songNumberWithAlbumName;
+		var intervalVariable = setInterval(()=>{
+			albumName = Object.keys(albumsDictionary)[loopCount];
+			songNumberWithAlbumName = albumsDictionary[albumName][0];
+			ID3.loadTags("/songs/"+songNumberWithAlbumName+".mp3", () => {
+				var tags = ID3.getAllTags("/songs/"+songNumberWithAlbumName+".mp3");
+				var liElement = document.createElement("li");
+				liElement.setAttribute("class", "album-"+loopCount+"-preview-li");
+				var liElementImg = document.createElement("img");
+				liElementImg.setAttribute("class", "album_img");
+				// Get image from metadata and add it to the img tag
+				var image = tags.picture;
+				if(image){
+					var base64String = "";
+					for (var i = 0; i < image.data.length; i++){
+						base64String += String.fromCharCode(image.data[i]);
+					}
+					var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+					liElementImg.setAttribute("src", base64);
+				} else if(!image){
+					liElementImg.setAttribute("src", "/resources/images/no-image.png");
+				}
+				else {}
+				var liElementH5 = document.createElement("h5");
+				liElementH5.setAttribute("class", "album-"+loopCount+"-album-name");
+				liElementH5.innerText = tags.album;
+				var liElementH5Div = document.createElement("div");
+				liElementH5Div.setAttribute("class", "subtitle album-"+loopCount+"-artist-name");
+				liElementH5Div.innerText = tags.artist;
+				liElementH5.appendChild(liElementH5Div);
+				liElement.appendChild(liElementImg);
+				liElement.appendChild(liElementH5);
+				previewAlbumsDivUl.appendChild(liElement);
+			}, {
+				tags: ["picture", "album", "artist"]
+			});
+
+			
+			loopCount++
+			if(loopCount == (Object.keys(albumsDictionary).length)){
+				clearInterval(intervalVariable);
+			}
+		}, 80);
+	}
+	createAlbumsPreviews();
 
 
 	// Change current song position when the user slides the current playing song slider
