@@ -22,6 +22,7 @@ var isCurrentPlayingSongMute = false;
 var updateSongProgressInterval = null;
 var playingSongNumber = 0;
 var numberOfSongs = 10;
+var numberOfAlbums = 0;
 
 
 // Set songs in the songs array
@@ -37,9 +38,12 @@ function addAlbumNamesAndSongFileNumbersToAlbumsDictionary(){
 		var songNumber = loopCount.toString();
 		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
+			// Replace whitespace with underscores
+			tags.album = (tags.album).replace(/\s+/g, "_");
 			// Add album name if not present and song file number
 			if(tags.album in albumsDictionary == false){
 				albumsDictionary[tags.album] = [songNumber];
+				numberOfAlbums++;
 			}
 			// Add song file number to album key value
 			else if(tags.album in albumsDictionary == true){
