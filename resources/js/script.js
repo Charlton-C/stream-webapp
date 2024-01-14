@@ -4,6 +4,7 @@ var expandAlbumsButton = document.querySelector(".expand-albums-div");
 var previewSongsDivUl = document.querySelector(".songs-ul");
 var previewAlbumsDivUl = document.querySelector(".albums-ul");
 var songsListDivUl = document.querySelector(".songs_list_div-ul");
+var specificAlbumListDivOl = document.querySelector(".specific_album_list_div-ol");
 var playingSongImage = document.querySelector(".playing-song-image");
 var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
 var playingSongProgressBar = document.querySelector(".playing-song-progress-bar");
@@ -71,6 +72,7 @@ setTimeout(() => {
 	expandLibraryButton.addEventListener("click", () => {
 		document.querySelector(".songs_list_div").style.display = "none";
 		document.querySelector(".albums_list_div").style.display = "none";
+		document.querySelector(".specific_album_list_div").style.display = "none";
 		document.querySelector(".music_div").style.display = "block";
 		expandLibraryButton.style.color = "rgb(42, 231, 241)";
 		expandLibraryButton.style.textDecoration = "underline";
@@ -190,7 +192,7 @@ setTimeout(() => {
 			});
 
 
-			loopCount++
+			loopCount++;
 			if(loopCount > numberOfSongs){
 				clearInterval(intervalVariable);
 			}
@@ -292,7 +294,7 @@ setTimeout(() => {
 			});
 
 
-			loopCount++
+			loopCount++;
 			if(loopCount > numberOfSongs){
 				clearInterval(intervalVariable);
 			}
@@ -312,7 +314,7 @@ setTimeout(() => {
 			ID3.loadTags("/songs/"+songNumberWithAlbumName+".mp3", () => {
 				var tags = ID3.getAllTags("/songs/"+songNumberWithAlbumName+".mp3");
 				var liElement = document.createElement("li");
-				liElement.setAttribute("class", "album-"+loopCount+"-preview-li");
+				liElement.setAttribute("class", "album-"+(loopCount+1)+"-preview-li");
 				var liElementImg = document.createElement("img");
 				liElementImg.setAttribute("class", "album_img");
 				// Get image from metadata and add it to the img tag
@@ -337,13 +339,38 @@ setTimeout(() => {
 				liElementH5.appendChild(liElementH5Div);
 				liElement.appendChild(liElementImg);
 				liElement.appendChild(liElementH5);
+				liElement.addEventListener("click", () => {
+					specificAlbumListDivOl.innerHTML = "";
+					var albumNumber = liElement.classList[0].replace(/\D/g, "");
+					albumName = Object.keys(albumsDictionary)[albumNumber];
+					var loopCount2 = 0;
+					document.querySelector(".music_div").style.display = "none";
+					document.querySelector(".specific_album_list_div").style.display = "block";
+					expandLibraryButton.style.color = "rgb(106, 107, 111)";
+					expandLibraryButton.style.textDecoration = "none";
+					var image = tags.picture;
+					if(image){
+						var base64String = "";
+						for (var i = 0; i < image.data.length; i++){
+							base64String += String.fromCharCode(image.data[i]);
+						}
+						var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
+						document.querySelector(".specific_album_image").src = base64;
+					} else if(!image){
+						document.querySelector(".specific_album_image").src = "/resources/images/no-image.png";
+					}
+					else {}
+					document.querySelector(".specific_album_name > span").innerText = tags.album;
+					document.querySelector(".specific_album_artist_name").innerText = tags.artist;
+				});
+				
 				previewAlbumsDivUl.appendChild(liElement);
 			}, {
 				tags: ["picture", "album", "artist"]
 			});
 
 			
-			loopCount++
+			loopCount++;
 			if(loopCount == (Object.keys(albumsDictionary).length)){
 				clearInterval(intervalVariable);
 			}
