@@ -409,6 +409,7 @@ setTimeout(() => {
 								if(isASongPlaying == false && playingSongNumber != songNumber){
 									liElementI.classList.toggle("bi-play-circle-fill");
 									document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+									document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 									playOrPauseSongButton.classList.toggle("bi-play-fill");
 									playOrPauseSong(playingSongNumber, songNumber);
 									updateSongProgress(songNumber, 1);
@@ -418,6 +419,7 @@ setTimeout(() => {
 								else if(isASongPlaying == false && playingSongNumber == songNumber){
 									liElementI.classList.toggle("bi-play-circle-fill");
 									document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+									document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 									playOrPauseSongButton.classList.toggle("bi-play-fill");
 									playOrPauseSong(playingSongNumber, songNumber);
 									updateSongProgress(songNumber, 1);
@@ -429,6 +431,7 @@ setTimeout(() => {
 									document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 									liElementI.classList.toggle("bi-play-circle-fill");
 									document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+									document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 									updateSongProgress(playingSongNumber, 0);
 									playOrPauseSong(playingSongNumber, songNumber);
 									updateSongProgress(songNumber, 1);
@@ -437,6 +440,7 @@ setTimeout(() => {
 								else if(isASongPlaying == true && playingSongNumber == songNumber){
 									liElementI.classList.toggle("bi-play-circle-fill");
 									document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+									document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 									playOrPauseSongButton.classList.toggle("bi-play-fill");
 									playOrPauseSong(playingSongNumber, songNumber);
 									updateSongProgress(playingSongNumber, 0);
@@ -457,7 +461,6 @@ setTimeout(() => {
 
 
 						if(albumsDictionary[albumName][loopCount2] == undefined){
-							console.log("hey");
 							clearInterval(intervalVariable2);
 						}
 
