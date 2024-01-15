@@ -372,7 +372,7 @@ setTimeout(() => {
 						ID3.loadTags("/songs/"+songNumber+".mp3", () => {
 							tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
 							var liElement = document.createElement("li");
-							var liElement = document.createElement("li");
+							liElement.setAttribute("class", "specific_album_song-"+(loopCount2+1)+"-li song-"+songNumber+"-specific_album_list-li");
 							var liElementImg = document.createElement("img");
 							// Get image from metadata and add it to the img tag
 							if(image){
@@ -452,6 +452,15 @@ setTimeout(() => {
 
 
 							specificAlbumListDivOl.appendChild(liElement);
+
+
+							// To change the play, pause status of a song in the album if the song is playing
+							var numberOfLiItemsInspecificAlbumListDivOl = document.querySelectorAll(".specific_album_list_div-ol > li").length;
+							for(var i = 0; i < numberOfLiItemsInspecificAlbumListDivOl; i++){
+								if(!document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.contains("bi-play-circle-fill") && document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > img").src == document.querySelector(".specific_album_image").src){
+									document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+								}
+							}
 						}, {
 							tags: ["picture", "album", "artist"]
 						});
