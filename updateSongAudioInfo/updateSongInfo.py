@@ -7,17 +7,11 @@ from tinytag import TinyTag
 currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
 
-songNumber = 1
-song = TinyTag.get(parentFileDirectory+"/songs/"+str(songNumber)+".mp3", image=True)
 
-songName = song.title
-songArtist = song.artist
-songAlbum = song.album
+# Get the most recent song added to the songsInfo json file
+startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/lastUpdateFileNumber.txt", "r").readline()))+1
 
-
-songInfo = {
-	songNumber : [songName, songArtist, songAlbum]
-}
-
-jsonOutput = json.dumps(songInfo)
-print(jsonOutput)
+print("Please enter how many songs you want to add")
+endingSongNumber = int(input())
+for i in range(endingSongNumber):
+	print(startingSongNumber+i)
