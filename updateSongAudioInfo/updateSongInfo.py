@@ -1,4 +1,4 @@
-import os, sys, base64, json
+import os, sys, json
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
 
