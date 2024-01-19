@@ -3,7 +3,7 @@ sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
 
 
-# Get the parent file directory in ordeer to access the songs folder
+# Get the parent file directory in order to access the songs folder
 currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
 
