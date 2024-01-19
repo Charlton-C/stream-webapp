@@ -21,8 +21,9 @@ var songsArray = [];
 var albumsDictionary = {};
 var isASongPlaying = false;
 var isCurrentPlayingSongMute = false;
+var isCurrentPlayingSongPlayingFromAlbum;
 var updateSongProgressInterval = null;
-var playingSongNumber = 0;
+var playingSongNumber = 1;
 var numberOfSongs = 10;
 var numberOfAlbums = 0;
 
@@ -183,6 +184,7 @@ setTimeout(() => {
 					}
 					else{}
 					playingSongNumber = songNumber;
+					isCurrentPlayingSongPlayingFromAlbum = false;
 				});
 
 
@@ -285,6 +287,7 @@ setTimeout(() => {
 					}
 					else{}
 					playingSongNumber = songNumber;
+					isCurrentPlayingSongPlayingFromAlbum = false;
 				});
 
 
@@ -448,6 +451,7 @@ setTimeout(() => {
 								}
 								else{}
 								playingSongNumber = songNumber;
+								isCurrentPlayingSongPlayingFromAlbum = true;
 							});
 
 
@@ -637,7 +641,17 @@ setTimeout(() => {
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
-			playingSongNumber = Number(playingSongNumber) + 1;
+			if(isCurrentPlayingSongPlayingFromAlbum == false){
+				playingSongNumber = Number(playingSongNumber) + 1;
+			}
+			else if(isCurrentPlayingSongPlayingFromAlbum == true){
+				var albumName = Object.keys(albumsDictionary).find(key => albumsDictionary[key][0] == playingSongNumber);
+				var songIndexInAlbumArray = albumsDictionary[albumName].indexOf(playingSongNumber);
+				if(albumsDictionary[albumName][songIndexInAlbumArray+1] != undefined){
+					playingSongNumber = albumsDictionary[albumName][songIndexInAlbumArray+1];
+				}
+			}
+			else{}
 			songsArray[playingSongNumber].currentTime = 0;
 			// To play the next song
 			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
@@ -668,7 +682,11 @@ setTimeout(() => {
 		// To play the next song when the user has paused the currently playing song
 		else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false && playingSongNumber < numberOfSongs){
 			// To play the next song
-			playingSongNumber = Number(playingSongNumber) + 1;
+			if(isCurrentPlayingSongPlayingFromAlbum == false){
+				playingSongNumber = Number(playingSongNumber) + 1;
+			}
+			else if(isCurrentPlayingSongPlayingFromAlbum == true){}
+			else{}
 			songsArray[playingSongNumber].currentTime = 0;
 			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
