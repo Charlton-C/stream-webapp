@@ -9,7 +9,7 @@ parentFileDirectory = os.path.dirname(currentFileDirectory)
 
 
 # Get the most recent song added to the songsInfo json file
-startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/lastUpdateFileNumber.txt", "r").readline()))
+startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "r").readline()))
 
 # Input for the number of new songs info to be added
 print("Please enter how many songs you want to add")
@@ -17,7 +17,20 @@ numberOfSongsToAdd = int(input())
 
 # For loop to add the new songs info
 for i in range(numberOfSongsToAdd):
-	print((startingSongNumber+1) + i)
+	song = TinyTag.get(parentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+
+	songName = song.title
+	songArtist = song.artist
+	songAlbum = song.album
+
+
+	songInfo = {
+		(startingSongNumber+i) : [songName, songArtist, songAlbum]
+	}
+
+	songInfoJson = json.dumps(songInfo)
+	print(songInfoJson)
+	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "a").write(songInfoJson)
 
 # Update the most recent song added to the songsInfo json file number
-open(parentFileDirectory+"/songAudioInfo/txt/lastUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
+open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
