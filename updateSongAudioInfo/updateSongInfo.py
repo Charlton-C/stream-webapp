@@ -8,11 +8,11 @@ currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
 
 songNumber = 1
-audio = TinyTag.get(parentFileDirectory+"/songs/"+str(songNumber)+".mp3", image=True)
+song = TinyTag.get(parentFileDirectory+"/songs/"+str(songNumber)+".mp3", image=True)
 
-songName = audio.title
-songArtist = audio.artist
-songAlbum = audio.album
+songName = song.title
+songArtist = song.artist
+songAlbum = song.album
 
 
 songInfo = {
