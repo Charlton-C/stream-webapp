@@ -9,7 +9,7 @@ parentFileDirectory = os.path.dirname(currentFileDirectory)
 
 
 # Get the next song to be added to the songsInfo json file
-startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "r").readline()))
+startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
 
 # Input for the number of new songs information to be added
 print("Please enter how many songs you want to add")
@@ -17,20 +17,34 @@ numberOfSongsToAdd = int(input())
 
 # For loop to add the new songs info
 for i in range(numberOfSongsToAdd):
-	song = TinyTag.get(parentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+	# Load the songsInfo.json file
+	# When the songsInfo.json file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size == 0:
+		songInfo = {}
+	# When the songsInfo.json file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size != 0:
+		songInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json"))
+	else:
+		None
+	
+	# Load the song metadata
+	try:
+		song = TinyTag.get(parentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+	except FileNotFoundError:
+		numberOfSongsToAdd = i
+		break
 
 	songName = song.title
 	songArtist = song.artist
 	songAlbum = song.album
 
+	# Add the song information to songInfo dictionary
+	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
 
-	songInfo = {
-		(startingSongNumber+i) : [songName, songArtist, songAlbum]
-	}
-
+	# Convert the dictionary to JSON
 	songInfoJson = json.dumps(songInfo)
-	print(songInfoJson)
-	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "a").write(songInfoJson)
+	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
+
 
 # Update the number of the next song to be added to the songsInfo json file number
-open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
+open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
