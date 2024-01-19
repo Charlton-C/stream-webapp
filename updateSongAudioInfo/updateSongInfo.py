@@ -8,10 +8,10 @@ currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
 
 
-# Get the most recent song added to the songsInfo json file
+# Get the next song to be added to the songsInfo json file
 startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "r").readline()))
 
-# Input for the number of new songs info to be added
+# Input for the number of new songs information to be added
 print("Please enter how many songs you want to add")
 numberOfSongsToAdd = int(input())
 
@@ -32,5 +32,5 @@ for i in range(numberOfSongsToAdd):
 	print(songInfoJson)
 	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "a").write(songInfoJson)
 
-# Update the most recent song added to the songsInfo json file number
+# Update the number of the next song to be added to the songsInfo json file number
 open(parentFileDirectory+"/songAudioInfo/txt/nextUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
