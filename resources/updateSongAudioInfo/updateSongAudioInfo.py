@@ -3,9 +3,10 @@ sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
 
 
-# Get the parent file directory in order to access the songs folder
+# Get the parent parent file directory in order to access the songs folder
 currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
+parentParentFileDirectory = os.path.dirname(parentFileDirectory)
 
 
 # Get the next song to be added to the songsInfo json file
@@ -36,7 +37,7 @@ for i in range(numberOfSongsToAdd):
 
 	# Load the song metadata
 	try:
-		song = TinyTag.get(parentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+		song = TinyTag.get(parentParentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
 	except FileNotFoundError:
 		numberOfSongsToAdd = i
 		break
@@ -57,6 +58,7 @@ for i in range(numberOfSongsToAdd):
 	# Update Album info
 
 
+	# Load the albumsInfo.json file
 	# When the albumsInfo.json file is empty, create an empty dictionary
 	if os.stat(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json").st_size == 0:
 		albumInfo = {}
@@ -72,7 +74,8 @@ for i in range(numberOfSongsToAdd):
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
 	elif songAlbum in albumInfo.keys():
-		albumInfo[songAlbum][1].append(startingSongNumber+i)
+		if startingSongNumber+i not in albumInfo[songAlbum][1]:
+			albumInfo[songAlbum][1].append(startingSongNumber+i)
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
 	else:
@@ -82,6 +85,7 @@ for i in range(numberOfSongsToAdd):
 	# # Update Artist info
 
 
+	# Load the artistsInfo.json file
 	# When the artistsInfo.json file is empty, create an empty dictionary
 	if os.stat(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json").st_size == 0:
 		artistInfo = {}
@@ -100,7 +104,8 @@ for i in range(numberOfSongsToAdd):
 		elif songArtist in artistInfo.keys():
 			if songAlbum not in artistInfo[songArtist][0]:
 				artistInfo[songArtist][0].append(songAlbum)
-			artistInfo[songArtist][1].append(startingSongNumber+i)
+			if startingSongNumber+i not in artistInfo[songArtist][1]:
+				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
 		else:
@@ -111,7 +116,8 @@ for i in range(numberOfSongsToAdd):
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
 		elif songArtist in artistInfo.keys():
-			artistInfo[songArtist][1].append(startingSongNumber+i)
+			if startingSongNumber+i not in artistInfo[songArtist][1]:
+				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
 		else:
