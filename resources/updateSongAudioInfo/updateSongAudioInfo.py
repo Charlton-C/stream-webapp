@@ -37,7 +37,7 @@ for i in range(numberOfSongsToAdd):
 
 	# Load the song metadata
 	try:
-		song = TinyTag.get(parentParentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+		song = TinyTag.get(parentParentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3", image=True)
 	except FileNotFoundError:
 		numberOfSongsToAdd = i
 		break
@@ -46,6 +46,7 @@ for i in range(numberOfSongsToAdd):
 	songArtist = song.artist
 	songAlbum = song.album
 	songAlbumArtist = song.albumartist
+	songImage = song.get_image()
 
 	# Add the song information to songInfo dictionary
 	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
@@ -53,6 +54,15 @@ for i in range(numberOfSongsToAdd):
 	# Convert the dictionary to JSON
 	songInfoJson = json.dumps(songInfo)
 	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
+
+
+	# Add songImage file to the /images/songImages folder
+	if "\\x89PNG" in str(songImage[:25]):
+		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+	elif "\\xff\\xd8" in str(songImage[:25]):
+		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+	else:
+		None
 
 
 	# Update Album info
