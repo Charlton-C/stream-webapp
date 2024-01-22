@@ -4,23 +4,47 @@ sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
 
 
+
 # Get the parent parent file directory in order to access the songs folder
 currentFileDirectory = os.getcwd()
 parentFileDirectory = os.path.dirname(currentFileDirectory)
 parentParentFileDirectory = os.path.dirname(parentFileDirectory)
 
 
+
 # Get the next song to be added to the songsInfo json file
 startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
 
 
+
+# Get the number of the next album image to be added to the albumImages folder
+nextAlbumImageFileNumber = (len(os.listdir(parentFileDirectory+"/images/albumImages"))+1)
+
+
+
 # Input for the number of new songs information to be added
-print("Please enter how many songs you want to add")
+print("Please enter how many songs you want to add,  they must be in the newMusic folder")
 numberOfSongsToAdd = int(input())
 
 
-# For loop to add the new songs info
+
+# Get all the file names of the files in the newMusic folder
+songFileNamesToAdd = os.listdir(parentParentFileDirectory+"/newMusic")
+
+
+
+# # For loop to add the new songs info
 for i in range(numberOfSongsToAdd):
+	# Move and rename the specified number of files in the newMusic folder to the songs folder
+	# Rename the files to the next number in series in the songs folder
+	if len(songFileNamesToAdd) != 0 and len(songFileNamesToAdd) == numberOfSongsToAdd:
+		os.rename(parentParentFileDirectory+"/newMusic/"+str(songFileNamesToAdd[i]), parentParentFileDirectory+"/songs/"+str(startingSongNumber+i)+".mp3")
+	elif len(songFileNamesToAdd) == 0:
+		print("\nNo songs to add.")
+		print("Move an mp3 file to the newMusic folder and run this script again.")
+		break
+	else:
+		None
 
 
 	# Update song info
@@ -85,11 +109,11 @@ for i in range(numberOfSongsToAdd):
 		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
-		# Add album image file to the /images/albumImages folder
+		# Add album image file to the images/albumImages folder
 		if "\\x89PNG" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
 		elif "\\xff\\xd8" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
 		else:
 			None
 	# Add song number to an album that's already in the albumInfo dictionary
@@ -98,6 +122,8 @@ for i in range(numberOfSongsToAdd):
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		# Minus one in order to ensure album Images are labelled chronologically
+		nextAlbumImageFileNumber = nextAlbumImageFileNumber-1
 	else:
 		None
 
