@@ -23,8 +23,15 @@ nextAlbumImageFileNumber = (len(os.listdir(parentFileDirectory+"/images/albumIma
 
 
 # Input for the number of new songs information to be added
-print("Please enter how many songs you want to add,  they must be in the newMusic folder")
-numberOfSongsToAdd = int(input())
+numberOfSongsToAdd = input("Please enter how many songs in the newMusic folder you want to add.\nYou can either write a number or \"all\" to add all the songs in the newMusic folder: ")
+try:
+	numberOfSongsToAdd = int(numberOfSongsToAdd)
+except ValueError:
+	if numberOfSongsToAdd == "all":
+		numberOfSongsToAdd = len(os.listdir(parentParentFileDirectory+"/newMusic"))
+	if numberOfSongsToAdd == 0:
+		print("\nNo songs to add.")
+		print("Move an mp3 file to the newMusic folder and run this script again.")
 
 
 
@@ -42,6 +49,7 @@ for i in range(numberOfSongsToAdd):
 	elif len(songFileNamesToAdd) == 0:
 		print("\nNo songs to add.")
 		print("Move an mp3 file to the newMusic folder and run this script again.")
+		numberOfSongsToAdd = i
 		break
 	else:
 		None
