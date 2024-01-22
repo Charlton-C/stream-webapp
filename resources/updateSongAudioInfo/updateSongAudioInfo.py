@@ -1,4 +1,5 @@
 import os, sys, json
+# Add tinytag to import path to be able to import it
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
 
@@ -56,7 +57,7 @@ for i in range(numberOfSongsToAdd):
 	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
 
 
-	# Add songImage file to the /images/songImages folder
+	# Add song image file to the /images/songImages folder
 	if "\\x89PNG" in str(songImage[:25]):
 		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
 	elif "\\xff\\xd8" in str(songImage[:25]):
@@ -79,17 +80,19 @@ for i in range(numberOfSongsToAdd):
 		None
 
 
+	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
 		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
-		# Add songImage file to the /images/songImages folder
+		# Add album image file to the /images/albumImages folder
 		if "\\x89PNG" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
 		elif "\\xff\\xd8" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
 		else:
 			None
+	# Add song number to an album that's already in the albumInfo dictionary
 	elif songAlbum in albumInfo.keys():
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
@@ -113,25 +116,33 @@ for i in range(numberOfSongsToAdd):
 		None
 
 
+	# Add artist, album and song number
 	if songArtist == songAlbumArtist:
+		# Add artist, their album and song number information to the artistInfo dictionary if they do not exist
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[songAlbum], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+		# Add album and song number to an artist already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
+			# Add album to an artist that's already in the artistInfo dictionary
 			if songAlbum not in artistInfo[songArtist][0]:
 				artistInfo[songArtist][0].append(songAlbum)
+			# Add song number to an artist that's already in the artistInfo dictionary
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
 		else:
 			None
+	# Add artist and song number
 	elif songArtist != songAlbumArtist:
+		# Add artist and song number to the artistInfo dictionary if it does not exist
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
 			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+		# Add song number to an aritst already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
