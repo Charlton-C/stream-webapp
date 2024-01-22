@@ -83,6 +83,13 @@ for i in range(numberOfSongsToAdd):
 		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		# Add songImage file to the /images/songImages folder
+		if "\\x89PNG" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+		elif "\\xff\\xd8" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+		else:
+			None
 	elif songAlbum in albumInfo.keys():
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
