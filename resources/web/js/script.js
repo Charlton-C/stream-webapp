@@ -768,9 +768,9 @@ setTimeout(() =>{
 	
 	// Download current song button function
 	downloadSongButton.addEventListener("click", ()=>{
-		var aElement = document.createElement("a");
+		let aElement = document.createElement("a");
 		aElement.setAttribute("href", "/songs/"+playingSongNumber+".mp3");
-		aElement.download = playingSongNameSpan.innerText;
+		aElement.download = (playingSongNameSpan.innerText+"-"+playingSongArtistSpan.innerText).replace(/\s/g, "-");
 		aElement.click();
 	});
 	
