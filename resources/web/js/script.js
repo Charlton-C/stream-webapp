@@ -48,44 +48,22 @@ setTimeout(() =>{
 	var numberOfAlbums = Object.keys(albumsInfo).length;
 	var albumsArray = [];
 	
+
 	
 	// Set songs in the songs array
 	for(let i = 1; i <= numberOfSongs; i++){
 		songsArray[i] = new Audio("/songs/"+i+".mp3");
 	}
 	
+
 	
-	// Function to add album names to the albumsArray when the website loads
-	function addAlbumNamesAndSongFileNumbersToAlbumsDictionary(){
-		var loopCount = 1;
-		var intervalVariable = setInterval(()=>{
-			var songNumber = loopCount.toString();
-			ID3.loadTags("/songs/"+songNumber+".mp3", () => {
-				var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
-				// Replace whitespace with underscores
-				tags.album = (tags.album).replace(/\s+/g, "_");
-				// Add album name if not present and song file number
-				if(tags.album in albumsDictionary == false){
-					albumsDictionary[tags.album] = [songNumber];
-					numberOfAlbums++;
-				}
-				// Add song file number to album key value
-				else if(tags.album in albumsDictionary == true){
-					albumsDictionary[tags.album].push(songNumber);
-				}
-				else{}
-			}, {
-				tags: ["album"]
-			});
-			
-			
-			loopCount++
-			if(loopCount > numberOfSongs){
-				clearInterval(intervalVariable);
-			}
-		}, 80);
+	// Function to add album names and album index to the albumsArray when the website loads
+	function changeAlbumInfoDictionaryToAlbumsArray(){
+		for(let key in albumsInfo){
+			albumsArray.push([key, albumsInfo[key]]);
+		}
 	}
-	addAlbumNamesAndSongFileNumbersToAlbumsDictionary();
+	changeAlbumInfoDictionaryToAlbumsArray();
 	
 	
 	
