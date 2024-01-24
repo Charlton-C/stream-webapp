@@ -562,7 +562,7 @@ setTimeout(() =>{
 	};
 	
 	
-	
+
 	// Go to the previous song button function
 	previousSongButton.addEventListener("click", () => {
 		// No song plays as the user has not selected a song
@@ -647,6 +647,9 @@ setTimeout(() =>{
 		else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
 			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill")){
+				document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			}
 			playOrPauseSongButton.classList.toggle("bi-play-fill");
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
@@ -656,6 +659,9 @@ setTimeout(() =>{
 		else if(playingSongNameSpan.innerText != "" && playingSongNumber != 0 && isASongPlaying == false){
 			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
 			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill")){
+				document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			}
 			playOrPauseSongButton.classList.toggle("bi-play-fill");
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
