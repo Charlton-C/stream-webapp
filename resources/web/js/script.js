@@ -96,107 +96,89 @@ setTimeout(() =>{
 	});
 	
 	
+	
 	// Function to create the song previews when the website loads
 	function createSongsPreviews(){
-		var loopCount = 1;
-		var intervalVariable = setInterval(()=>{
-			var songNumber = loopCount.toString();
-			ID3.loadTags("/songs/"+songNumber+".mp3", () => {
-				var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
-				var liElement = document.createElement("li");
-				liElement.setAttribute("class", "song-"+songNumber+"-preview-item");
-				var liElementDiv = document.createElement("div");
-				liElementDiv.setAttribute("class", "img_play");
-				var liElementDivImg = document.createElement("img");
-				// Get image from metadata and add it to the img tag
-				var image = tags.picture;
-				if(image){
-					var base64String = "";
-					for (var i = 0; i < image.data.length; i++){
-						base64String += String.fromCharCode(image.data[i]);
-					}
-					var base64 = "data:" + image.format + ";base64," + window.btoa(base64String);
-					liElementDivImg.setAttribute("src", base64);
-				} else if(!image){
-					liElementDivImg.setAttribute("src", "/resources/images/no-image.png");
+		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
+			let liElement = document.createElement("li");
+			liElement.setAttribute("class", "song-"+songNumber+"-preview-item");
+			let liElementDiv = document.createElement("div");
+			liElementDiv.setAttribute("class", "img_play");
+			let liElementDivImg = document.createElement("img");
+			liElementDivImg.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
+			liElementDivImg.onerror = () => {
+				liElementDivImg.src = "/resources/images/songImages/"+songNumber+".jpeg";
+			};
+			let liElementDivI = document.createElement("i");
+			liElementDivI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
+			liElementDivI.setAttribute("id", "2");
+			liElementDiv.appendChild(liElementDivImg);
+			liElementDiv.appendChild(liElementDivI);
+			let liElementH5 = document.createElement("h5");
+			liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
+			liElementH5.innerText = songsInfo[songNumber.toString()][0];
+			let br = document.createElement("br");
+			let liElementH5Div = document.createElement("div");
+			liElementH5Div.setAttribute("class", "subtitle song-"+songNumber+"-artist-name");
+			liElementH5Div.innerText = songsInfo[songNumber.toString()][1];
+			liElementH5.appendChild(br);
+			liElementH5.appendChild(liElementH5Div);
+			liElement.appendChild(liElementDiv);
+			liElement.appendChild(liElementH5);
+			liElement.addEventListener("click", () => {
+				playingSongImage.setAttribute("src", liElementDivImg.src);
+				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
+				playingSongArtistSpan.innerText = songsInfo[songNumber.toString()][1];
+			
+				// Change image play or pause button to show whether a song is playing
+				// To play the first song or to play a different song while the previous one is paused
+				if(isASongPlaying == false && playingSongNumber != songNumber){
+					document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+					isASongPlaying = true;
 				}
-				else {}
-				var liElementDivI = document.createElement("i");
-				liElementDivI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
-				liElementDivI.setAttribute("id", "2");
-				liElementDiv.appendChild(liElementDivImg);
-				liElementDiv.appendChild(liElementDivI);
-				var liElementH5 = document.createElement("h5");
-				liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
-				liElementH5.innerText = tags.title;
-				var br = document.createElement("br");
-				var liElementH5Div = document.createElement("div");
-				liElementH5Div.setAttribute("class", "subtitle song-"+songNumber+"-artist-name");
-				liElementH5Div.innerText = tags.artist;
-				liElementH5.appendChild(br);
-				liElementH5.appendChild(liElementH5Div);
-				liElement.appendChild(liElementDiv);
-				liElement.appendChild(liElementH5);
-				liElement.addEventListener("click", () => {
-					playingSongImage.setAttribute("src", liElementDivImg.src);
-					playingSongNameSpan.innerText = tags.title;
-					playingSongArtistSpan.innerText = tags.artist;
-				
-					// Change image play or pause button to show whether a song is playing
-					// To play the first song or to play a different song while the previous one is paused
-					if(isASongPlaying == false && playingSongNumber != songNumber){
-						document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						playOrPauseSongButton.classList.toggle("bi-play-fill");
-						playOrPauseSong(playingSongNumber, songNumber);
-						updateSongProgress(songNumber, 1);
-						isASongPlaying = true;
-					}
-					// To continue to play the same song
-					else if(isASongPlaying == false && playingSongNumber == songNumber){
-						document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						playOrPauseSongButton.classList.toggle("bi-play-fill");
-						playOrPauseSong(playingSongNumber, songNumber);
-						updateSongProgress(songNumber, 1);
-						isASongPlaying = true;
-					}
-					// To play a different song while another one is still playing(pause this other one)
-					else if(isASongPlaying == true && playingSongNumber != songNumber){
-						document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						updateSongProgress(playingSongNumber, 0);
-						playOrPauseSong(playingSongNumber, songNumber);
-						updateSongProgress(songNumber, 1);
-					}
-					// To pause a song
-					else if(isASongPlaying == true && playingSongNumber == songNumber){
-						document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-						playOrPauseSongButton.classList.toggle("bi-play-fill");
-						playOrPauseSong(playingSongNumber, songNumber);
-						updateSongProgress(playingSongNumber, 0);
-						isASongPlaying = false;
-					}
-					else{}
-					playingSongNumber = songNumber;
-					isCurrentPlayingSongPlayingFromAlbum = false;
-				});
+				// To continue to play the same song
+				else if(isASongPlaying == false && playingSongNumber == songNumber){
+					document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+					isASongPlaying = true;
+				}
+				// To play a different song while another one is still playing(pause this other one)
+				else if(isASongPlaying == true && playingSongNumber != songNumber){
+					document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					updateSongProgress(playingSongNumber, 0);
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(songNumber, 1);
+				}
+				// To pause a song
+				else if(isASongPlaying == true && playingSongNumber == songNumber){
+					document.querySelector("[class='song-"+songNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					document.querySelector("[class='song-"+songNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+					playOrPauseSongButton.classList.toggle("bi-play-fill");
+					playOrPauseSong(playingSongNumber, songNumber);
+					updateSongProgress(playingSongNumber, 0);
+					isASongPlaying = false;
+				}
+				else{}
 	
 	
-				previewSongsDivUl.appendChild(liElement);
-			}, {
-				tags: ["picture", "title", "artist"]
+				playingSongNumber = songNumber;
+				isCurrentPlayingSongPlayingFromAnAlbum = false;
+				playingAlbumQueue = [];
 			});
 	
 	
-			loopCount++;
-			if(loopCount > numberOfSongs){
-				clearInterval(intervalVariable);
-			}
-		}, 80);
+			previewSongsDivUl.appendChild(liElement);
+		}
 	}
 	createSongsPreviews();
 	
