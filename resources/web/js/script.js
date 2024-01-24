@@ -1,21 +1,21 @@
+var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+fetch("/resources/songAudioInfo/json/songsInfo.json")
+	.then(response => response.json())
+	.then(json => songsInfo = json);
+fetch("/resources/songAudioInfo/json/albumsInfo.json")
+	.then(response => response.json())
+	.then(json => albumsInfo = json);
+
+fetch("/resources/songAudioInfo/json/artistsInfo.json")
+	.then(response => response.json())
+	.then(json => artistsInfo = json);
+
+
+
 // To ensure fetch loads the audio information
 setTimeout(() =>{
-	var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-	var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-	var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-	fetch("/resources/songAudioInfo/json/songsInfo.json")
-		.then(response => response.json())
-		.then(json => songsInfo = json);
-	fetch("/resources/songAudioInfo/json/albumsInfo.json")
-		.then(response => response.json())
-		.then(json => albumsInfo = json);
-	
-	fetch("/resources/songAudioInfo/json/artistsInfo.json")
-		.then(response => response.json())
-		.then(json => artistsInfo = json);
-
-
-
 	var expandLibraryButton = document.querySelector("#music_side-library");
 	var expandSongsButton = document.querySelector(".expand-songs-div");
 	var expandAlbumsButton = document.querySelector(".expand-albums-div");
