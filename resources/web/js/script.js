@@ -764,8 +764,9 @@ setTimeout(() =>{
 		}
 		else{}
 	});
-	
-	
+
+
+
 	// Download current song button function
 	downloadSongButton.addEventListener("click", ()=>{
 		let aElement = document.createElement("a");
@@ -773,8 +774,9 @@ setTimeout(() =>{
 		aElement.download = (playingSongNameSpan.innerText+"-"+playingSongArtistSpan.innerText).replace(/\s/g, "-");
 		aElement.click();
 	});
-	
-	
+
+
+
 	// Mute or unmute current song button function
 	volumeButton.addEventListener("click", ()=>{
 		if(isCurrentPlayingSongMute == false){
@@ -787,19 +789,18 @@ setTimeout(() =>{
 		}
 		else{}
 	});
-	
-	
+
 	// Change current song volume when the user slides the current playing song volume slider
 	volumeLevelBar.addEventListener("change", ()=>{
 		songsArray[playingSongNumber].volume = (volumeLevelBar.value/100);
 	});
-	
-	
+
+
+
 	// Play or pause current song function
 	function playOrPauseSong(playingSongNumber, songNumber){
-		var previousSong = songsArray[playingSongNumber];
-		var currentSong = songsArray[songNumber];
-	
+		let previousSong = songsArray[playingSongNumber];
+		let currentSong = songsArray[songNumber];
 	
 		// To play the first song or to play a different song while the previous one is paused
 		if(isASongPlaying == false && playingSongNumber != songNumber){
@@ -822,15 +823,15 @@ setTimeout(() =>{
 		}
 		else{}
 	}
-	
-	
+
+
+
 	// Update song time progress function
 	function updateSongElapsedAndRemainingTime(currentSong){
-		var songElapsedTimeInSeconds = Math.floor(currentSong.currentTime);
-		var songElapsedTimeInMinutes = Math.floor(songElapsedTimeInSeconds/60);
-		var songRemainingTimeInSeconds = (Math.floor(currentSong.duration))-songElapsedTimeInSeconds;
-		var songRemainingTimeInMinutes = Math.floor(songRemainingTimeInSeconds/60);
-	
+		let songElapsedTimeInSeconds = Math.floor(currentSong.currentTime);
+		let songElapsedTimeInMinutes = Math.floor(songElapsedTimeInSeconds/60);
+		let songRemainingTimeInSeconds = (Math.floor(currentSong.duration))-songElapsedTimeInSeconds;
+		let songRemainingTimeInMinutes = Math.floor(songRemainingTimeInSeconds/60);
 	
 		// Show Elapsed time
 		// Show time when the elapsed time seconds is less than 10 seconds
@@ -846,8 +847,8 @@ setTimeout(() =>{
 			playingSongElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
 		}
 		else{}
-	
-	
+
+
 		// Show Remaining time
 		// Show time when the reamining time seconds is less than 10 seconds
 		if(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) > 0 && songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) < 10){
@@ -863,8 +864,7 @@ setTimeout(() =>{
 		}
 		else{}
 	}
-	
-	
+
 	// Update song slider position function
 	function updateSongProgressBar(currentSong){
 		playingSongProgressBar.value = ((currentSong.currentTime/currentSong.duration)*100);
