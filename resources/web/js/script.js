@@ -1,74 +1,94 @@
-var expandLibraryButton = document.querySelector("#music_side-library");
-var expandSongsButton = document.querySelector(".expand-songs-div");
-var expandAlbumsButton = document.querySelector(".expand-albums-div");
-var previewSongsDivUl = document.querySelector(".songs-ul");
-var previewAlbumsDivUl = document.querySelector(".albums-ul");
-var songsListDivUl = document.querySelector(".songs_list_div-ul");
-var specificAlbumListDivOl = document.querySelector(".specific_album_list_div-ol");
-var playingSongImage = document.querySelector(".playing-song-image");
-var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
-var playingSongProgressBar = document.querySelector(".playing-song-progress-bar");
-var playingSongRemainingTimeSpan = document.querySelector(".playing-song-remaining-time-span");
-var playingSongNameSpan = document.querySelector(".playing-song-name-span");
-var playingSongArtistSpan = document.querySelector(".playing-song-artist-span");
-var previousSongButton = document.querySelector(".previous-song-button");
-var playOrPauseSongButton = document.querySelector(".play-or-pause-song-button");
-var nextSongButton = document.querySelector(".next-song-button");
-var downloadSongButton = document.querySelector(".download-song-button");
-var volumeButton = document.querySelector(".volume-button");
-var volumeLevelBar = document.querySelector(".volume-level-bar");
-var songsArray = [];
-var albumsDictionary = {};
-var isASongPlaying = false;
-var isCurrentPlayingSongMute = false;
-var isCurrentPlayingSongPlayingFromAlbum;
-var updateSongProgressInterval = null;
-var playingSongNumber = 1;
-var numberOfSongs = 10;
-var numberOfAlbums = 0;
+// To ensure fetch loads the audio information
+setTimeout(() =>{
+	var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+	var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+	var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+	fetch("/resources/songAudioInfo/json/songsInfo.json")
+		.then(response => response.json())
+		.then(json => songsInfo = json);
+	fetch("/resources/songAudioInfo/json/albumsInfo.json")
+		.then(response => response.json())
+		.then(json => albumsInfo = json);
+	
+	fetch("/resources/songAudioInfo/json/artistsInfo.json")
+		.then(response => response.json())
+		.then(json => artistsInfo = json);
 
 
-// Set songs in the songs array
-for(var i = 1; i <= numberOfSongs; i++){
-	songsArray[i] = new Audio("/songs/"+i+".mp3");
-}
 
-
-// Function to add album names to the albumsArray when the website loads
-function addAlbumNamesAndSongFileNumbersToAlbumsDictionary(){
-	var loopCount = 1;
-	var intervalVariable = setInterval(()=>{
-		var songNumber = loopCount.toString();
-		ID3.loadTags("/songs/"+songNumber+".mp3", () => {
-			var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
-			// Replace whitespace with underscores
-			tags.album = (tags.album).replace(/\s+/g, "_");
-			// Add album name if not present and song file number
-			if(tags.album in albumsDictionary == false){
-				albumsDictionary[tags.album] = [songNumber];
-				numberOfAlbums++;
+	var expandLibraryButton = document.querySelector("#music_side-library");
+	var expandSongsButton = document.querySelector(".expand-songs-div");
+	var expandAlbumsButton = document.querySelector(".expand-albums-div");
+	var previewSongsDivUl = document.querySelector(".songs-ul");
+	var previewAlbumsDivUl = document.querySelector(".albums-ul");
+	var songsListDivUl = document.querySelector(".songs_list_div-ul");
+	var albumsListDivUl = document.querySelector(".albums_list_div-ul");
+	var specificAlbumListDivOl = document.querySelector(".specific_album_list_div-ol");
+	var playingSongImage = document.querySelector(".playing-song-image");
+	var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
+	var playingSongProgressBar = document.querySelector(".playing-song-progress-bar");
+	var playingSongRemainingTimeSpan = document.querySelector(".playing-song-remaining-time-span");
+	var playingSongNameSpan = document.querySelector(".playing-song-name-span");
+	var playingSongArtistSpan = document.querySelector(".playing-song-artist-span");
+	var previousSongButton = document.querySelector(".previous-song-button");
+	var playOrPauseSongButton = document.querySelector(".play-or-pause-song-button");
+	var nextSongButton = document.querySelector(".next-song-button");
+	var downloadSongButton = document.querySelector(".download-song-button");
+	var volumeButton = document.querySelector(".volume-button");
+	var volumeLevelBar = document.querySelector(".volume-level-bar");
+	var songsArray = [];
+	var albumsDictionary = {};
+	var isASongPlaying = false;
+	var isCurrentPlayingSongMute = false;
+	var isCurrentPlayingSongPlayingFromAnAlbum;
+	var playingAlbumQueue = [];
+	var updateSongProgressInterval = null;
+	var playingSongNumber = 1;
+	var numberOfSongs = 10;
+	var numberOfAlbums = Object.keys(albumsInfo).length;
+	var albumsArray = [];
+	
+	
+	// Set songs in the songs array
+	for(let i = 1; i <= numberOfSongs; i++){
+		songsArray[i] = new Audio("/songs/"+i+".mp3");
+	}
+	
+	
+	// Function to add album names to the albumsArray when the website loads
+	function addAlbumNamesAndSongFileNumbersToAlbumsDictionary(){
+		var loopCount = 1;
+		var intervalVariable = setInterval(()=>{
+			var songNumber = loopCount.toString();
+			ID3.loadTags("/songs/"+songNumber+".mp3", () => {
+				var tags = ID3.getAllTags("/songs/"+songNumber+".mp3");
+				// Replace whitespace with underscores
+				tags.album = (tags.album).replace(/\s+/g, "_");
+				// Add album name if not present and song file number
+				if(tags.album in albumsDictionary == false){
+					albumsDictionary[tags.album] = [songNumber];
+					numberOfAlbums++;
+				}
+				// Add song file number to album key value
+				else if(tags.album in albumsDictionary == true){
+					albumsDictionary[tags.album].push(songNumber);
+				}
+				else{}
+			}, {
+				tags: ["album"]
+			});
+			
+			
+			loopCount++
+			if(loopCount > numberOfSongs){
+				clearInterval(intervalVariable);
 			}
-			// Add song file number to album key value
-			else if(tags.album in albumsDictionary == true){
-				albumsDictionary[tags.album].push(songNumber);
-			}
-			else{}
-		}, {
-			tags: ["album"]
-		});
-		
-		
-		loopCount++
-		if(loopCount > numberOfSongs){
-			clearInterval(intervalVariable);
-		}
-	}, 80);
-}
-addAlbumNamesAndSongFileNumbersToAlbumsDictionary();
-
-
-// To give time for the songs and albums info to load
-setTimeout(() => {
+		}, 80);
+	}
+	addAlbumNamesAndSongFileNumbersToAlbumsDictionary();
+	
+	
+	
 	// Show the songs preview page when the user clicks the library button
 	expandLibraryButton.addEventListener("click", () => {
 		document.querySelector(".songs_list_div").style.display = "none";
@@ -78,8 +98,8 @@ setTimeout(() => {
 		expandLibraryButton.style.color = "rgb(42, 231, 241)";
 		expandLibraryButton.style.textDecoration = "underline";
 	});
-
-
+	
+	
 	// Show the songs list page when the user clicks the songs button
 	expandSongsButton.addEventListener("click", () => {
 		document.querySelector(".music_div").style.display = "none";
@@ -87,8 +107,8 @@ setTimeout(() => {
 		expandLibraryButton.style.color = "rgb(106, 107, 111)";
 		expandLibraryButton.style.textDecoration = "none";
 	});
-
-
+	
+	
 	// Show the albums list page when the user clicks the albums button
 	expandAlbumsButton.addEventListener("click", () => {
 		document.querySelector(".music_div").style.display = "none";
@@ -96,8 +116,8 @@ setTimeout(() => {
 		expandLibraryButton.style.color = "rgb(106, 107, 111)";
 		expandLibraryButton.style.textDecoration = "none";
 	});
-
-
+	
+	
 	// Function to create the song previews when the website loads
 	function createSongsPreviews(){
 		var loopCount = 1;
@@ -186,14 +206,14 @@ setTimeout(() => {
 					playingSongNumber = songNumber;
 					isCurrentPlayingSongPlayingFromAlbum = false;
 				});
-
-
+	
+	
 				previewSongsDivUl.appendChild(liElement);
 			}, {
 				tags: ["picture", "title", "artist"]
 			});
-
-
+	
+	
 			loopCount++;
 			if(loopCount > numberOfSongs){
 				clearInterval(intervalVariable);
@@ -201,8 +221,8 @@ setTimeout(() => {
 		}, 80);
 	}
 	createSongsPreviews();
-
-
+	
+	
 	// Function to create the song list when the website loads
 	function createSongItemsInSongsListPage(){
 		songsListDivUl.innerHTML = "";
@@ -289,14 +309,14 @@ setTimeout(() => {
 					playingSongNumber = songNumber;
 					isCurrentPlayingSongPlayingFromAlbum = false;
 				});
-
-
+	
+	
 				songsListDivUl.appendChild(liElement);
 			}, {
 				tags: ["picture", "title", "artist"]
 			});
-
-
+	
+	
 			loopCount++;
 			if(loopCount > numberOfSongs){
 				clearInterval(intervalVariable);
@@ -304,8 +324,8 @@ setTimeout(() => {
 		}, 80);
 	}
 	createSongItemsInSongsListPage();
-
-
+	
+	
 	// Function to create the albums previews when the website loads
 	function createAlbumsPreviews(){
 		var loopCount = 0;
@@ -367,8 +387,8 @@ setTimeout(() => {
 					else {}
 					document.querySelector(".specific_album_name > span").innerText = tags.album;
 					document.querySelector(".specific_album_artist_name").innerText = tags.artist;
-
-
+	
+	
 					// Load the songs on the album page
 					var intervalVariable2 = setInterval(() => {
 						var songNumber = albumsDictionary[albumName][loopCount2];
@@ -453,11 +473,11 @@ setTimeout(() => {
 								playingSongNumber = songNumber;
 								isCurrentPlayingSongPlayingFromAlbum = true;
 							});
-
-
+	
+	
 							specificAlbumListDivOl.appendChild(liElement);
-
-
+	
+	
 							// To change the play, pause status of a song in the album if the song is playing
 							var numberOfLiItemsInspecificAlbumListDivOl = document.querySelectorAll(".specific_album_list_div-ol > li").length;
 							for(var i = 0; i < numberOfLiItemsInspecificAlbumListDivOl; i++){
@@ -468,15 +488,15 @@ setTimeout(() => {
 						}, {
 							tags: ["picture", "album", "artist"]
 						});
-
-
+	
+	
 						loopCount2++;
-
-
+	
+	
 						if(albumsDictionary[albumName][loopCount2] == undefined){
 							clearInterval(intervalVariable2);
 						}
-
+	
 					}, 80);
 				});
 				
@@ -484,7 +504,7 @@ setTimeout(() => {
 			}, {
 				tags: ["picture", "album", "artist"]
 			});
-
+	
 			
 			loopCount++;
 			if(loopCount == (Object.keys(albumsDictionary).length)){
@@ -493,8 +513,8 @@ setTimeout(() => {
 		}, 80);
 	}
 	createAlbumsPreviews();
-
-
+	
+	
 	// Change current song position when the user slides the current playing song slider
 	playingSongProgressBar.addEventListener("change", ()=>{
 		// To pause the song
@@ -508,8 +528,8 @@ setTimeout(() => {
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	});
-
-
+	
+	
 	// Function to change the current song progress info every second
 	function updateSongProgress(playingSongNumber, turnOnOrOff){
 		var currentSong = songsArray[playingSongNumber];
@@ -525,8 +545,8 @@ setTimeout(() => {
 		}
 		else{}
 	};
-
-
+	
+	
 	// Go to the previous song button function
 	previousSongButton.addEventListener("click", () => {
 		// No song plays as the user has not selected a song
@@ -600,8 +620,8 @@ setTimeout(() => {
 		}
 		else{}
 	});
-
-
+	
+	
 	// Play or pause current song button function
 	playOrPauseSongButton.addEventListener("click", () => {
 		// No song plays as the user has not selected a song
@@ -626,8 +646,8 @@ setTimeout(() => {
 		}
 		else{}
 	});
-
-
+	
+	
 	// Go to the next song button function
 	nextSongButton.addEventListener("click", () => {
 		// No song plays as the user has not selected a song
@@ -715,8 +735,8 @@ setTimeout(() => {
 		}
 		else{}
 	});
-
-
+	
+	
 	// Download current song button function
 	downloadSongButton.addEventListener("click", ()=>{
 		var aElement = document.createElement("a");
@@ -724,8 +744,8 @@ setTimeout(() => {
 		aElement.download = playingSongNameSpan.innerText;
 		aElement.click();
 	});
-
-
+	
+	
 	// Mute or unmute current song button function
 	volumeButton.addEventListener("click", ()=>{
 		if(isCurrentPlayingSongMute == false){
@@ -738,20 +758,20 @@ setTimeout(() => {
 		}
 		else{}
 	});
-
-
+	
+	
 	// Change current song volume when the user slides the current playing song volume slider
 	volumeLevelBar.addEventListener("change", ()=>{
 		songsArray[playingSongNumber].volume = (volumeLevelBar.value/100);
 	});
-
-
+	
+	
 	// Play or pause current song function
 	function playOrPauseSong(playingSongNumber, songNumber){
 		var previousSong = songsArray[playingSongNumber];
 		var currentSong = songsArray[songNumber];
-
-
+	
+	
 		// To play the first song or to play a different song while the previous one is paused
 		if(isASongPlaying == false && playingSongNumber != songNumber){
 			currentSong.currentTime = 0;
@@ -773,16 +793,16 @@ setTimeout(() => {
 		}
 		else{}
 	}
-
-
+	
+	
 	// Update song time progress function
 	function updateSongElapsedAndRemainingTime(currentSong){
 		var songElapsedTimeInSeconds = Math.floor(currentSong.currentTime);
 		var songElapsedTimeInMinutes = Math.floor(songElapsedTimeInSeconds/60);
 		var songRemainingTimeInSeconds = (Math.floor(currentSong.duration))-songElapsedTimeInSeconds;
 		var songRemainingTimeInMinutes = Math.floor(songRemainingTimeInSeconds/60);
-
-
+	
+	
 		// Show Elapsed time
 		// Show time when the elapsed time seconds is less than 10 seconds
 		if(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) > 0 && songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) < 10){
@@ -797,8 +817,8 @@ setTimeout(() => {
 			playingSongElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
 		}
 		else{}
-
-
+	
+	
 		// Show Remaining time
 		// Show time when the reamining time seconds is less than 10 seconds
 		if(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) > 0 && songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) < 10){
@@ -814,14 +834,14 @@ setTimeout(() => {
 		}
 		else{}
 	}
-
-
+	
+	
 	// Update song slider position function
 	function updateSongProgressBar(currentSong){
 		playingSongProgressBar.value = ((currentSong.currentTime/currentSong.duration)*100);
 	}
-
-
+	
+	
 	// Play next song when current song ends
 	function playNextSongWhenCurrentSongEnds(currentSong){
 		if(currentSong.currentTime == currentSong.duration && playingSongNumber < numberOfSongs){
@@ -866,4 +886,5 @@ setTimeout(() => {
 		}
 		else{}
 	}
-}, 2000);
+
+}, 100);
