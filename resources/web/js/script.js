@@ -1,9 +1,11 @@
 var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
 var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
 var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+
 fetch("/resources/songAudioInfo/json/songsInfo.json")
 	.then(response => response.json())
 	.then(json => songsInfo = json);
+
 fetch("/resources/songAudioInfo/json/albumsInfo.json")
 	.then(response => response.json())
 	.then(json => albumsInfo = json);
@@ -14,7 +16,7 @@ fetch("/resources/songAudioInfo/json/artistsInfo.json")
 
 
 
-// To ensure fetch loads the audio information
+// To ensure fetch loads the audio information before it is required by the website
 setTimeout(() =>{
 	var expandLibraryButton = document.querySelector("#music_side-library");
 	var expandSongsButton = document.querySelector(".expand-songs-div");
@@ -49,14 +51,14 @@ setTimeout(() =>{
 	var albumsArray = [];
 	
 
-	
+
 	// Set songs in the songs array
 	for(let i = 1; i <= numberOfSongs; i++){
 		songsArray[i] = new Audio("/songs/"+i+".mp3");
 	}
-	
 
-	
+
+
 	// Function to add album names and album index to the albumsArray when the website loads
 	function changeAlbumInfoDictionaryToAlbumsArray(){
 		for(let key in albumsInfo){
@@ -64,9 +66,9 @@ setTimeout(() =>{
 		}
 	}
 	changeAlbumInfoDictionaryToAlbumsArray();
-	
-	
-	
+
+
+
 	// Show the songs preview page when the user clicks the library button
 	expandLibraryButton.addEventListener("click", () => {
 		document.querySelector(".songs_list_div").style.display = "none";
@@ -76,8 +78,8 @@ setTimeout(() =>{
 		expandLibraryButton.style.color = "rgb(42, 231, 241)";
 		expandLibraryButton.style.textDecoration = "underline";
 	});
-	
-	
+
+
 	// Show the songs list page when the user clicks the songs button
 	expandSongsButton.addEventListener("click", () => {
 		document.querySelector(".music_div").style.display = "none";
@@ -85,8 +87,8 @@ setTimeout(() =>{
 		expandLibraryButton.style.color = "rgb(106, 107, 111)";
 		expandLibraryButton.style.textDecoration = "none";
 	});
-	
-	
+
+
 	// Show the albums list page when the user clicks the albums button
 	expandAlbumsButton.addEventListener("click", () => {
 		document.querySelector(".music_div").style.display = "none";
@@ -94,9 +96,9 @@ setTimeout(() =>{
 		expandLibraryButton.style.color = "rgb(106, 107, 111)";
 		expandLibraryButton.style.textDecoration = "none";
 	});
-	
 
-	
+
+
 	// Function to create the song previews when the website loads
 	function createSongsPreviews(){
 		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
@@ -129,7 +131,7 @@ setTimeout(() =>{
 				playingSongImage.setAttribute("src", liElementDivImg.src);
 				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
 				playingSongArtistSpan.innerText = songsInfo[songNumber.toString()][1];
-			
+
 				// Change image play or pause button to show whether a song is playing
 				// To play the first song or to play a different song while the previous one is paused
 				if(isASongPlaying == false && playingSongNumber != songNumber){
@@ -169,21 +171,21 @@ setTimeout(() =>{
 					isASongPlaying = false;
 				}
 				else{}
-	
-	
+
+
 				playingSongNumber = songNumber;
 				isCurrentPlayingSongPlayingFromAnAlbum = false;
 				playingAlbumQueue = [];
 			});
-	
-	
+
+
 			previewSongsDivUl.appendChild(liElement);
 		}
 	}
 	createSongsPreviews();
-	
 
-	
+
+
 	// Function to create the song list when the website loads
 	function createSongItemsInSongsListPage(){
 		songsListDivUl.innerHTML = "";
@@ -214,7 +216,7 @@ setTimeout(() =>{
 				playingSongImage.setAttribute("src", liElementImg.src);
 				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
 				playingSongArtistSpan.innerText = songsInfo[songNumber.toString()][1];
-			
+
 				// Change image play or pause button to show whether a song is playing
 				// To play the first song or to play a different song while the previous one is paused
 				if(isASongPlaying == false && playingSongNumber != songNumber){
@@ -258,14 +260,14 @@ setTimeout(() =>{
 				isCurrentPlayingSongPlayingFromAnAlbum = false;
 				playingAlbumQueue = [];
 			});
-	
-	
+
+
 			songsListDivUl.appendChild(liElement);
 		}
 	}
 	createSongItemsInSongsListPage();
-	
-	
+
+
 
 	// Function to create the albums previews when the website loads
 	function createAlbumsPreviews(){
@@ -381,8 +383,8 @@ setTimeout(() =>{
 							playingAlbumQueue = albumsArray[albumNumber-1][1][numberOfSongsToAddToPlayingAlbumQueue];
 						}
 					});
-	
-	
+
+
 					specificAlbumListDivOl.appendChild(liElement);
 				}
 				// To change the play, pause status of a song in the album if the song is playing
@@ -419,7 +421,7 @@ setTimeout(() =>{
 			liElementH5.appendChild(liElementH5Div);
 			liElement.appendChild(liElementImg);
 			liElement.appendChild(liElementH5);
-	
+
 			// Add click event listener for the album previews to open the album page when clicked
 			liElement.addEventListener("click", () => {
 				let albumNumber = (Number(liElement.classList[0].replace(/\D/g, "")));
@@ -512,8 +514,8 @@ setTimeout(() =>{
 							playingAlbumQueue = albumsArray[albumNumber-1][1][numberOfSongsToAddToPlayingAlbumQueue];
 						}
 					});
-	
-	
+
+
 					specificAlbumListDivOl.appendChild(liElement);
 				}
 				// To change the play, pause status of a song in the album if the song is playing
@@ -527,8 +529,8 @@ setTimeout(() =>{
 		}
 	}
 	createAlbumListPreviews();
-	
-	
+
+
 
 	// Change current song position when the user slides the current playing song slider
 	playingSongProgressBar.addEventListener("change", ()=>{
@@ -543,8 +545,8 @@ setTimeout(() =>{
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	});
-	
-	
+
+
 	// Function to change the current song progress info every second
 	function updateSongProgress(playingSongNumber, turnOnOrOff){
 		let currentSong = songsArray[playingSongNumber];
@@ -801,7 +803,7 @@ setTimeout(() =>{
 	function playOrPauseSong(playingSongNumber, songNumber){
 		let previousSong = songsArray[playingSongNumber];
 		let currentSong = songsArray[songNumber];
-	
+
 		// To play the first song or to play a different song while the previous one is paused
 		if(isASongPlaying == false && playingSongNumber != songNumber){
 			currentSong.currentTime = 0;
@@ -832,7 +834,7 @@ setTimeout(() =>{
 		let songElapsedTimeInMinutes = Math.floor(songElapsedTimeInSeconds/60);
 		let songRemainingTimeInSeconds = (Math.floor(currentSong.duration))-songElapsedTimeInSeconds;
 		let songRemainingTimeInMinutes = Math.floor(songRemainingTimeInSeconds/60);
-	
+
 		// Show Elapsed time
 		// Show time when the elapsed time seconds is less than 10 seconds
 		if(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) > 0 && songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) < 10){
