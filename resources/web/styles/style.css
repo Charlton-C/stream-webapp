@@ -9,3 +9,29 @@
 .navbar-brand-image{
 	width: 30%;
 }
+
+.navbar-nav{
+	text-align: right;
+}
+
+/* For the Library button*/
+/* Remove default border from bootstrap and make the text black */
+.navbar-toggler{
+	border: none!important;
+	color: #000000!important;
+}
+/* Remove the default box-shadow when focused */
+.navbar-toggler:focus{
+	box-shadow: none!important;
+}
+
+.nav-item{
+	padding: 0 3% 0 0;
+}
+.nav-item:hover{
+	padding: 0 4% .5% 0;
+	background-color: rgb(120, 233, 227);
+}
+.nav-item:active{
+	background-color: rgb(104, 187, 183);
+}
