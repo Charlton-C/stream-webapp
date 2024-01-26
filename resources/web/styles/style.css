@@ -131,3 +131,49 @@ body{
 .expand-albums-previews-div > button{
 	float: right;
 }
+
+/* For the albums previews */
+.albums-previews-ul{
+	display: flex;
+	width: 100%;
+	margin-bottom: 8%;
+	padding: 0 2% 0 2%;
+	list-style: none;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+.albums-previews-ul::-webkit-scrollbar{
+	display: none;
+}
+
+.albums-previews-ul > li{
+	width: 23vw;
+	height: 30vw;
+    margin-right: 2%;
+}
+
+.albums-previews-ul >  li > img{
+	position: relative;
+    height: 75%;
+	transition: .25s linear;
+}
+.albums-previews-ul > li:hover > img{
+	filter: brightness(50%);
+}
+
+.albums-previews-ul > li > h5{
+	margin: 5% 0 2% 3%;
+    overflow: hidden;
+    font-size: 65%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} 
+
+.albums-previews-ul > li > h6{
+	margin-left: 3%;
+    color: rgb(98, 100, 104);
+	font-size: 55%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
