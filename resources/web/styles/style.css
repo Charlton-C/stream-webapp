@@ -49,3 +49,69 @@ body{
 .expand-songs-previews-div > button{
 	float: right;
 }
+
+
+/* For the songs previews */
+.songs-previews-ul{
+	display: flex;
+	width: 100%;
+	padding: 0 2% 0 2%;
+	list-style: none;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+.songs-previews-ul::-webkit-scrollbar{
+	display: none;
+}
+
+.songs-previews-ul  > li{
+	width: 25vw;
+	height: 30vw;
+    margin-right: 1.5%;
+}
+
+.songs-previews-ul  > li > .image-and-image_play-container{
+    display: flex;
+	position: relative;
+    width: 100%;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+
+.songs-previews-ul  > li > .image-and-image_play-container > img{
+	width: 23vw;
+    transition: .3s linear;
+}
+.songs-previews-ul  > li:hover > .image-and-image_play-container > img{
+	filter: brightness(55%);
+}
+
+.songs-previews-ul  > li > .image-and-image_play-container > span{
+	position: absolute;
+	color: rgb(255, 255, 255);
+	font-size: 140%;
+    opacity: 0;
+    cursor: pointer;
+    transition: .3s linear;
+}
+.songs-previews-ul  > li:hover > .image-and-image_play-container > span{
+	opacity: 1;
+}
+
+.songs-previews-ul  > li > h5{
+	margin: 5% 0 2% 3%;
+    overflow: hidden;
+    font-size: 65%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.songs-previews-ul  > li > h6{
+	margin-left: 3%;
+    color: rgb(98, 100, 104);
+	font-size: 55%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
