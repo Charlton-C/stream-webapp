@@ -55,6 +55,7 @@ body{
 .songs-previews-ul{
 	display: flex;
 	width: 100%;
+	margin-bottom: 8%;
 	padding: 0 2% 0 2%;
 	list-style: none;
     overflow: scroll;
@@ -114,4 +115,19 @@ body{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+
+.expand-albums-previews-div{
+	margin-top: 2%;
+}
+
+.expand-albums-previews-div > span{
+	float: left;
+	font-size: large;
+	font-weight: 500;
+}
+
+.expand-albums-previews-div > button{
+	float: right;
 }
