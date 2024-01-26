@@ -35,3 +35,17 @@
 .nav-item:active{
 	background-color: rgb(104, 187, 183);
 }
+
+.expand-songs-previews-div{
+	margin-top: 2%;
+}
+
+.expand-songs-previews-div > span{
+	float: left;
+	font-size: large;
+	font-weight: 500;
+}
+
+.expand-songs-previews-div > button{
+	float: right;
+}
