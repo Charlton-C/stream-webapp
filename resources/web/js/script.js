@@ -1,7 +1,6 @@
 var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
 var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
 var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-
 fetch("/resources/songAudioInfo/json/songsInfo.json")
 	.then(response => response.json())
 	.then(json => songsInfo = json);
@@ -13,7 +12,6 @@ fetch("/resources/songAudioInfo/json/albumsInfo.json")
 fetch("/resources/songAudioInfo/json/artistsInfo.json")
 	.then(response => response.json())
 	.then(json => artistsInfo = json);
-
 
 
 // To ensure fetch loads the audio information before it is required by the website
@@ -59,16 +57,6 @@ setTimeout(() =>{
 		}
 	}
 	addAlbumNamesAndIndicesToAlbumsArray();
-
-
-	// Show the albums list page when the user clicks the albums button
-	expandAlbumsButton.addEventListener("click", () => {
-		document.querySelector(".music_div").style.display = "none";
-		document.querySelector(".albums_list_div").style.display = "block";
-		expandLibraryButton.style.color = "rgb(106, 107, 111)";
-		expandLibraryButton.style.textDecoration = "none";
-	});
-
 
 
 	// Function to create the song previews when the website loads

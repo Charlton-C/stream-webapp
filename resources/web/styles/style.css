@@ -181,13 +181,13 @@ footer{
 	margin-top: 2%;
 }
 
-.expand-albums-previews-div > span{
+.expand-albums-previews-div > a >span{
 	float: left;
 	font-size: large;
 	font-weight: 500;
 }
 
-.expand-albums-previews-div > button{
+.expand-albums-previews-div > a >button{
 	float: right;
 }
 
