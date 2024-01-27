@@ -185,6 +185,7 @@ footer{
 	float: left;
 	font-size: large;
 	font-weight: 500;
+	color: rgb(14, 14, 14);
 }
 
 .expand-albums-previews-div > a >button{

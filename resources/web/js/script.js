@@ -63,30 +63,28 @@ setTimeout(() =>{
 	function createSongsPreviews(){
 		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
 			let liElement = document.createElement("li");
-			liElement.setAttribute("class", "song-"+songNumber+"-preview-item");
+			liElement.setAttribute("class", "song-"+songNumber+"-preview-li");
 			let liElementDiv = document.createElement("div");
-			liElementDiv.setAttribute("class", "img_play");
+			liElementDiv.setAttribute("class", "image-and-image_play-container");
 			let liElementDivImg = document.createElement("img");
+			liElementDivImg.setAttribute("class", "rounded");
 			liElementDivImg.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
 			liElementDivImg.onerror = () => {
 				liElementDivImg.src = "/resources/images/songImages/"+songNumber+".jpeg";
 			};
-			let liElementDivI = document.createElement("i");
-			liElementDivI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
-			liElementDivI.setAttribute("id", "2");
+			let liElementDivSpan = document.createElement("span");
+			liElementDivSpan.setAttribute("class", "bi-play-fill bi-pause-fill");
 			liElementDiv.appendChild(liElementDivImg);
-			liElementDiv.appendChild(liElementDivI);
+			liElementDiv.appendChild(liElementDivSpan);
 			let liElementH5 = document.createElement("h5");
 			liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
 			liElementH5.innerText = songsInfo[songNumber.toString()][0];
-			let br = document.createElement("br");
-			let liElementH5Div = document.createElement("div");
-			liElementH5Div.setAttribute("class", "subtitle song-"+songNumber+"-artist-name");
-			liElementH5Div.innerText = songsInfo[songNumber.toString()][1];
-			liElementH5.appendChild(br);
-			liElementH5.appendChild(liElementH5Div);
+			let liElementH6 = document.createElement("h6");
+			liElementH6.setAttribute("class", "song-"+songNumber+"-artist-name");
+			liElementH6.innerText = songsInfo[songNumber.toString()][1];			
 			liElement.appendChild(liElementDiv);
 			liElement.appendChild(liElementH5);
+			liElement.appendChild(liElementH6);
 			liElement.addEventListener("click", () => {
 				playingSongImage.setAttribute("src", liElementDivImg.src);
 				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
