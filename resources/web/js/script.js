@@ -176,9 +176,8 @@ setTimeout(() =>{
 			liElement.appendChild(liElementDiv2);
 			liElement.appendChild(liElementDiv3);
 			liElement.addEventListener("click", () => {
-				playingSongImage.setAttribute("src", liElementImg.src);
-				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
-				playingSongArtistSpan.innerText = songsInfo[songNumber.toString()][1];
+				songPlayerSongNameH5.innerText = songsInfo[songNumber.toString()][0];
+				songPlayerArtistNameH5.innerText = songsInfo[songNumber.toString()][1];
 
 				// Change image play or pause button to show whether a song is playing
 				// To play the first song or to play a different song while the previous one is paused
