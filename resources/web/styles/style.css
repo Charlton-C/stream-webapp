@@ -91,7 +91,7 @@ body{
 }
 
 .songs-previews-ul  > li > .image-and-image_play-container > img{
-	width: 23vw;
+	width: 22vw;
     transition: .3s linear;
 }
 .songs-previews-ul  > li:hover > .image-and-image_play-container > img{
