@@ -365,7 +365,9 @@ setTimeout(() =>{
 					}
 				}
 			});
-			previewAlbumsDivUl.appendChild(liElement);
+
+
+			albumsPreviewsDivUl.appendChild(liElement);
 		}
 	}
 	createAlbumsPreviews();
