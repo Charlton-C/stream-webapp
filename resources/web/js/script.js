@@ -148,27 +148,33 @@ setTimeout(() =>{
 		songsListDivUl.innerHTML = "";
 		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
 			let liElement = document.createElement("li");
-			liElement.setAttribute("class", "song-"+songNumber+"-list-item");
-			let liElementImg = document.createElement("img");
-			liElementImg.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-			liElementImg.onerror = () => {
-				liElementImg.src = "/resources/images/songImages/"+songNumber+".jpeg";
+			liElement.setAttribute("class", "song-"+songNumber+"-song-list-li");
+			let liElementDiv1 = document.createElement("div");
+			liElementDiv1.setAttribute("class", "song-list-song-li-image-container");
+			let liElementDiv1Img = document.createElement("img");
+			liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
+			liElementDiv1Img.onerror = () => {
+				liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".jpeg";
 			};
-			let liElementH5 = document.createElement("h5");
-			liElementH5.setAttribute("class", "song-"+songNumber+"-song-name");
-			liElementH5.innerText = songsInfo[songNumber.toString()][0];
-			let br = document.createElement("br");
-			liElementH5.appendChild(br);
-			let liElementH5Div = document.createElement("div");
-			liElementH5Div.setAttribute("class", "subtitle song-"+songNumber+"-artist-name");
-			liElementH5Div.innerText = songsInfo[songNumber.toString()][1];
-			liElementH5.appendChild(liElementH5Div);
-			let liElementI = document.createElement("i");
-			liElementI.setAttribute("class", "bi bi-play-circle-fill bi-pause-circle-fill");
-			liElementI.setAttribute("id", "2");
-			liElement.appendChild(liElementImg);
-			liElement.appendChild(liElementH5);
-			liElement.appendChild(liElementI);
+			liElementDiv1.appendChild(liElementDiv1Img);
+			let liElementDiv2 = document.createElement("div");
+			liElementDiv2.setAttribute("class", "song-list-song-li-text-container");
+			let liElementDiv2H5 = document.createElement("h5");
+			liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name");
+			liElementDiv2H5.innerText = songsInfo[songNumber.toString()][0];
+			let liElementDiv2H6 = document.createElement("h6");
+			liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name");
+			liElementDiv2H6.innerText = songsInfo[songNumber.toString()][1];
+			liElementDiv2.appendChild(liElementDiv2H5);
+			liElementDiv2.appendChild(liElementDiv2H6);
+			let liElementDiv3 = document.createElement("div");
+			liElementDiv3.setAttribute("class", "song-list-song-li-button-container");
+			let liElementDiv3Button = document.createElement("button");
+			liElementDiv3Button.setAttribute("class", "btn bi-play-fill bi-pause-fill");
+			liElementDiv3.appendChild(liElementDiv3Button);
+			liElement.appendChild(liElementDiv1);
+			liElement.appendChild(liElementDiv2);
+			liElement.appendChild(liElementDiv3);
 			liElement.addEventListener("click", () => {
 				playingSongImage.setAttribute("src", liElementImg.src);
 				playingSongNameSpan.innerText = songsInfo[songNumber.toString()][0];
