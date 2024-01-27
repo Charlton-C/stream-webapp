@@ -579,12 +579,8 @@ setTimeout(() =>{
 				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
-			playingSongImage.setAttribute("src", "/resources/images/songImages/"+playingSongNumber+".png");
-			playingSongImage.onerror = () => {
-				playingSongImage.src = "/resources/images/songImages/"+playingSongNumber+".jpeg";
-			};
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
-			playingSongArtistSpan.innerText = songsInfo[playingSongNumber][1];
+			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
@@ -608,10 +604,6 @@ setTimeout(() =>{
 				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
-			playingSongImage.setAttribute("src", "/resources/images/songImages/"+playingSongNumber+".png");
-			playingSongImage.onerror = () => {
-				playingSongImage.src = "/resources/images/songImages/"+playingSongNumber+".jpeg";
-			};
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
