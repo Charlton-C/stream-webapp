@@ -136,7 +136,7 @@ setTimeout(() =>{
 			});
 
 
-			previewSongsDivUl.appendChild(liElement);
+			songsPreviewsDivUl.appendChild(liElement);
 		}
 	}
 	createSongsPreviews();
