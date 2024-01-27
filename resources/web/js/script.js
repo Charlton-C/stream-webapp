@@ -375,7 +375,7 @@ setTimeout(() =>{
 
 
 	// Function to create the albums previews when the website loads
-	function createAlbumListPreviews(){
+	function createAlbumsListPreviews(){
 		for(let albumNumber = 1; albumNumber <= numberOfAlbums; albumNumber++){
 			let liElement = document.createElement("li");
 			liElement.setAttribute("class", "album-"+albumNumber+"-album-li-item");
@@ -501,7 +501,7 @@ setTimeout(() =>{
 			albumsListDivUl.appendChild(liElement);
 		}
 	}
-	createAlbumListPreviews();
+	createAlbumsListPreviews();
 
 
 
