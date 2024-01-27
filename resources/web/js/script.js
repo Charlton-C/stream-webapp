@@ -144,7 +144,7 @@ setTimeout(() =>{
 
 
 	// Function to create the song list when the website loads
-	function createSongItemsInSongsListPage(){
+	function createSongsLiInSongsListPage(){
 		songsListDivUl.innerHTML = "";
 		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
 			let liElement = document.createElement("li");
@@ -222,7 +222,7 @@ setTimeout(() =>{
 			songsListDivUl.appendChild(liElement);
 		}
 	}
-	createSongItemsInSongsListPage();
+	createSongsLiInSongsListPage();
 
 
 
