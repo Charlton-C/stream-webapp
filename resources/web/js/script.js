@@ -61,27 +61,6 @@ setTimeout(() =>{
 	addAlbumNamesAndIndicesToAlbumsArray();
 
 
-
-	// Show the songs preview page when the user clicks the library button
-	expandLibraryButton.addEventListener("click", () => {
-		document.querySelector(".songs_list_div").style.display = "none";
-		document.querySelector(".albums_list_div").style.display = "none";
-		document.querySelector(".specific_album_list_div").style.display = "none";
-		document.querySelector(".music_div").style.display = "block";
-		expandLibraryButton.style.color = "rgb(42, 231, 241)";
-		expandLibraryButton.style.textDecoration = "underline";
-	});
-
-
-	// Show the songs list page when the user clicks the songs button
-	expandSongsButton.addEventListener("click", () => {
-		document.querySelector(".music_div").style.display = "none";
-		document.querySelector(".songs_list_div").style.display = "block";
-		expandLibraryButton.style.color = "rgb(106, 107, 111)";
-		expandLibraryButton.style.textDecoration = "none";
-	});
-
-
 	// Show the albums list page when the user clicks the albums button
 	expandAlbumsButton.addEventListener("click", () => {
 		document.querySelector(".music_div").style.display = "none";

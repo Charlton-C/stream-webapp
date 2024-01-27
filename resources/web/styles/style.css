@@ -99,13 +99,14 @@ footer{
 	margin-top: 2%;
 }
 
-.expand-songs-previews-div > span{
+.expand-songs-previews-div > a > span{
 	float: left;
 	font-size: large;
 	font-weight: 500;
+	color: rgb(14, 14, 14);
 }
 
-.expand-songs-previews-div > button{
+.expand-songs-previews-div > a > button{
 	float: right;
 }
 
