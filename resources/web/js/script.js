@@ -378,9 +378,9 @@ setTimeout(() =>{
 	function createAlbumsListPreviews(){
 		for(let albumNumber = 1; albumNumber <= numberOfAlbums; albumNumber++){
 			let liElement = document.createElement("li");
-			liElement.setAttribute("class", "album-"+albumNumber+"-album-li-item");
+			liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
 			let liElementImg = document.createElement("img");
-			liElementImg.setAttribute("class", "album_img");
+			liElementImg.setAttribute("class", "rounded");
 			liElementImg.setAttribute("src", "/resources/images/albumImages/"+albumNumber+".png");
 			liElementImg.onerror = () => {
 				liElementImg.src = "/resources/images/albumImages/"+albumNumber+".jpeg";
@@ -388,12 +388,12 @@ setTimeout(() =>{
 			let liElementH5 = document.createElement("h5");
 			liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 			liElementH5.innerText = albumsArray[albumNumber-1][0];
-			let liElementH5Div = document.createElement("div");
-			liElementH5Div.setAttribute("class", "subtitle album-"+(albumNumber+1)+"-artist-name");
-			liElementH5Div.innerText = albumsArray[albumNumber-1][1][0];
-			liElementH5.appendChild(liElementH5Div);
+			let liElementH6 = document.createElement("h6");
+			liElementH6.setAttribute("class", "album-"+albumNumber+"-artist-name");
+			liElementH6.innerText = albumsArray[albumNumber-1][1][0];
 			liElement.appendChild(liElementImg);
 			liElement.appendChild(liElementH5);
+			liElement.appendChild(liElementH6);
 
 			// Add click event listener for the album previews to open the album page when clicked
 			liElement.addEventListener("click", () => {
