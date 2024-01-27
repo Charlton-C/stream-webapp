@@ -496,7 +496,7 @@ setTimeout(() =>{
 					});
 
 
-					specificAlbumListDivOl.appendChild(liElement);
+					specificAlbumSongsListDivOl.appendChild(liElement);
 				}
 				// To change the play, pause status of a song in the album if the song is playing
 				for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
