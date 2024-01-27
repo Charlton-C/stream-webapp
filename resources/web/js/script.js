@@ -46,21 +46,19 @@ setTimeout(() =>{
 	var numberOfAlbums = Object.keys(albumsInfo).length;
 	
 
-
 	// Set songs in the songs array
 	for(let i = 1; i <= numberOfSongs; i++){
 		songsArray[i] = new Audio("/songs/"+i+".mp3");
 	}
 
 
-
 	// Function to add album names and album index to the albumsArray when the website loads
-	function changeAlbumInfoDictionaryToAlbumsArray(){
+	function addAlbumNamesAndIndicesToAlbumsArray(){
 		for(let key in albumsInfo){
 			albumsArray.push([key, albumsInfo[key]]);
 		}
 	}
-	changeAlbumInfoDictionaryToAlbumsArray();
+	addAlbumNamesAndIndicesToAlbumsArray();
 
 
 
