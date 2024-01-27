@@ -781,15 +781,15 @@ setTimeout(() =>{
 		// Show Elapsed time
 		// Show time when the elapsed time seconds is less than 10 seconds
 		if(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) > 0 && songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) < 10){
-			playingSongElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":0"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
+			songPlayerElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":0"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
 		}
 		// Show time when elapsed time is at a new minute
 		else if((songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60)) == 0){
-			playingSongElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":00";
+			songPlayerElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":00";
 		}
 		// Show time when the elapsed time seconds is from 10 seconds to 59 seconds
 		else if(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) >= 10 && songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60) < 60){
-			playingSongElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
+			songPlayerElapsedTimeSpan.innerText = songElapsedTimeInMinutes+":"+(songElapsedTimeInSeconds-(songElapsedTimeInMinutes*60));
 		}
 		else{}
 
@@ -797,22 +797,22 @@ setTimeout(() =>{
 		// Show Remaining time
 		// Show time when the reamining time seconds is less than 10 seconds
 		if(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) > 0 && songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) < 10){
-			playingSongRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":0"+(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60));
+			songPlayerRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":0"+(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60));
 		}
 		// Show time when reamining time is at a new minute
 		else if((songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60)) == 0){
-			playingSongRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":00";
+			songPlayerRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":00";
 		}
 		// Show time when the reamining time seconds is from 10 seconds to 59 seconds
 		else if(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) >= 10 && songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60) < 60){
-			playingSongRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":"+(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60));
+			songPlayerRemainingTimeSpan.innerText = songRemainingTimeInMinutes+":"+(songRemainingTimeInSeconds-(songRemainingTimeInMinutes*60));
 		}
 		else{}
 	}
 
 	// Update song slider position function
 	function updateSongProgressBar(currentSong){
-		playingSongProgressBar.value = ((currentSong.currentTime/currentSong.duration)*100);
+		songPlayerProgressBar.value = ((currentSong.currentTime/currentSong.duration)*100);
 	}
 
 
