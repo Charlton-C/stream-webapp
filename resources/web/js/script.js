@@ -18,37 +18,32 @@ fetch("/resources/songAudioInfo/json/artistsInfo.json")
 
 // To ensure fetch loads the audio information before it is required by the website
 setTimeout(() =>{
-	var expandLibraryButton = document.querySelector("#music_side-library");
-	var expandSongsButton = document.querySelector(".expand-songs-div");
-	var expandAlbumsButton = document.querySelector(".expand-albums-div");
-	var previewSongsDivUl = document.querySelector(".songs-ul");
-	var previewAlbumsDivUl = document.querySelector(".albums-ul");
-	var songsListDivUl = document.querySelector(".songs_list_div-ul");
-	var albumsListDivUl = document.querySelector(".albums_list_div-ul");
-	var specificAlbumListDivOl = document.querySelector(".specific_album_list_div-ol");
-	var playingSongImage = document.querySelector(".playing-song-image");
-	var playingSongElapsedTimeSpan = document.querySelector(".playing-song-elapsed-time-span");
-	var playingSongProgressBar = document.querySelector(".playing-song-progress-bar");
-	var playingSongRemainingTimeSpan = document.querySelector(".playing-song-remaining-time-span");
-	var playingSongNameSpan = document.querySelector(".playing-song-name-span");
-	var playingSongArtistSpan = document.querySelector(".playing-song-artist-span");
-	var previousSongButton = document.querySelector(".previous-song-button");
-	var playOrPauseSongButton = document.querySelector(".play-or-pause-song-button");
-	var nextSongButton = document.querySelector(".next-song-button");
-	var downloadSongButton = document.querySelector(".download-song-button");
-	var volumeButton = document.querySelector(".volume-button");
-	var volumeLevelBar = document.querySelector(".volume-level-bar");
+	var expandSongsPreviewsButton = document.querySelector(".expand-songs-previews-div");
+	var expandAlbumsPreviewsButton = document.querySelector(".expand-albums-previews-div");
+	var songsPreviewsDivUl = document.querySelector(".songs-previews-ul");
+	var albumsPreviewsDivUl = document.querySelector(".albums-previews-div");
+	var songsListDivUl = document.querySelector(".songs-list-div-ul");
+	var albumsListDivUl = document.querySelector(".albums-list-div-ul");
+	var specificAlbumSongsListDivOl = document.querySelector(".specific-album-songs-list-div-ol");
+	var songPlayerSongNameH5 = document.querySelector(".song-player-song-name");
+	var songPlayerArtistNameH5 = document.querySelector(".song-player-artist-name");
+	var songPlayerElapsedTimeSpan = document.querySelector(".song-player-elapsed-time-span");
+	var songPlayerProgressBar = document.querySelector(".song-player-progress-bar");
+	var songPlayerRemainingTimeSpan = document.querySelector(".song-player-remaining-time-span");
+	var downloadCurrentSongButton = document.querySelector(".download-current-song-button");
+	var goToPreviousSongButton = document.querySelector(".go-to-previous-song-button");
+	var playOrPauseCurrentSongButton = document.querySelector(".play-or-pause-current-song-button");
+	var goToNextSongButton = document.querySelector(".go-to-next-song-button");
 	var songsArray = [];
 	var albumsDictionary = {};
-	var isASongPlaying = false;
-	var isCurrentPlayingSongMute = false;
-	var isCurrentPlayingSongPlayingFromAnAlbum;
+	var albumsArray = [];
 	var playingAlbumQueue = [];
+	var isASongPlaying = false;
+	var isCurrentPlayingSongPlayingFromAnAlbum;
 	var updateSongProgressInterval = null;
 	var playingSongNumber = 1;
 	var numberOfSongs = 10;
 	var numberOfAlbums = Object.keys(albumsInfo).length;
-	var albumsArray = [];
 	
 
 
