@@ -733,7 +733,6 @@ setTimeout(() =>{
 	});
 
 
-
 	// Download current song button function
 	downloadCurrentSongButton.addEventListener("click", ()=>{
 		let aElement = document.createElement("a");
@@ -741,27 +740,6 @@ setTimeout(() =>{
 		aElement.download = (songPlayerSongNameH5.innerText+"-"+songPlayerArtistNameH6.innerText).replace(/\s/g, "-");
 		aElement.click();
 	});
-
-
-
-	// Mute or unmute current song button function
-	volumeButton.addEventListener("click", ()=>{
-		if(isCurrentPlayingSongMute == false){
-			songsArray[playingSongNumber].volume = 0.0;
-			isCurrentPlayingSongMute = true;
-		}
-		else if(isCurrentPlayingSongMute == true){
-			songsArray[playingSongNumber].volume = 1.0;
-			isCurrentPlayingSongMute = false;
-		}
-		else{}
-	});
-
-	// Change current song volume when the user slides the current playing song volume slider
-	volumeLevelBar.addEventListener("change", ()=>{
-		songsArray[playingSongNumber].volume = (volumeLevelBar.value/100);
-	});
-
 
 
 	// Play or pause current song function
