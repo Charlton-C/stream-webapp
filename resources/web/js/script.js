@@ -515,7 +515,6 @@ setTimeout(() =>{
 	createAlbumsListPreviews();
 
 
-
 	// Change current song position when the user slides the current playing song slider
 	songPlayerProgressBar.addEventListener("change", ()=>{
 		// To pause the song
@@ -529,7 +528,6 @@ setTimeout(() =>{
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	});
-
 
 	// Function to change the current song progress info every second
 	function updateSongProgress(playingSongNumber, turnOnOrOff){
@@ -548,20 +546,19 @@ setTimeout(() =>{
 	};
 
 
-
 	// Go to the previous song button function
-	previousSongButton.addEventListener("click", () => {
+	goToPreviousSongButton.addEventListener("click", () => {
 		// No song plays as the user has not selected a song
-		if(playingSongNameSpan.innerText == ""){}
+		if(songPlayerSongNameH5.innerText == ""){}
 		// To play the previous song when the user is currently listening to another song
-		else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == true){
+		else if(songPlayerSongNameH5.innerText != "" && playingSongNumber > 1 && isASongPlaying == true){
 			// To pause the current playing song
-			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			if(document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
+				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
+			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
@@ -576,24 +573,24 @@ setTimeout(() =>{
 			else{}
 			songsArray[playingSongNumber].currentTime = 0;
 			// To play the previous song
-			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			if(document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
+				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
+			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			playingSongImage.setAttribute("src", "/resources/images/songImages/"+playingSongNumber+".png");
 			playingSongImage.onerror = () => {
 				playingSongImage.src = "/resources/images/songImages/"+playingSongNumber+".jpeg";
 			};
-			playingSongNameSpan.innerText = songsInfo[playingSongNumber][0];
+			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			playingSongArtistSpan.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
 		// To play the previous song when the user has paused the currently listening to song
-		else if(playingSongNameSpan.innerText != "" && playingSongNumber > 1 && isASongPlaying == false){
+		else if(songPlayerSongNameH5.innerText != "" && playingSongNumber > 1 && isASongPlaying == false){
 			// To play the previous song
 			if(isCurrentPlayingSongPlayingFromAnAlbum == true){
 				if(playingAlbumQueue[Number(playingAlbumQueue.indexOf(playingSongNumber))-1] != undefined){
@@ -605,18 +602,18 @@ setTimeout(() =>{
 			}
 			else{}
 			songsArray[playingSongNumber].currentTime = 0;
-			document.querySelector("[class='song-"+playingSongNumber+"-preview-item'] .img_play .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			document.querySelector("[class='song-"+playingSongNumber+"-list-item'] .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
-			if(document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific_album_list-li > .bi-pause-circle-fill").classList.toggle("bi-play-circle-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
+				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			playOrPauseSongButton.classList.toggle("bi-play-fill");
+			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			playingSongImage.setAttribute("src", "/resources/images/songImages/"+playingSongNumber+".png");
 			playingSongImage.onerror = () => {
 				playingSongImage.src = "/resources/images/songImages/"+playingSongNumber+".jpeg";
 			};
-			playingSongNameSpan.innerText = songsInfo[playingSongNumber][0];
-			playingSongArtistSpan.innerText = songsInfo[playingSongNumber][1];
+			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
+			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
