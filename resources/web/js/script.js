@@ -24,7 +24,7 @@ setTimeout(() =>{
 	var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 	var specificAlbumSongsListDivOl = document.querySelector(".specific-album-songs-list-div-ol");
 	var songPlayerSongNameH5 = document.querySelector(".song-player-song-name");
-	var songPlayerArtistNameH5 = document.querySelector(".song-player-artist-name");
+	var songPlayerArtistNameH6 = document.querySelector(".song-player-artist-name");
 	var songPlayerElapsedTimeSpan = document.querySelector(".song-player-elapsed-time-span");
 	var songPlayerProgressBar = document.querySelector(".song-player-progress-bar");
 	var songPlayerRemainingTimeSpan = document.querySelector(".song-player-remaining-time-span");
@@ -87,7 +87,7 @@ setTimeout(() =>{
 			liElement.appendChild(liElementH6);
 			liElement.addEventListener("click", () => {
 				songPlayerSongNameH5.innerText = songsInfo[songNumber.toString()][0];
-				songPlayerArtistNameH5.innerText = songsInfo[songNumber.toString()][1];
+				songPlayerArtistNameH6.innerText = songsInfo[songNumber.toString()][1];
 
 				// Change image play or pause button to show whether a song is playing
 				// To play the first song or to play a different song while the previous one is paused
@@ -176,7 +176,7 @@ setTimeout(() =>{
 			liElement.appendChild(liElementDiv3);
 			liElement.addEventListener("click", () => {
 				songPlayerSongNameH5.innerText = songsInfo[songNumber.toString()][0];
-				songPlayerArtistNameH5.innerText = songsInfo[songNumber.toString()][1];
+				songPlayerArtistNameH6.innerText = songsInfo[songNumber.toString()][1];
 
 				// Change image play or pause button to show whether a song is playing
 				// To play the first song or to play a different song while the previous one is paused
@@ -295,7 +295,7 @@ setTimeout(() =>{
 					liElement.appendChild(liElementDiv3);
 					liElement.addEventListener("click", () => {
 						songPlayerSongNameH5.innerText = songsInfo[songNumber][0];
-						songPlayerArtistNameH5.innerText = songsInfo[songNumber][1];
+						songPlayerArtistNameH6.innerText = songsInfo[songNumber][1];
 
 						// Change image play or pause button to show whether a song is playing
 						// To play the first song or to play a different song while the previous one is paused
@@ -438,7 +438,7 @@ setTimeout(() =>{
 					liElement.appendChild(liElementDiv3);
 					liElement.addEventListener("click", () => {
 						songPlayerSongNameH5.innerText = songsInfo[songNumber][0];
-						songPlayerArtistNameH5.innerText = songsInfo[songNumber][1];
+						songPlayerArtistNameH6.innerText = songsInfo[songNumber][1];
 
 						// Change image play or pause button to show whether a song is playing
 						// To play the first song or to play a different song while the previous one is paused
@@ -580,7 +580,7 @@ setTimeout(() =>{
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
-			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
+			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
@@ -605,7 +605,7 @@ setTimeout(() =>{
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
-			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
+			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
@@ -680,7 +680,7 @@ setTimeout(() =>{
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
-			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
+			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
@@ -705,7 +705,7 @@ setTimeout(() =>{
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
-			songPlayerArtistNameH5.innerText = songsInfo[playingSongNumber][1];
+			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
