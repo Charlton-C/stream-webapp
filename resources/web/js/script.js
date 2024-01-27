@@ -507,6 +507,8 @@ setTimeout(() =>{
 					}
 				}
 			});
+
+
 			albumsListDivUl.appendChild(liElement);
 		}
 	}
@@ -515,13 +517,13 @@ setTimeout(() =>{
 
 
 	// Change current song position when the user slides the current playing song slider
-	playingSongProgressBar.addEventListener("change", ()=>{
+	songPlayerProgressBar.addEventListener("change", ()=>{
 		// To pause the song
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
 		// To change the time of the song to the time the user has slide the slider to
-		songsArray[playingSongNumber].currentTime = Math.floor((playingSongProgressBar.value/100)*songsArray[playingSongNumber].duration);
+		songsArray[playingSongNumber].currentTime = Math.floor((songPlayerProgressBar.value/100)*songsArray[playingSongNumber].duration);
 		// To continue to play the song from the new position
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
