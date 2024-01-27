@@ -36,6 +36,17 @@ body{
 	background-color: rgb(104, 187, 183);
 }
 
+
+#music_previews_page{
+	height: 74vh;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+#music_previews_page::-webkit-scrollbar{
+	display: none;
+}
+
+
 .expand-songs-previews-div{
 	margin-top: 2%;
 }
@@ -49,7 +60,6 @@ body{
 .expand-songs-previews-div > button{
 	float: right;
 }
-
 
 /* For the songs previews */
 .songs-previews-ul{
