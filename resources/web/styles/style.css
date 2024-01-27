@@ -177,3 +177,48 @@ body{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+
+/* For the song player */
+footer{
+	padding-top: 2%;
+	background-color: rgb(92, 223, 216);
+}
+
+.song-player-time-progress-bar-name-and-artist-container-div{
+	color: rgb(0, 0, 0);
+}
+
+.song-player-name{
+	width: 85%;
+	margin: auto;
+    font-size: 68%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.song-player-artist-name{
+	width: 80%;
+	margin: auto;
+	font-size: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.song-player-elapsed-time-span{
+	font-size: 80%;
+}
+.song-player-progress-bar{
+	width: 70vw;
+}
+.song-player-remaining-time-span{
+	font-size: 80%;
+}
+
+.song-player-controls-div{
+	display: flex;
+}
+.song-player-controls-div > button{
+	margin: auto;
+}

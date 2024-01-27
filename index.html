@@ -63,36 +63,33 @@
                 </h5><br>
                 <ol class="specific_album_list_div-ol"></ol>
             </div>
-
-
-            <div class="playing_song_div">
-                <img class="playing-song-image" src="/resources/images/no-image.png">
-                <div class="playing-song-time-progress-bar-name-and-artist-container-div">
-                    <div class="playing-song-progress-div">
-                        <span class="playing-song-elapsed-time-span">0:00</span>
-                        <input class="playing-song-progress-bar" type="range" min="0" max="100" value="0">
-                        <span class="playing-song-remaining-time-span">0:00</span>
-                    </div>
-                    <h5>
-                        <span class="playing-song-name-span"></span>
-                        <div class="playing-song-artist-span subtitle"></div>
-                    </h5>
-                </div>
-                <div class="song-controls-div">
-                    <i class="bi bi-skip-start-fill previous-song-button"></i>
-                    <i class="bi bi-play-fill bi-pause-fill play-or-pause-song-button"></i>
-                    <i class="bi bi-skip-end-fill next-song-button"></i>
-                    <i class="bi bi-cloud-arrow-down-fill download-song-button"></i>
-                </div>
-                <div class="volume-control-div">
-                    <i class="bi bi-volume-down-fill volume-button"></i>
-                    <input class="volume-level-bar" type="range" min="0" max="100" value="100"/>
-                </div>
-            </div>
         </div>
 
 
-        <script src="resources/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/resources/web/js/script.js"></script>
-    </body>
+		<footer class="fixed-bottom text-center">
+			<div id="song_player_div">
+				<div class="song-player-time-progress-bar-name-and-artist-container-div">
+					<div class="song-player-name-and-artist-container-div">
+						<h5 class="song-player-name"></h5>
+						<h6 class="song-player-artist-name"></h6>
+					</div>
+					<div class="song-player-progress-container-div">
+						<span class="song-player-elapsed-time-span">0:00</span>
+						<input class="song-player-progress-bar" type="range" min="0" max="100" value="0">
+						<span class="song-player-remaining-time-span">0:00</span>
+					</div>
+				</div>
+				<div class="song-player-controls-div">
+					<button class="btn btn-lg bi-download download-current-song-button"></button>
+					<button class="btn btn-lg bi-skip-backward go-to-previous-song-button"></button>
+					<button class="btn btn-lg bi-play bi-pause play-or-pause-current-song-button"></button>
+					<button class="btn btn-lg bi-skip-forward go-to-next-song-button"></button>
+				</div>
+			</div>
+		</footer>
+
+
+		<script src="resources/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/resources/web/js/script.js"></script>
+	</body>
 </html>
