@@ -221,8 +221,8 @@ footer{
 
 .albums-previews-ul > li > h5{
 	margin: 5% 0 2% 3%;
-    overflow: hidden;
     font-size: 65%;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 } 
@@ -304,4 +304,59 @@ footer{
 .song-list-song-li-button-container > button{
 	font-size: 125%;
 	color: rgb(240, 251, 255);
+}
+
+
+/* albums.html CSS */
+
+
+/* For the albums list */
+.albums-list-div > h3{
+	margin-top: 1%;
+}
+
+.albums-list-div-ul{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	height: 74vh;
+	padding: 0 0 10% 3%;
+	list-style: none;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+.albums-list-div-ul::-webkit-scrollbar{
+	display: none;
+}
+
+.albums-list-div-ul > li{
+	width: 23vw;
+	height: 30vw;
+    margin: 0 4% 5% 0;
+}
+
+.albums-list-div-ul >  li > img{
+	position: relative;
+    height: 75%;
+	transition: .25s linear;
+}
+.albums-list-div-ul > li:hover > img{
+	filter: brightness(50%);
+}
+
+.albums-list-div-ul > li > h5{
+	margin: 5% 0 2% 0;
+    font-size: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+} 
+
+.albums-list-div-ul > li > h6{
+    color: rgb(98, 100, 104);
+	font-size: 55%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
