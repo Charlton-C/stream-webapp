@@ -50,18 +50,18 @@ footer{
 .song-player-name{
 	width: 85%;
 	margin: auto;
-    font-size: 68%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 68%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .song-player-artist-name{
 	width: 80%;
 	margin: auto;
 	font-size: 60%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .song-player-elapsed-time-span{
@@ -87,8 +87,8 @@ footer{
 
 #music_previews_page{
 	height: 74vh;
-    overflow: scroll;
-    scroll-behavior: smooth;
+	overflow: scroll;
+	scroll-behavior: smooth;
 }
 #music_previews_page::-webkit-scrollbar{
 	display: none;
@@ -116,8 +116,8 @@ footer{
 	margin-bottom: 8%;
 	padding: 0 2% 0 2%;
 	list-style: none;
-    overflow: scroll;
-    scroll-behavior: smooth;
+	overflow: scroll;
+	scroll-behavior: smooth;
 }
 .songs-previews-ul::-webkit-scrollbar{
 	display: none;
@@ -126,21 +126,21 @@ footer{
 .songs-previews-ul  > li{
 	width: 25vw;
 	height: 30vw;
-    margin-right: 1.5%;
+	margin-right: 1.5%;
 }
 
 .songs-previews-ul  > li > .image-and-image_play-container{
-    display: flex;
+	display: flex;
 	position: relative;
-    width: 100%;
-    height: 75%;
-    align-items: center;
-    justify-content: center;
+	width: 100%;
+	height: 75%;
+	align-items: center;
+	justify-content: center;
 }
 
 .songs-previews-ul  > li > .image-and-image_play-container > img{
 	width: 22vw;
-    transition: .3s linear;
+	transition: .3s linear;
 }
 .songs-previews-ul  > li:hover > .image-and-image_play-container > img{
 	filter: brightness(55%);
@@ -150,9 +150,9 @@ footer{
 	position: absolute;
 	font-size: 140%;
 	color: rgb(255, 255, 255);
-    opacity: 0;
-    cursor: pointer;
-    transition: .3s linear;
+	opacity: 0;
+	cursor: pointer;
+	transition: .3s linear;
 }
 .songs-previews-ul  > li:hover > .image-and-image_play-container > span{
 	opacity: 1;
@@ -160,19 +160,19 @@ footer{
 
 .songs-previews-ul  > li > h5{
 	margin: 5% 0 2% 3%;
-    overflow: hidden;
-    font-size: 65%;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 65%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .songs-previews-ul  > li > h6{
 	margin-left: 3%;
 	font-size: 55%;
-    color: rgb(98, 100, 104);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	color: rgb(98, 100, 104);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 
@@ -197,8 +197,8 @@ footer{
 	margin-bottom: 8%;
 	padding: 0 2% 0 2%;
 	list-style: none;
-    overflow: scroll;
-    scroll-behavior: smooth;
+	overflow: scroll;
+	scroll-behavior: smooth;
 }
 .albums-previews-ul::-webkit-scrollbar{
 	display: none;
@@ -207,12 +207,12 @@ footer{
 .albums-previews-ul > li{
 	width: 23vw;
 	height: 30vw;
-    margin-right: 2%;
+	margin-right: 2%;
 }
 
 .albums-previews-ul >  li > img{
 	position: relative;
-    height: 75%;
+	height: 75%;
 	transition: .25s linear;
 }
 .albums-previews-ul > li:hover > img{
@@ -221,19 +221,19 @@ footer{
 
 .albums-previews-ul > li > h5{
 	margin: 5% 0 2% 3%;
-    font-size: 65%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 65%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 } 
 
 .albums-previews-ul > li > h6{
 	margin-left: 3%;
 	font-size: 55%;
-    color: rgb(98, 100, 104);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	color: rgb(98, 100, 104);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 
@@ -282,7 +282,7 @@ footer{
 .song-list-song-li-text-container{
 	width: 80%;
 	overflow: hidden;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 .song-list-song-li-text-container > h5{
 	margin: 0;
@@ -295,7 +295,7 @@ footer{
 .song-list-song-li-text-container > h6{
 	margin: 0;
 	font-size: 60%;
-    color: rgb(210, 211, 214);
+	color: rgb(210, 211, 214);
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -327,8 +327,8 @@ footer{
 	height: 74vh;
 	padding: 0 0 10% 3%;
 	list-style: none;
-    overflow: scroll;
-    scroll-behavior: smooth;
+	overflow: scroll;
+	scroll-behavior: smooth;
 }
 .albums-list-div-ul::-webkit-scrollbar{
 	display: none;
@@ -337,12 +337,12 @@ footer{
 .albums-list-div-ul > li{
 	width: 23vw;
 	height: 30vw;
-    margin: 0 4% 5% 0;
+	margin: 0 4% 5% 0;
 }
 
 .albums-list-div-ul >  li > img{
 	position: relative;
-    height: 75%;
+	height: 75%;
 	transition: .25s linear;
 }
 .albums-list-div-ul > li:hover > img{
@@ -351,18 +351,18 @@ footer{
 
 .albums-list-div-ul > li > h5{
 	margin: 5% 0 2% 0;
-    font-size: 65%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 65%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 } 
 
 .albums-list-div-ul > li > h6{
 	font-size: 55%;
-    color: rgb(98, 100, 104);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	color: rgb(98, 100, 104);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 
@@ -386,8 +386,8 @@ footer{
 	height: 74vh;
 	padding: 0 0 10% 3%;
 	list-style: none;
-    overflow: scroll;
-    scroll-behavior: smooth;
+	overflow: scroll;
+	scroll-behavior: smooth;
 }
 .albums-list-div-ul::-webkit-scrollbar{
 	display: none;
@@ -396,12 +396,12 @@ footer{
 .albums-list-div-ul > li{
 	width: 23vw;
 	height: 30vw;
-    margin: 0 4% 5% 0;
+	margin: 0 4% 5% 0;
 }
 
 .albums-list-div-ul >  li > img{
 	position: relative;
-    height: 75%;
+	height: 75%;
 	transition: .25s linear;
 }
 .albums-list-div-ul > li:hover > img{
@@ -410,18 +410,18 @@ footer{
 
 .albums-list-div-ul > li > h5{
 	margin: 5% 0 2% 0;
-    font-size: 65%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 65%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 } 
 
 .albums-list-div-ul > li > h6{
 	font-size: 55%;
-    color: rgb(98, 100, 104);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	color: rgb(98, 100, 104);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 
