@@ -16,8 +16,6 @@ fetch("/resources/songAudioInfo/json/artistsInfo.json")
 
 // To ensure fetch loads the audio information before it is required by the website
 setTimeout(() =>{
-	var expandSongsPreviewsButton = document.querySelector(".expand-songs-previews-div");
-	var expandAlbumsPreviewsButton = document.querySelector(".expand-albums-previews-div");
 	var songsPreviewsDivUl = document.querySelector(".songs-previews-ul");
 	var albumsPreviewsDivUl = document.querySelector(".albums-previews-div");
 	var songsListDivUl = document.querySelector(".songs-list-div-ul");
