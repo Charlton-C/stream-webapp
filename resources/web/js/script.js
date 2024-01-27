@@ -33,7 +33,6 @@ setTimeout(() =>{
 	var playOrPauseCurrentSongButton = document.querySelector(".play-or-pause-current-song-button");
 	var goToNextSongButton = document.querySelector(".go-to-next-song-button");
 	var songsArray = [];
-	var albumsDictionary = {};
 	var albumsArray = [];
 	var playingAlbumQueue = [];
 	var isASongPlaying = false;
