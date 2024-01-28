@@ -152,8 +152,6 @@ setTimeout(() =>{
 						// To play the first song or to play a different song while the previous one is paused
 						if(isASongPlaying == false && playingSongNumber != songNumber){
 							liElementDiv3Button.classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 							playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 							playOrPauseSong(playingSongNumber, songNumber);
 							updateSongProgress(songNumber, 1);
@@ -162,8 +160,6 @@ setTimeout(() =>{
 						// To continue to play the same song
 						else if(isASongPlaying == false && playingSongNumber == songNumber){
 							liElementDiv3Button.classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 							playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 							playOrPauseSong(playingSongNumber, songNumber);
 							updateSongProgress(songNumber, 1);
@@ -171,14 +167,10 @@ setTimeout(() =>{
 						}
 						// To play a different song while another one is still playing (pause the other one)
 						else if(isASongPlaying == true && playingSongNumber != songNumber){
-							document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 							if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 								document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 							}
 							liElementDiv3Button.classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 							updateSongProgress(playingSongNumber, 0);
 							playOrPauseSong(playingSongNumber, songNumber);
 							updateSongProgress(songNumber, 1);
@@ -186,8 +178,6 @@ setTimeout(() =>{
 						// To pause a song
 						else if(isASongPlaying == true && playingSongNumber == songNumber){
 							liElementDiv3Button.classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-							document.querySelector("[class='song-"+songNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 							playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 							playOrPauseSong(playingSongNumber, songNumber);
 							updateSongProgress(playingSongNumber, 0);
@@ -211,7 +201,7 @@ setTimeout(() =>{
 
 				// To change the play, pause status of a song in the album if the song is playing
 				for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
-					if(!document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill") && document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
+					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 						document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 					}
 				}
