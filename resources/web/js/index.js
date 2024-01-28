@@ -62,7 +62,7 @@ setTimeout(() =>{
 				// To pause a song
 				else if(isASongPlaying == true && playingSongNumber == songNumber){
 					document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-					playNextSongWhenCurrentSongEnds.classList.toggle("bi-play");
+					playOrPauseCurrentSongButton.classList.toggle("bi-play");
 					playOrPauseSong(playingSongNumber, songNumber);
 					updateSongProgress(playingSongNumber, 0);
 					isASongPlaying = false;
