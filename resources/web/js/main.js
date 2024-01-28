@@ -151,7 +151,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 		}
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
-		}``
+		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 		songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
