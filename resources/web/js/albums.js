@@ -123,8 +123,8 @@ setTimeout(() =>{
 
 				// To change the play, pause status of a song in the album if the song is playing
 				for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
-					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-						document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil .bi-pause-fill")){
+						document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil .bi-pause-fill").classList.toggle("bi-play-fill");
 					}
 				}
 			});
