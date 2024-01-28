@@ -1,5 +1,5 @@
-var songsPreviewsDivUl = document.querySelector(".songs-previews-ul");
-var albumsPreviewsDivUl = document.querySelector(".albums-previews-ul");
+var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
+var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
 var specificAlbumSongsListDivOl = document.querySelector(".specific-album-songs-list-div-ol");
 
 

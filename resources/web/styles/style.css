@@ -111,7 +111,7 @@ footer{
 }
 
 /* For the songs previews */
-.songs-previews-ul{
+.songs-previews-div-ul{
 	display: flex;
 	width: 100%;
 	margin-bottom: 8%;
@@ -120,17 +120,17 @@ footer{
 	overflow: scroll;
 	scroll-behavior: smooth;
 }
-.songs-previews-ul::-webkit-scrollbar{
+.songs-previews-div-ul::-webkit-scrollbar{
 	display: none;
 }
 
-.songs-previews-ul  > li{
+.songs-previews-div-ul  > li{
 	width: 25vw;
 	height: 30vw;
 	margin-right: 1.5%;
 }
 
-.songs-previews-ul  > li > .image-and-image_play-container{
+.songs-previews-div-ul  > li > .image-and-image_play-container{
 	display: flex;
 	position: relative;
 	width: 100%;
@@ -139,15 +139,15 @@ footer{
 	justify-content: center;
 }
 
-.songs-previews-ul  > li > .image-and-image_play-container > img{
+.songs-previews-div-ul  > li > .image-and-image_play-container > img{
 	width: 22vw;
 	transition: .3s linear;
 }
-.songs-previews-ul  > li:hover > .image-and-image_play-container > img{
+.songs-previews-div-ul  > li:hover > .image-and-image_play-container > img{
 	filter: brightness(55%);
 }
 
-.songs-previews-ul  > li > .image-and-image_play-container > span{
+.songs-previews-div-ul  > li > .image-and-image_play-container > span{
 	position: absolute;
 	font-size: 140%;
 	color: rgb(255, 255, 255);
@@ -155,11 +155,11 @@ footer{
 	cursor: pointer;
 	transition: .3s linear;
 }
-.songs-previews-ul  > li:hover > .image-and-image_play-container > span{
+.songs-previews-div-ul  > li:hover > .image-and-image_play-container > span{
 	opacity: 1;
 }
 
-.songs-previews-ul  > li > h5{
+.songs-previews-div-ul  > li > h5{
 	margin: 5% 0 2% 3%;
 	overflow: hidden;
 	font-size: 65%;
@@ -167,7 +167,7 @@ footer{
 	text-overflow: ellipsis;
 }
 
-.songs-previews-ul  > li > h6{
+.songs-previews-div-ul  > li > h6{
 	margin-left: 3%;
 	font-size: 55%;
 	color: rgb(98, 100, 104);
@@ -193,7 +193,7 @@ footer{
 }
 
 /* For the albums previews */
-.albums-previews-ul{
+.albums-previews-div-ul{
 	display: flex;
 	width: 100%;
 	margin-bottom: 8%;
@@ -202,26 +202,26 @@ footer{
 	overflow: scroll;
 	scroll-behavior: smooth;
 }
-.albums-previews-ul::-webkit-scrollbar{
+.albums-previews-div-ul::-webkit-scrollbar{
 	display: none;
 }
 
-.albums-previews-ul > li{
+.albums-previews-div-ul > li{
 	width: 23vw;
 	height: 30vw;
 	margin-right: 2%;
 }
 
-.albums-previews-ul >  li > img{
+.albums-previews-div-ul >  li > img{
 	position: relative;
 	height: 75%;
 	transition: .25s linear;
 }
-.albums-previews-ul > li:hover > img{
+.albums-previews-div-ul > li:hover > img{
 	filter: brightness(50%);
 }
 
-.albums-previews-ul > li > h5{
+.albums-previews-div-ul > li > h5{
 	margin: 5% 0 2% 3%;
 	font-size: 65%;
 	overflow: hidden;
@@ -229,7 +229,7 @@ footer{
 	text-overflow: ellipsis;
 } 
 
-.albums-previews-ul > li > h6{
+.albums-previews-div-ul > li > h6{
 	margin-left: 3%;
 	font-size: 55%;
 	color: rgb(98, 100, 104);
