@@ -1,4 +1,3 @@
-var albumsPreviewsDivUl = document.querySelector(".albums-previews-div");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumSongsListDivOl = document.querySelector(".specific-album-songs-list-div-ol");
 
