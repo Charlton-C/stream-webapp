@@ -96,8 +96,8 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -120,8 +120,8 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
@@ -149,8 +149,8 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
@@ -175,8 +175,8 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -191,8 +191,8 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -216,8 +216,8 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -240,8 +240,8 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
@@ -269,8 +269,8 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
@@ -294,8 +294,8 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 			document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+			document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 		}
 		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -401,8 +401,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
@@ -424,8 +424,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
@@ -443,8 +443,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;
@@ -460,8 +460,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
@@ -483,8 +483,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
@@ -502,8 +502,8 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill")){
 				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+				document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 			}
 			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;

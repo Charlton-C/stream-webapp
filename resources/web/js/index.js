@@ -167,8 +167,8 @@ setTimeout(() =>{
 						}
 						// To play a different song while another one is still playing (pause the other one)
 						else if(isASongPlaying == true && playingSongNumber != songNumber){
-							if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-								document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+							if(document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+								document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 							}
 							liElementDiv3Button.classList.toggle("bi-play-fill");
 							updateSongProgress(playingSongNumber, 0);
@@ -201,8 +201,8 @@ setTimeout(() =>{
 
 				// To change the play, pause status of a song in the album if the song is playing
 				for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
-					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
-						document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
+					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil")){
+						document.querySelector(".song-"+playingSongNumber+"-song-list-li .bi-pause-fil").classList.toggle("bi-play-fill");
 					}
 				}
 			});
