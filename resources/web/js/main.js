@@ -99,7 +99,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
@@ -123,7 +123,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 		songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -152,7 +152,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 		songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -178,7 +178,7 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
@@ -194,7 +194,7 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
@@ -219,7 +219,7 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
@@ -243,7 +243,7 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 		songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -272,7 +272,7 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 		songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 		playOrPauseSong(playingSongNumber, playingSongNumber);
@@ -297,7 +297,7 @@ goToNextSongButton.addEventListener("click", () => {
 		if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play-fill");
+		playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
@@ -446,7 +446,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			playNextSongWhenCurrentSongEnds.classList.toggle("bi-play-fill");
+			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;
 		}
 		else{}
@@ -505,7 +505,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill")){
 				document.querySelector(".song-"+playingSongNumber+"-specific-album-songs-list-li .bi-pause-fill").classList.toggle("bi-play-fill");
 			}
-			playNextSongWhenCurrentSongEnds.classList.toggle("bi-play-fill");
+			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;
 		}
 		else{}
