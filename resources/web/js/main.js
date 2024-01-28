@@ -39,13 +39,10 @@ setTimeout(() =>{
 	// Get the number of albums after fetch completes
 	numberOfAlbums = Object.keys(albumsInfo).length;
 
-	// Function to add album names and album index to the albumsArray when the website loads
-	function addAlbumNamesAndIndicesToAlbumsArray(){
-		for(let key in albumsInfo){
-			albumsArray.push([key, albumsInfo[key]]);
-		}
+	// Add album names and album index to the albumsArray after fetch completes
+	for(let key in albumsInfo){
+		albumsArray.push([key, albumsInfo[key]]);
 	}
-	addAlbumNamesAndIndicesToAlbumsArray();
 }, 100);
 
 
