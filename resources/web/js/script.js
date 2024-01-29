@@ -548,7 +548,7 @@ setTimeout(() =>{
 		document.querySelector("title").innerText = "Music - Albums";
 		createAlbumsListPreviews();
 	}
-}, 200);
+}, 250);
 
 
 // Set songs in the songs array
