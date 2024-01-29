@@ -22,6 +22,7 @@ var artistsPageLinkButton = document.querySelector(".artists-page-link-button");
 var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
 var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
 var expandSongsPreviewsDiv = document.querySelector(".expand-songs-previews-div");
+var expandAlbumsPreviewsDiv = document.querySelector(".expand-albums-previews-div");
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
@@ -517,6 +518,7 @@ function goToSongsListPage(){
 	document.querySelector("#songs_list_page").style.display = "block";
 }
 
+expandAlbumsPreviewsDiv.addEventListener("click", goToAlbumsListPage);
 albumsPageLinkButton.addEventListener("click", goToAlbumsListPage);
 function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
