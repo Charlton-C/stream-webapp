@@ -307,13 +307,9 @@ footer{
 }
 
 
-#albums_list_page{
-	display: none;
-}
-
 /* For the albums list page */
 #albums_list_page{
-	display: block;
+	display: none;
 }
 
 .albums-list-div > h3{
