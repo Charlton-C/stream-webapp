@@ -14,6 +14,7 @@ fetch("/resources/songAudioInfo/json/artistsInfo.json")
 	.then(json => artistsInfo = json);
 
 
+var websiteBrandImage = document.querySelector(".navbar-brand");
 var homePageLinkButton = document.querySelector(".home-page-link-button");
 var songsPageLinkButton = document.querySelector(".songs-page-link-button");
 var albumsPageLinkButton = document.querySelector(".albums-page-link-button");
@@ -490,7 +491,9 @@ for(let i = 1; i <= numberOfSongs; i++){
 }
 
 
-homePageLinkButton.addEventListener("click", () => {
+websiteBrandImage.addEventListener("click", goToHomePage);
+homePageLinkButton.addEventListener("click", goToHomePage);
+function goToHomePage(){
 	document.querySelector("#songs_list_page").style.display = "none";
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
@@ -502,21 +505,23 @@ homePageLinkButton.addEventListener("click", () => {
 			document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
 	}
-});
+}
 
-songsPageLinkButton.addEventListener("click", () => {
+songsPageLinkButton.addEventListener("click", goToSongsListPage);
+function goToSongsListPage(){
 	document.querySelector("#music_previews_page").style.display = "none";
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
 	document.querySelector("#songs_list_page").style.display = "block";
-});
+}
 
-albumsPageLinkButton.addEventListener("click", () => {
+albumsPageLinkButton.addEventListener("click", goToAlbumsListPage);
+function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("#music_previews_page").style.display = "none";
 	document.querySelector("#songs_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
-});
+}
 
 
 // Change current song position when the user slides the current playing song slider
