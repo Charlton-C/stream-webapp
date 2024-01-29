@@ -14,6 +14,10 @@ fetch("/resources/songAudioInfo/json/artistsInfo.json")
 	.then(json => artistsInfo = json);
 
 
+var homePageLinkButton = document.querySelector(".home-page-link-button");
+var songsPageLinkButton = document.querySelector(".songs-page-link-button");
+var albumsPageLinkButton = document.querySelector(".albums-page-link-button");
+var artistsPageLinkButton = document.querySelector(".artists-page-link-button");
 var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
 var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
 var songsPreviewsDivUl = document.querySelector(".songs-previews-ul");
