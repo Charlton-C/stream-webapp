@@ -352,7 +352,6 @@ setTimeout(() =>{
 			songsListDivUl.appendChild(liElement);
 		}
 	}
-	createSongsLiInSongsListPage();
 
 
 	// Function to create the albums previews when the website loads
@@ -483,48 +482,51 @@ setTimeout(() =>{
 			albumsListDivUl.appendChild(liElement);
 		}
 	}
-	createAlbumsListPreviews();
+
+
+	websiteBrandImage.addEventListener("click", goToHomePage);
+	homePageLinkButton.addEventListener("click", goToHomePage);
+	function goToHomePage(){
+		document.querySelector("#songs_list_page").style.display = "none";
+		document.querySelector("#albums_list_page").style.display = "none";
+		document.querySelector("#specific_album_page").style.display = "none";
+		document.querySelector("#music_previews_page").style.display = "block";
+		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
+			if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
+				document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+			}
+		}
+	}
+
+	expandSongsPreviewsDiv.addEventListener("click", goToSongsListPage);
+	songsPageLinkButton.addEventListener("click", goToSongsListPage);
+	function goToSongsListPage(){
+		document.querySelector("#music_previews_page").style.display = "none";
+		document.querySelector("#albums_list_page").style.display = "none";
+		document.querySelector("#specific_album_page").style.display = "none";
+		document.querySelector("#songs_list_page").style.display = "block";
+		createSongsLiInSongsListPage();
+		for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
+			if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.contains("bi-play-fill")){
+				document.querySelector("[class='song-"+playingSongNumber+"-song-list-li'] .bi-pause-fill").classList.toggle("bi-play-fill");			
+			}
+		}
+	}
+
+	expandAlbumsPreviewsDiv.addEventListener("click", goToAlbumsListPage);
+	albumsPageLinkButton.addEventListener("click", goToAlbumsListPage);
+	function goToAlbumsListPage(){
+		document.querySelector("#albums_list_page").style.display = "block";
+		document.querySelector("#music_previews_page").style.display = "none";
+		document.querySelector("#songs_list_page").style.display = "none";
+		document.querySelector("#specific_album_page").style.display = "none";
+	}
 }, 200);
 
 
 // Set songs in the songs array
 for(let i = 1; i <= numberOfSongs; i++){
 	songsArray[i] = new Audio("/songs/"+i+".mp3");
-}
-
-
-websiteBrandImage.addEventListener("click", goToHomePage);
-homePageLinkButton.addEventListener("click", goToHomePage);
-function goToHomePage(){
-	document.querySelector("#songs_list_page").style.display = "none";
-	document.querySelector("#albums_list_page").style.display = "none";
-	document.querySelector("#specific_album_page").style.display = "none";
-	document.querySelector("#music_previews_page").style.display = "block";
-	songsPreviewsDivUl.appendChild(liElement);
-	albumsPreviewsDivUl.appendChild(liElement);
-	for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
-		if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
-			document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-		}
-	}
-}
-
-expandSongsPreviewsDiv.addEventListener("click", goToSongsListPage);
-songsPageLinkButton.addEventListener("click", goToSongsListPage);
-function goToSongsListPage(){
-	document.querySelector("#music_previews_page").style.display = "none";
-	document.querySelector("#albums_list_page").style.display = "none";
-	document.querySelector("#specific_album_page").style.display = "none";
-	document.querySelector("#songs_list_page").style.display = "block";
-}
-
-expandAlbumsPreviewsDiv.addEventListener("click", goToAlbumsListPage);
-albumsPageLinkButton.addEventListener("click", goToAlbumsListPage);
-function goToAlbumsListPage(){
-	document.querySelector("#albums_list_page").style.display = "block";
-	document.querySelector("#music_previews_page").style.display = "none";
-	document.querySelector("#songs_list_page").style.display = "none";
-	document.querySelector("#specific_album_page").style.display = "none";
 }
 
 
