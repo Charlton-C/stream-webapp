@@ -21,6 +21,7 @@ var albumsPageLinkButton = document.querySelector(".albums-page-link-button");
 var artistsPageLinkButton = document.querySelector(".artists-page-link-button");
 var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
 var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
+var expandSongsPreviewsDiv = document.querySelector(".expand-songs-previews-div");
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
@@ -507,6 +508,7 @@ function goToHomePage(){
 	}
 }
 
+expandSongsPreviewsDiv.addEventListener("click", goToSongsListPage);
 songsPageLinkButton.addEventListener("click", goToSongsListPage);
 function goToSongsListPage(){
 	document.querySelector("#music_previews_page").style.display = "none";
