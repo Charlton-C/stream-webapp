@@ -497,7 +497,7 @@ homePageLinkButton.addEventListener("click", () => {
 	document.querySelector("#specific_album_page").style.display = "none";
 	document.querySelector("#music_previews_page").style.display = "block";
 	for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
-		if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill")){
+		if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 			document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
 	}
