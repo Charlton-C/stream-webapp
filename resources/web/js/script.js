@@ -866,29 +866,15 @@ goToNextSongButton.addEventListener("click", () => {
 		// To restart the current song
 		songsArray[playingSongNumber].currentTime = 0;
 	}
-	// To restart the current song when their is no next song to play and their isn't a song playing
+	// To end the current song when their is no next song to play and their is a song playing
+	else if(songPlayerSongNameH5.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber == numberOfSongs){
+		// To end the current song
+		songsArray[playingSongNumber].currentTime = songsArray[playingSongNumber].duration;
+	}
+	// To end the current song when their is no next song to play and their isn't a song playing
 	else if(songPlayerSongNameH5.innerText != "" && playingSongNumber != 0 && isASongPlaying == false && playingSongNumber == numberOfSongs){
-		// To restart the current song
-		playOrPauseSong(playingSongNumber, playingSongNumber);
-		updateSongProgress(playingSongNumber, 0);
-		songsArray[playingSongNumber].currentTime = 0;
-		if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
-			if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
-			}
-		}
-		if(document.querySelector(".song-"+playingSongNumber+"-song-list-li")){
-			if(!document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill");
-			}
-		}
-		if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
-			if(!document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-				document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
-			}
-		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play");
-		isASongPlaying = false;		
+		// To end the current song
+		songsArray[playingSongNumber].currentTime = songsArray[playingSongNumber].duration;	
 	}
 	else{}
 });
