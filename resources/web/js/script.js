@@ -579,7 +579,7 @@ function updateSongProgress(playingSongNumber, turnOnOrOff){
 			updateSongProgressBar(currentSong);
 			updateSongElapsedAndRemainingTime(currentSong);
 			playNextSongWhenCurrentSongEnds(currentSong);
-		}, 1000);
+		}, 850);
 	}
 	else if(turnOnOrOff == 0){
 		clearInterval(updateSongProgressInterval);
