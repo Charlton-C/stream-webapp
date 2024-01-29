@@ -498,6 +498,13 @@ homePageLinkButton.addEventListener("click", () => {
 	document.querySelector("#music_previews_page").style.display = "block";
 });
 
+songsPageLinkButton.addEventListener("click", () => {
+	document.querySelector("#music_previews_page").style.display = "none";
+	document.querySelector("#albums_list_page").style.display = "none";
+	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#songs_list_page").style.display = "block";
+});
+
 
 // Change current song position when the user slides the current playing song slider
 songPlayerProgressBar.addEventListener("change", ()=>{
