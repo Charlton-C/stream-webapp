@@ -90,7 +90,7 @@ setTimeout(() =>{
 				songPlayerArtistNameH6.innerText = songsInfo[songNumber.toString()][1];
 
 				// Change image play or pause button to show whether a song is playing
-				// To play the first song or to play a different song while the previous one is paused
+				// To play the first song or to play a different song while the previous one is paused				
 				if(isASongPlaying == false && playingSongNumber != songNumber){
 					document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 					playOrPauseCurrentSongButton.classList.toggle("bi-play");
@@ -496,6 +496,11 @@ homePageLinkButton.addEventListener("click", () => {
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
 	document.querySelector("#music_previews_page").style.display = "block";
+	for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
+		if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill")){
+			document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+		}
+	}
 });
 
 songsPageLinkButton.addEventListener("click", () => {
