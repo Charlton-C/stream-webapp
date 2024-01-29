@@ -518,6 +518,7 @@ setTimeout(() =>{
 		document.querySelector("#albums_list_page").style.display = "none";
 		document.querySelector("#specific_album_page").style.display = "none";
 		document.querySelector("#music_previews_page").style.display = "block";
+		document.querySelector("title").innerText = "Music - Home";
 		if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 		}
@@ -530,6 +531,7 @@ setTimeout(() =>{
 		document.querySelector("#albums_list_page").style.display = "none";
 		document.querySelector("#specific_album_page").style.display = "none";
 		document.querySelector("#songs_list_page").style.display = "block";
+		document.querySelector("title").innerText = "Music - Songs";
 		createSongsLiInSongsListPage();
 		if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
 			document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill");			
@@ -539,10 +541,11 @@ setTimeout(() =>{
 	expandAlbumsPreviewsDiv.addEventListener("click", goToAlbumsListPage);
 	albumsPageLinkButton.addEventListener("click", goToAlbumsListPage);
 	function goToAlbumsListPage(){
-		document.querySelector("#albums_list_page").style.display = "block";
 		document.querySelector("#music_previews_page").style.display = "none";
 		document.querySelector("#songs_list_page").style.display = "none";
 		document.querySelector("#specific_album_page").style.display = "none";
+		document.querySelector("#albums_list_page").style.display = "block";
+		document.querySelector("title").innerText = "Music - Albums";
 		createAlbumsListPreviews();
 	}
 }, 200);
