@@ -520,6 +520,7 @@ setTimeout(() =>{
 		document.querySelector("#music_previews_page").style.display = "none";
 		document.querySelector("#songs_list_page").style.display = "none";
 		document.querySelector("#specific_album_page").style.display = "none";
+		createAlbumsListPreviews();
 	}
 }, 200);
 
