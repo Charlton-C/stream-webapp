@@ -82,10 +82,8 @@ footer{
 }
 
 
-/* index.html page CSS */
-
-
 #music_previews_page{
+	display: block;
 	height: 74vh;
 	overflow: scroll;
 	scroll-behavior: smooth;
@@ -93,7 +91,6 @@ footer{
 #music_previews_page::-webkit-scrollbar{
 	display: none;
 }
-
 
 .expand-songs-previews-div{
 	margin-top: 2%;
@@ -239,8 +236,9 @@ footer{
 }
 
 
-/* songs.html css */
-
+#songs_list_page{
+	display: none;
+}
 
 /* For the songs list page */
 .songs-list-div > h3{
@@ -309,67 +307,9 @@ footer{
 }
 
 
-/* albums.html CSS */
-
-
-/* For the albums list page */
-.albums_list_page{
-	display: block;
-}
-
-.albums-list-div > h3{
-	margin-top: 1%;
-}
-
-.albums-list-div-ul{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;
-	height: 74vh;
-	padding: 0 0 10% 3%;
-	list-style: none;
-	overflow: scroll;
-	scroll-behavior: smooth;
-}
-.albums-list-div-ul::-webkit-scrollbar{
+#albums_list_page{
 	display: none;
 }
-
-.albums-list-div-ul > li{
-	width: 23vw;
-	height: 30vw;
-	margin: 0 4% 5% 0;
-}
-
-.albums-list-div-ul >  li > img{
-	position: relative;
-	height: 75%;
-	transition: .25s linear;
-}
-.albums-list-div-ul > li:hover > img{
-	filter: brightness(50%);
-}
-
-.albums-list-div-ul > li > h5{
-	margin: 5% 0 2% 0;
-	font-size: 65%;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-} 
-
-.albums-list-div-ul > li > h6{
-	font-size: 55%;
-	color: rgb(98, 100, 104);
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-
-/* albums.html CSS */
-
 
 /* For the albums list page */
 #albums_list_page{
@@ -428,8 +368,6 @@ footer{
 
 
 /* For the specific album songs list page */
-
-
 #specific_album_page{
 	display: none;
 }
