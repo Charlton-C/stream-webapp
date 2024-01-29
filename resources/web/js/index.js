@@ -1,6 +1,6 @@
 var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
 var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
-var specificAlbumSongsListDivOl = document.querySelector(".specific-album-songs-list-div-ol");
+var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
 
 
 setTimeout(() =>{
@@ -106,9 +106,9 @@ setTimeout(() =>{
 			// Add click event listener for the album previews to open the album page when clicked
 			liElement.addEventListener("click", () => {
 				let albumNumber = (Number(liElement.classList[0].replace(/\D/g, "")));
-				specificAlbumSongsListDivOl.innerHTML = "";
+				specificAlbumDivOl.innerHTML = "";
 				document.querySelector("#music_previews_page").style.display = "none";
-				document.querySelector("#specific_album_songs_list_page").style.display = "block";
+				document.querySelector("#specific_album_page").style.display = "block";
 				document.querySelector(".specific-album-image").src = liElementImg.src;
 				document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 				document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
@@ -195,7 +195,7 @@ setTimeout(() =>{
 					});
 
 
-					specificAlbumSongsListDivOl.appendChild(liElement);
+					specificAlbumDivOl.appendChild(liElement);
 				}
 
 
