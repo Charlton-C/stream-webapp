@@ -20,7 +20,6 @@ var albumsPageLinkButton = document.querySelector(".albums-page-link-button");
 var artistsPageLinkButton = document.querySelector(".artists-page-link-button");
 var songsPreviewsDivUl = document.querySelector(".songs-previews-div-ul");
 var albumsPreviewsDivUl = document.querySelector(".albums-previews-div-ul");
-var songsPreviewsDivUl = document.querySelector(".songs-previews-ul");
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
@@ -496,6 +495,8 @@ homePageLinkButton.addEventListener("click", () => {
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
 	document.querySelector("#music_previews_page").style.display = "block";
+	songsPreviewsDivUl.appendChild(liElement);
+	albumsPreviewsDivUl.appendChild(liElement);
 	for(let songNumber = 1; songNumber <= numberOfSongs; songNumber++){
 		if(isASongPlaying == true && document.querySelector("[class='song-"+playingSongNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 			document.querySelector("[class='song-"+songNumber+"-preview-li'] .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
