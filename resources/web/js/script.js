@@ -776,11 +776,6 @@ goToNextSongButton.addEventListener("click", () => {
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	}
-	// To restart the current song when their is no next song to play and their is a song playing
-	else if(songPlayerSongNameH5.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber == numberOfSongs){
-		// To restart the current song
-		songsArray[playingSongNumber].currentTime = 0;
-	}
 	// To end the current song when their is no next song to play and their is a song playing
 	else if(songPlayerSongNameH5.innerText != "" && playingSongNumber != 0 && isASongPlaying == true && playingSongNumber == numberOfSongs){
 		// To end the current song
