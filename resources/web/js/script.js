@@ -337,7 +337,8 @@ setTimeout(() =>{
 				if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
 					playOrPauseCurrentSongButton.classList.toggle("bi-play");
 				}
-				playOrPauseSong(playingSongNumber, songNumber);
+				songAudiosDictionary[songNumber].currentTime = 0;
+				playOrPauseSong(songNumber, 1);
 				updateSongProgress(songNumber, 1);
 				isASongPlaying = true;
 			}
@@ -361,7 +362,7 @@ setTimeout(() =>{
 				if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
 					playOrPauseCurrentSongButton.classList.toggle("bi-play");
 				}
-				playOrPauseSong(playingSongNumber, songNumber);
+				playOrPauseSong(songNumber, 1);
 				updateSongProgress(songNumber, 1);
 				isASongPlaying = true;
 			}
@@ -397,8 +398,10 @@ setTimeout(() =>{
 						document.querySelector(".song-"+songNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 					}
 				}
+				playOrPauseSong(playingSongNumber, 0);
 				updateSongProgress(playingSongNumber, 0);
-				playOrPauseSong(playingSongNumber, songNumber);
+				songAudiosDictionary[songNumber].currentTime = 0;
+				playOrPauseSong(songNumber, 1);
 				updateSongProgress(songNumber, 1);
 			}
 			// To pause a song
@@ -421,7 +424,7 @@ setTimeout(() =>{
 				if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
 					playOrPauseCurrentSongButton.classList.toggle("bi-play");
 				}
-				playOrPauseSong(playingSongNumber, songNumber);
+				playOrPauseSong(playingSongNumber, 0);
 				updateSongProgress(playingSongNumber, 0);
 				isASongPlaying = false;
 			}
@@ -487,13 +490,13 @@ setTimeout(() =>{
 // Change current song position when the user slides the current playing song slider
 songPlayerProgressBar.addEventListener("change", ()=>{
 	// To pause the song
-	playOrPauseSong(playingSongNumber, playingSongNumber);
+	playOrPauseSong(playingSongNumber, 0);
 	updateSongProgress(playingSongNumber, 0);
 	isASongPlaying = false;
 	// To change the time of the song to the time the user has slide the slider to
 	songAudiosDictionary[playingSongNumber].currentTime = Math.floor((songPlayerProgressBar.value/100)*songAudiosDictionary[playingSongNumber].duration);
 	// To continue to play the song from the new position
-	playOrPauseSong(playingSongNumber, playingSongNumber);
+	playOrPauseSong(playingSongNumber, 1);
 	updateSongProgress(playingSongNumber, 1);
 	isASongPlaying = true;
 });
@@ -538,7 +541,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the previous song
@@ -569,7 +572,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -598,7 +601,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the previous song
@@ -629,7 +632,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -670,7 +673,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -711,7 +714,7 @@ goToPreviousSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -749,7 +752,7 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
 			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		}
-		playOrPauseSong(playingSongNumber, playingSongNumber);
+		playOrPauseSong(playingSongNumber, 0);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
 	}
@@ -773,7 +776,7 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 		if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
 			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 		}
-		playOrPauseSong(playingSongNumber, playingSongNumber);
+		playOrPauseSong(playingSongNumber, 1);
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
 	}
@@ -804,7 +807,7 @@ goToNextSongButton.addEventListener("click", () => {
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the next song
@@ -835,7 +838,7 @@ goToNextSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -864,7 +867,7 @@ goToNextSongButton.addEventListener("click", () => {
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the next song
@@ -895,7 +898,7 @@ goToNextSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -936,7 +939,7 @@ goToNextSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -977,7 +980,7 @@ goToNextSongButton.addEventListener("click", () => {
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -1001,28 +1004,16 @@ downloadCurrentSongButton.addEventListener("click", ()=>{
 
 
 // Play or pause current song function
-function playOrPauseSong(playingSongNumber, songNumber){
-	let previousSong = songAudiosDictionary[playingSongNumber];
-	let currentSong = songAudiosDictionary[songNumber];
+function playOrPauseSong(songNumber, playOrPauseSong) {
+	let song = songAudiosDictionary[songNumber];
 
-	// To play the first song or to play a different song while the previous one is paused
-	if(isASongPlaying == false && playingSongNumber != songNumber){
-		currentSong.currentTime = 0;
-		currentSong.play();
-	}
-	// To continue to play the same song
-	else if(isASongPlaying == false && playingSongNumber == songNumber){
-		currentSong.play();
-	}
-	// To play a different song while another one is still playing(pause this other one)
-	else if(isASongPlaying == true && playingSongNumber != songNumber){
-		previousSong.pause();
-		currentSong.currentTime = 0;
-		currentSong.play();
-	}
 	// To pause a song
-	else if(isASongPlaying == true && playingSongNumber == songNumber){
-		currentSong.pause();
+	if(playOrPauseSong == 0){
+		song.pause();
+	}
+	// To play a song
+	else if(playOrPauseSong == 1){
+		song.play();
 	}
 	else{}
 }
@@ -1093,7 +1084,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the next song
@@ -1124,7 +1115,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -1148,7 +1139,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
 				playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 		}
@@ -1172,7 +1163,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 			// To play the next song
@@ -1203,7 +1194,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 1);
 			updateSongProgress(playingSongNumber, 1);
 			isASongPlaying = true;
 		}
@@ -1227,7 +1218,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
 				playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			}
-			playOrPauseSong(playingSongNumber, playingSongNumber);
+			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
 		}
