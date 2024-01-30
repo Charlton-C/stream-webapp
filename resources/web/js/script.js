@@ -1,6 +1,6 @@
-var songsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-var albumsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
-var artistsInfo = JSON.parse(JSON.stringify({newVar: "newVar"}));
+var songsInfo = JSON.parse(JSON.stringify({songName: "name"}));
+var albumsInfo = JSON.parse(JSON.stringify({songAlbum: "album"}));
+var artistsInfo = JSON.parse(JSON.stringify({songArtist: "artist"}));
 fetch("/resources/songAudioInfo/json/songsInfo.json")
 	.then(response => response.json())
 	.then(json => songsInfo = json);
