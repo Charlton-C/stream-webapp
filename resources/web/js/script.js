@@ -54,10 +54,12 @@ setTimeout(() =>{
 	numberOfAlbums = Object.keys(albumsInfo).length;
 
 	// Add album names and album index to the albumsArray after fetch completes
-	for(let key in albumsInfo){
-		albumsArray.push([key, albumsInfo[key]]);
-	}
-}, 100);
+	setTimeout(() => {
+		for(let key in albumsInfo){
+			albumsArray.push([key, albumsInfo[key]]);
+		}
+	}, 3000);
+}, 1500);
 
 
 setTimeout(() =>{
@@ -462,7 +464,7 @@ setTimeout(() =>{
 		document.querySelector("title").innerText = "Music - Albums";
 		createAlbumsListPreviews();
 	}
-}, 250);
+}, 5000);
 
 
 // Set songs in the songs array
