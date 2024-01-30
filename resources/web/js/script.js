@@ -50,6 +50,11 @@ var numberOfAlbums;
 
 // To ensure fetch has loaded the audio information before it is required
 setTimeout(() =>{
+	// Set songs in the songs array
+	for(let i = 1; i <= numberOfSongs; i++){
+		songsArray[i] = new Audio("/songs/"+i+".mp3");
+	}
+
 	// Get the number of albums after fetch completes
 	numberOfAlbums = Object.keys(albumsInfo).length;
 
@@ -465,12 +470,6 @@ setTimeout(() =>{
 		createAlbumsListPreviews();
 	}
 }, 5000);
-
-
-// Set songs in the songs array
-for(let i = 1; i <= numberOfSongs; i++){
-	songsArray[i] = new Audio("/songs/"+i+".mp3");
-}
 
 
 // Change current song position when the user slides the current playing song slider
