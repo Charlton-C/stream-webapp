@@ -329,7 +329,9 @@ setTimeout(() =>{
 					document.querySelector(".song-"+songNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			playOrPauseSong(playingSongNumber, songNumber);
 			updateSongProgress(songNumber, 1);
 			isASongPlaying = true;
@@ -351,7 +353,9 @@ setTimeout(() =>{
 					document.querySelector(".song-"+songNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			playOrPauseSong(playingSongNumber, songNumber);
 			updateSongProgress(songNumber, 1);
 			isASongPlaying = true;
@@ -409,7 +413,9 @@ setTimeout(() =>{
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			playOrPauseSong(playingSongNumber, songNumber);
 			updateSongProgress(playingSongNumber, 0);
 			isASongPlaying = false;
@@ -734,7 +740,9 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 				document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 			}
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play");
+		if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
+			playOrPauseCurrentSongButton.classList.toggle("bi-play");
+		}
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 0);
 		isASongPlaying = false;
@@ -756,7 +764,9 @@ playOrPauseCurrentSongButton.addEventListener("click", () => {
 				document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 			}
 		}
-		playOrPauseCurrentSongButton.classList.toggle("bi-play");
+		if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
+			playOrPauseCurrentSongButton.classList.toggle("bi-play");
+		}
 		playOrPauseSong(playingSongNumber, playingSongNumber);
 		updateSongProgress(playingSongNumber, 1);
 		isASongPlaying = true;
@@ -1129,9 +1139,11 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
-			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;
 		}
 		else{}
@@ -1206,9 +1218,11 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			playOrPauseSong(playingSongNumber, playingSongNumber);
 			updateSongProgress(playingSongNumber, 0);
-			playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			isASongPlaying = false;
 		}
 		else{}
