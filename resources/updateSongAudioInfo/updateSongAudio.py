@@ -29,9 +29,11 @@ try:
 except ValueError:
 	if numberOfSongsToAdd == "all":
 		numberOfSongsToAdd = len(os.listdir(parentParentFileDirectory+"/newMusic"))
-	if numberOfSongsToAdd == 0:
+	elif numberOfSongsToAdd == 0:
 		print("\nNo songs to add.")
 		print("Move an mp3 file to the newMusic folder and run this script again.")
+	else:
+		print("Something went wrong, please try again.")
 
 
 
@@ -55,18 +57,6 @@ for i in range(numberOfSongsToAdd):
 		None
 
 
-	# Update song info
-
-
-	# Load the songsInfo.json file
-	# When the songsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size == 0:
-		songInfo = {}
-	# When the songsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size != 0:
-		songInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json"))
-	else:
-		None
 
 	# Load the song metadata
 	try:
@@ -81,13 +71,30 @@ for i in range(numberOfSongsToAdd):
 	songAlbumArtist = song.albumartist
 	songImage = song.get_image()
 
+
+
+	# Update song info
+
+
+	# Load the songsInfo.js file
+	# When the songsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").st_size == 0:
+		songInfo = {}
+	# When the songsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").st_size != 0:
+		songInfo = open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").readline()
+		songInfo = songInfo[16:]
+		songInfo = json.loads(songInfo)
+	else:
+		None
+
 	# Add the song information to songInfo dictionary
 	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
 
-	# Convert the dictionary to JSON
+	# Convert the songInfo dictionary to js
 	songInfoJson = json.dumps(songInfo)
-	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
-
+	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "w").write("var songsInfo = ")
+	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "a").write(songInfoJson)
 
 	# Add song image file to the /images/songImages folder
 	if "\\x89PNG" in str(songImage[:25]):
@@ -101,22 +108,24 @@ for i in range(numberOfSongsToAdd):
 	# Update Album info
 
 
-	# Load the albumsInfo.json file
-	# When the albumsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json").st_size == 0:
+	# Load the albumsInfo.js file
+	# When the albumsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").st_size == 0:
 		albumInfo = {}
-	# When the albumsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json").st_size != 0:
-		albumInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "r"))
+	# When the albumsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").st_size != 0:
+		albumInfo = open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").readline()
+		albumInfo = albumInfo[17:]
+		albumInfo = json.loads(albumInfo)
 	else:
 		None
-
 
 	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
 		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
 		albumInfoJson = json.dumps(albumInfo)
-		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Add album image file to the images/albumImages folder
 		if "\\x89PNG" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
@@ -129,7 +138,8 @@ for i in range(numberOfSongsToAdd):
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
 		albumInfoJson = json.dumps(albumInfo)
-		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Minus one in order to ensure album Images are labelled chronologically
 		nextAlbumImageFileNumber = nextAlbumImageFileNumber-1
 	else:
@@ -139,16 +149,17 @@ for i in range(numberOfSongsToAdd):
 	# # Update Artist info
 
 
-	# Load the artistsInfo.json file
-	# When the artistsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json").st_size == 0:
+	# Load the artistsInfo.js file
+	# When the artistsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").st_size == 0:
 		artistInfo = {}
-	# When the artistsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json").st_size != 0:
-		artistInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "r"))
+	# When the artistsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").st_size != 0:
+		artistInfo = open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").readline()
+		artistInfo = artistInfo[18:]
+		artistInfo = json.loads(artistInfo)
 	else:
 		None
-
 
 	# Add artist, album and song number
 	if songArtist == songAlbumArtist:
@@ -156,7 +167,8 @@ for i in range(numberOfSongsToAdd):
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[songAlbum], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		# Add album and song number to an artist already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
 			# Add album to an artist that's already in the artistInfo dictionary
@@ -166,7 +178,8 @@ for i in range(numberOfSongsToAdd):
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		else:
 			None
 	# Add artist and song number
@@ -175,17 +188,20 @@ for i in range(numberOfSongsToAdd):
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		# Add song number to an aritst already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		else:
 			None
 	else:
 		None
+
 
 
 # Update the number of the next song to be added to the songsInfo json file number
