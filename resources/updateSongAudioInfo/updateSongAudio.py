@@ -76,22 +76,25 @@ for i in range(numberOfSongsToAdd):
 	# Update song info
 
 
-	# Load the songsInfo.json file
-	# When the songsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size == 0:
+	# Load the songsInfo.js file
+	# When the songsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").st_size == 0:
 		songInfo = {}
-	# When the songsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size != 0:
-		songInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json"))
+	# When the songsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").st_size != 0:
+		songInfo = open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js").readline()
+		songInfo = songInfo[16:]
+		songInfo = json.loads(songInfo)
 	else:
 		None
 
 	# Add the song information to songInfo dictionary
 	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
 
-	# Convert the dictionary to JSON
+	# Convert the songInfo dictionary to js
 	songInfoJson = json.dumps(songInfo)
-	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
+	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "w").write("var songsInfo = ")
+	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "a").write(songInfoJson)
 
 	# Add song image file to the /images/songImages folder
 	if "\\x89PNG" in str(songImage[:25]):
