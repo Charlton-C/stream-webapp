@@ -149,13 +149,15 @@ for i in range(numberOfSongsToAdd):
 	# # Update Artist info
 
 
-	# Load the artistsInfo.json file
-	# When the artistsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json").st_size == 0:
+	# Load the artistsInfo.js file
+	# When the artistsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").st_size == 0:
 		artistInfo = {}
-	# When the artistsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json").st_size != 0:
-		artistInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "r"))
+	# When the artistsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").st_size != 0:
+		artistInfo = open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js").readline()
+		artistInfo = artistInfo[18:]
+		artistInfo = json.loads(artistInfo)
 	else:
 		None
 
@@ -165,7 +167,8 @@ for i in range(numberOfSongsToAdd):
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[songAlbum], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		# Add album and song number to an artist already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
 			# Add album to an artist that's already in the artistInfo dictionary
@@ -175,7 +178,8 @@ for i in range(numberOfSongsToAdd):
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		else:
 			None
 	# Add artist and song number
@@ -184,13 +188,15 @@ for i in range(numberOfSongsToAdd):
 		if songArtist not in artistInfo.keys():
 			artistInfo[songArtist] = [[], [startingSongNumber+i]]
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		# Add song number to an aritst already in the artistInfo dictionary
 		elif songArtist in artistInfo.keys():
 			if startingSongNumber+i not in artistInfo[songArtist][1]:
 				artistInfo[songArtist][1].append(startingSongNumber+i)
 			artistInfoJson = json.dumps(artistInfo)
-			open(parentFileDirectory+"/songAudioInfo/json/artistsInfo.json", "w").write(artistInfoJson)
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "w").write("var artistsInfo = ")
+			open(parentFileDirectory+"/songAudioInfo/js/artistsInfo.js", "a").write(artistInfoJson)
 		else:
 			None
 	else:
