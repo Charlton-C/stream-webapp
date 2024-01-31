@@ -29,9 +29,11 @@ try:
 except ValueError:
 	if numberOfSongsToAdd == "all":
 		numberOfSongsToAdd = len(os.listdir(parentParentFileDirectory+"/newMusic"))
-	if numberOfSongsToAdd == 0:
+	elif numberOfSongsToAdd == 0:
 		print("\nNo songs to add.")
 		print("Move an mp3 file to the newMusic folder and run this script again.")
+	else:
+		print("Something went wrong, please try again.")
 
 
 
