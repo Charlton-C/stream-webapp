@@ -57,18 +57,6 @@ for i in range(numberOfSongsToAdd):
 		None
 
 
-	# Update song info
-
-
-	# Load the songsInfo.json file
-	# When the songsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size == 0:
-		songInfo = {}
-	# When the songsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size != 0:
-		songInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json"))
-	else:
-		None
 
 	# Load the song metadata
 	try:
@@ -83,13 +71,27 @@ for i in range(numberOfSongsToAdd):
 	songAlbumArtist = song.albumartist
 	songImage = song.get_image()
 
+
+
+	# Update song info
+
+
+	# Load the songsInfo.json file
+	# When the songsInfo.json file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size == 0:
+		songInfo = {}
+	# When the songsInfo.json file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/json/songsInfo.json").st_size != 0:
+		songInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json"))
+	else:
+		None
+
 	# Add the song information to songInfo dictionary
 	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
 
 	# Convert the dictionary to JSON
 	songInfoJson = json.dumps(songInfo)
 	open(parentFileDirectory+"/songAudioInfo/json/songsInfo.json", "w").write(songInfoJson)
-
 
 	# Add song image file to the /images/songImages folder
 	if "\\x89PNG" in str(songImage[:25]):
@@ -112,7 +114,6 @@ for i in range(numberOfSongsToAdd):
 		albumInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "r"))
 	else:
 		None
-
 
 	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
@@ -151,7 +152,6 @@ for i in range(numberOfSongsToAdd):
 	else:
 		None
 
-
 	# Add artist, album and song number
 	if songArtist == songAlbumArtist:
 		# Add artist, their album and song number information to the artistInfo dictionary if they do not exist
@@ -188,6 +188,7 @@ for i in range(numberOfSongsToAdd):
 			None
 	else:
 		None
+
 
 
 # Update the number of the next song to be added to the songsInfo json file number
