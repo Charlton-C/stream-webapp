@@ -108,13 +108,15 @@ for i in range(numberOfSongsToAdd):
 	# Update Album info
 
 
-	# Load the albumsInfo.json file
-	# When the albumsInfo.json file is empty, create an empty dictionary
-	if os.stat(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json").st_size == 0:
+	# Load the albumsInfo.js file
+	# When the albumsInfo.js file is empty, create an empty dictionary
+	if os.stat(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").st_size == 0:
 		albumInfo = {}
-	# When the albumsInfo.json file is not empty, load the values into a dictionary
-	elif os.stat(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json").st_size != 0:
-		albumInfo = json.load(open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "r"))
+	# When the albumsInfo.js file is not empty, load the values into a dictionary
+	elif os.stat(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").st_size != 0:
+		albumInfo = open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js").readline()
+		albumInfo = albumInfo[17:]
+		albumInfo = json.loads(albumInfo)
 	else:
 		None
 
@@ -122,7 +124,8 @@ for i in range(numberOfSongsToAdd):
 	if songAlbum not in albumInfo.keys():
 		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
 		albumInfoJson = json.dumps(albumInfo)
-		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Add album image file to the images/albumImages folder
 		if "\\x89PNG" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
@@ -135,7 +138,8 @@ for i in range(numberOfSongsToAdd):
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
 		albumInfoJson = json.dumps(albumInfo)
-		open(parentFileDirectory+"/songAudioInfo/json/albumsInfo.json", "w").write(albumInfoJson)
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Minus one in order to ensure album Images are labelled chronologically
 		nextAlbumImageFileNumber = nextAlbumImageFileNumber-1
 	else:
