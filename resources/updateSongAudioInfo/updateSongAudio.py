@@ -69,6 +69,7 @@ for i in range(numberOfSongsToAdd):
 	songArtist = song.artist
 	songAlbum = song.album
 	songAlbumArtist = song.albumartist
+	songTrackNumberInAlbum = int(song.track)
 	songImage = song.get_image()
 
 
@@ -122,7 +123,7 @@ for i in range(numberOfSongsToAdd):
 
 	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
-		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i]]
+		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i], [songTrackNumberInAlbum]]
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
@@ -137,6 +138,7 @@ for i in range(numberOfSongsToAdd):
 	elif songAlbum in albumInfo.keys():
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
 			albumInfo[songAlbum][1].append(startingSongNumber+i)
+			albumInfo[songAlbum][2].append(songTrackNumberInAlbum)
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
@@ -206,3 +208,6 @@ for i in range(numberOfSongsToAdd):
 
 # Update the number of the next song to be added to the songsInfo json file number
 open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "w").write(str(startingSongNumber+numberOfSongsToAdd))
+
+
+print("\nSuccess")
