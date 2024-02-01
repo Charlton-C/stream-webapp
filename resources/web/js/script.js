@@ -112,6 +112,8 @@ function createAlbumsPreviews(){
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
+			// To arrange song li elements according to track number
+			let songsliElementsDict = {};
 			// Load the songs on the album page
 			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
 				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
@@ -146,7 +148,12 @@ function createAlbumsPreviews(){
 				liElement.appendChild(liElementDiv3);
 				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
-				specificAlbumDivOl.appendChild(liElement);
+				songsliElementsDict[songTrackNumberInAlbum] = liElement;
+			}
+			// To arrange song li elements according to track number
+			let sortedAlbumTrackNumberArray = (Object.keys(songsliElementsDict)).sort((a, b) => a - b);
+			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				specificAlbumDivOl.appendChild(songsliElementsDict[sortedAlbumTrackNumberArray[i]]);
 			}
 
 
@@ -234,6 +241,8 @@ function createAlbumsListPreviews(){
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
+			// To arrange song li elements according to track number
+			let songsliElementsDict = {};
 			// Load the songs on the album page
 			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
 				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
@@ -268,7 +277,12 @@ function createAlbumsListPreviews(){
 				liElement.appendChild(liElementDiv3);
 				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
-				specificAlbumDivOl.appendChild(liElement);
+				songsliElementsDict[songTrackNumberInAlbum] = liElement;
+			}
+			// To arrange song li elements according to track number
+			let sortedAlbumTrackNumberArray = (Object.keys(songsliElementsDict)).sort((a, b) => a - b);
+			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				specificAlbumDivOl.appendChild(songsliElementsDict[sortedAlbumTrackNumberArray[i]]);
 			}
 
 
