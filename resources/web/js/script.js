@@ -113,10 +113,11 @@ function createAlbumsPreviews(){
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
 			// Load the songs on the album page
-			for(let songNumberInAlbum = 0; songNumberInAlbum < (albumsArray[albumNumber-1][1][1]).length; songNumberInAlbum++){
-				let songNumber = albumsArray[albumNumber-1][1][1][songNumberInAlbum];
+			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
+				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
+				let songNumber = albumsArray[albumNumber-1][1][1][i];
 				let liElement = document.createElement("li");
-				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songNumberInAlbum+1)+"-in-specific-album-song-li");
+				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 				let liElementDiv1 = document.createElement("div");
 				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
 				let liElementDiv1Img = document.createElement("img");
@@ -128,10 +129,10 @@ function createAlbumsPreviews(){
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
 				let liElementDiv2H5 = document.createElement("h5");
-				liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songNumberInAlbum+1)+"-specific-album-songs-name");
+				liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-name");
 				liElementDiv2H5.innerText = songsInfo[songNumber.toString()][0];
 				let liElementDiv2H6 = document.createElement("h6");
-				liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songNumberInAlbum+1)+"-specific-album-songs-artist-name");
+				liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-artist-name");
 				liElementDiv2H6.innerText = songsInfo[songNumber.toString()][1];
 				liElementDiv2.appendChild(liElementDiv2H5);
 				liElementDiv2.appendChild(liElementDiv2H6);
@@ -143,6 +144,7 @@ function createAlbumsPreviews(){
 				liElement.appendChild(liElementDiv1);
 				liElement.appendChild(liElementDiv2);
 				liElement.appendChild(liElementDiv3);
+				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
 				specificAlbumDivOl.appendChild(liElement);
 			}
@@ -233,10 +235,11 @@ function createAlbumsListPreviews(){
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
 			// Load the songs on the album page
-			for(let songNumberInAlbum = 0; songNumberInAlbum < (albumsArray[albumNumber-1][1][1]).length; songNumberInAlbum++){
-				let songNumber = albumsArray[albumNumber-1][1][1][songNumberInAlbum];
+			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
+				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
+				let songNumber = albumsArray[albumNumber-1][1][1][i];
 				let liElement = document.createElement("li");
-				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songNumberInAlbum+1)+"-in-specific-album-song-li");
+				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 				let liElementDiv1 = document.createElement("div");
 				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
 				let liElementDiv1Img = document.createElement("img");
@@ -248,10 +251,10 @@ function createAlbumsListPreviews(){
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
 				let liElementDiv2H5 = document.createElement("h5");
-				liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songNumberInAlbum+1)+"-specific-album-songs-name");
+				liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-name");
 				liElementDiv2H5.innerText = songsInfo[songNumber.toString()][0];
 				let liElementDiv2H6 = document.createElement("h6");
-				liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songNumberInAlbum+1)+"-specific-album-songs-artist-name");
+				liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-artist-name");
 				liElementDiv2H6.innerText = songsInfo[songNumber.toString()][1];
 				liElementDiv2.appendChild(liElementDiv2H5);
 				liElementDiv2.appendChild(liElementDiv2H6);
@@ -263,6 +266,7 @@ function createAlbumsListPreviews(){
 				liElement.appendChild(liElementDiv1);
 				liElement.appendChild(liElementDiv2);
 				liElement.appendChild(liElementDiv3);
+				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
 				specificAlbumDivOl.appendChild(liElement);
 			}
