@@ -305,7 +305,7 @@ function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, a
 	}
 	else if(songAudiosDictionary[songNumber] === undefined){
 		songAudiosDictionary[songNumber] = new Audio("/songs/128kbps/"+songNumber.toString()+".mp3");
-		setTimeout(() => { songLiElementClickEventListenerPlayOrPauseFunction(); }, 2000);
+		setTimeout(() => { songLiElementClickEventListenerPlayOrPauseFunction(); }, 1000);
 	}
 	else{}
 
