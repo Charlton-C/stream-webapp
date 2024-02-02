@@ -304,7 +304,7 @@ function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, a
 		songLiElementClickEventListenerPlayOrPauseFunction();
 	}
 	else if(songAudiosDictionary[songNumber] === undefined){
-		songAudiosDictionary[songNumber] = new Audio("/songs/"+songNumber.toString()+".mp3");
+		songAudiosDictionary[songNumber] = new Audio("/songs/128kbps/"+songNumber.toString()+".mp3");
 		setTimeout(() => { songLiElementClickEventListenerPlayOrPauseFunction(); }, 2000);
 	}
 	else{}
