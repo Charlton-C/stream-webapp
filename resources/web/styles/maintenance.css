@@ -1,0 +1,8 @@
+body{
+	background-color: rgb(224, 250, 255)!important;
+	color: rgb(0, 0, 0)!important;
+}
+
+nav{
+	border-bottom: .5vh solid rgb(0, 0, 0);
+}
