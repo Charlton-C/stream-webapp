@@ -993,7 +993,7 @@ goToNextSongButton.addEventListener("click", () => {
 // Download current song button function
 downloadCurrentSongButton.addEventListener("click", ()=>{
 	let aElement = document.createElement("a");
-	aElement.setAttribute("href", "/songs/"+playingSongNumber+".mp3");
+	aElement.setAttribute("href", "/songs/128kbps/"+playingSongNumber+".mp3");
 	aElement.download = (songPlayerSongNameH5.innerText+"-"+songPlayerArtistNameH6.innerText).replace(/\s/g, "-");
 	aElement.click();
 });
