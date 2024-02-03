@@ -8,3 +8,4 @@ var comingSoonMonthNumber = document.querySelector(".coming-soon-month-number");
 var comingSoonYearNumber = document.querySelector(".coming-soon-year-number");
 var comingSoonTimeNumber = document.querySelector(".coming-soon-time-number");
 var localTime = new Date();
+var countdownTimerEnd = new Date(2024, 1, 10, 6, 0, 0, 0);
