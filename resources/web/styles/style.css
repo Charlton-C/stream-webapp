@@ -988,4 +988,29 @@ footer{
 	.songs-previews-div-ul  > li > h6{
 		font-size: 88%;
 	}
+
+
+	.expand-albums-previews-div{
+		margin-top: 0;
+	}
+	
+	/* For the albums previews */
+	.albums-previews-div-ul{
+		margin-bottom: 0;
+		padding: 0;
+	}
+	
+	.albums-previews-div-ul > li{
+		width: 12vw;
+		height: 17vw;
+	}
+	
+	.albums-previews-div-ul > li > h5{
+		margin: 3% 0 1% 3%;
+		font-size: 95%;
+	} 
+	
+	.albums-previews-div-ul > li > h6{
+		font-size: 88%;
+	}
 }
