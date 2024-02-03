@@ -670,3 +670,41 @@ footer{
 		font-size: 130%;
 	}
 }
+
+
+/* For Desktop and Laptop screens */
+
+@media only screen and (min-width: 1025px) and (max-width: 1600px){
+	/* For the navbar */
+	.navbar-nav{
+		margin-right: 2.5%;
+	}
+
+	/* For the song player */
+	footer{
+		padding-top: .5%;
+	}
+
+	.song-player-song-name{
+		margin-bottom: .1%;
+		font-size: 83%;
+	}
+	.song-player-artist-name{
+		font-size: 70%;
+	}
+
+	.song-player-elapsed-time-span{
+		font-size: 110%;
+	}
+	.song-player-progress-bar{
+		width: 82vw;
+	}
+	.song-player-remaining-time-span{
+		font-size: 110%;
+	}
+
+	.song-player-controls-div > button{
+		margin-top: 0;
+		font-size: 135%;
+	}
+}
