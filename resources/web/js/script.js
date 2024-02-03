@@ -949,6 +949,9 @@ goToNextSongButton.addEventListener("click", () => {
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+			if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
 			playOrPauseSong(playingSongNumber, 1);
@@ -989,6 +992,9 @@ goToNextSongButton.addEventListener("click", () => {
 				if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
+			}
+			if(playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
 			}
 			songPlayerSongNameH5.innerText = songsInfo[playingSongNumber][0];
 			songPlayerArtistNameH6.innerText = songsInfo[playingSongNumber][1];
