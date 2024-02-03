@@ -498,7 +498,6 @@ footer{
 		margin-top: 1%;
 	}
 
-
 	/* For the songs previews */
 	.songs-previews-div-ul{
 		margin-bottom: 0;
@@ -553,6 +552,7 @@ footer{
 		font-size: 64%;
 	}
 
+
 	/* For the songs list page */
 	.songs-list-div > h3{
 		margin-top: .5%;
@@ -587,5 +587,32 @@ footer{
 
 	.song-list-song-li-button-container > button{
 		font-size: 130%;
+	}
+
+
+	/* For the albums list page */
+
+	.albums-list-div > h3{
+		margin: .5% 0 1% 0;
+		font-size: 130%;
+	}
+
+	.albums-list-div-ul{
+		height: 70vh;
+		padding: 0 0 1% 3%;
+	}
+
+	.albums-list-div-ul > li{
+		width: 19vw;
+		height: 24vw;
+		margin: 0 4% 0 0;
+	}
+
+	.albums-list-div-ul > li > h5{
+		font-size: 75%;
+	} 
+
+	.albums-list-div-ul > li > h6{
+		font-size: 65%;
 	}
 }
