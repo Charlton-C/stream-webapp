@@ -458,3 +458,37 @@ footer{
 	font-size: 125%;
 	color: rgb(240, 251, 255);
 }
+
+
+/* For tablet screens */
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+	/* For the song player */
+	footer{
+		padding-top: 1%;
+	}
+
+	.song-player-song-name{
+		font-size: 75%;
+	}
+	.song-player-artist-name{
+		font-size: 63%;
+	}
+
+	.song-player-elapsed-time-span{
+		font-size: 82%;
+	}
+	.song-player-progress-bar{
+		width: 72vw;
+	}
+	.song-player-remaining-time-span{
+		font-size: 82%;
+	}
+
+	.song-player-controls-div{
+		display: flex;
+	}
+	.song-player-controls-div > button{
+		margin: auto;
+	}
+}
