@@ -5,5 +5,31 @@ body{
 }
 
 nav{
-	border-bottom: .5vh solid rgb(255, 255, 255);
+	margin-bottom: 28vh;
+	border-bottom: .5vh solid rgb(241, 241, 241);
+}
+
+nav > div >h2{
+	color: rgb(238, 238, 238)!important;
+}
+
+.countdown-container{
+	margin-bottom: 12vh;
+}
+
+.countdown-container > div > span{
+	font-size: 80%;
+}
+
+[class*="left-span"]{
+	color: rgb(238, 238, 238);
+	font-size: 200%;
+}
+
+.coming-soon-div > h6{
+	color: rgb(216, 216, 216);
+}
+
+.coming-soon-div > p{
+	font-size: 105%;
 }
