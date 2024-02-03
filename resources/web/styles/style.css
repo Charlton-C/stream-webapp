@@ -463,6 +463,12 @@ footer{
 /* For tablet screens */
 
 @media only screen and (min-width: 768px) and (max-width: 1024px){
+	/* For the navbar */
+	.navbar-nav{
+		font-weight: 500;
+	}
+
+
 	/* For the song player */
 	footer{
 		padding-top: 1%;
@@ -678,6 +684,7 @@ footer{
 	/* For the navbar */
 	.navbar-nav{
 		margin-right: 2.5%;
+		font-weight: 500;
 	}
 
 	/* For the song player */
