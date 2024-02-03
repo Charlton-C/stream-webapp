@@ -69,3 +69,28 @@ function displayCountdownTimerEndDate(){
 	comingSoonTimeNumber.innerText = hours+":"+minutes+":"+seconds;
 }
 displayCountdownTimerEndDate();
+
+
+function getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate){
+	let remainingTime = [];
+	let remainingTimeInMilliseconds = countdownTimerEndDate-localTimeDate;
+	let remainingTimeInSeconds = Math.floor(remainingTimeInMilliseconds/1000);
+	let remainingTimeInMinutes = Math.floor(remainingTimeInSeconds/60);
+	let remainingTimeInHours = Math.floor(remainingTimeInMinutes/60);
+
+	// Get days until countdown end
+	let remainingDays = Math.floor(remainingTimeInHours/24);
+	remainingTime[0] = remainingDays;
+
+	// Get hours until countdown end
+	remainingTime[1] = remainingTimeInHours-(remainingDays*24);
+
+	// Get minutes until countdown end
+	remainingTime[2] = remainingTimeInMinutes-(remainingTimeInHours*60);
+
+	// Get seconds until countdown end
+	remainingTime[3] = remainingTimeInSeconds-(remainingTimeInMinutes*60);
+
+
+	return remainingTime;
+}
