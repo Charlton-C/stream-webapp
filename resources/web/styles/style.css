@@ -373,7 +373,7 @@ footer{
 .specific-album-image{
 	width: 24%;
 	margin: 4% 0 3% 0;
-	border-radius: 1vw;	
+	border-radius: 1vw;
 }
 
 .specific-album-name{
@@ -614,5 +614,56 @@ footer{
 
 	.albums-list-div-ul > li > h6{
 		font-size: 65%;
+	}
+
+
+	/* For the specific album songs list page */
+	.specific-album-image{
+		width: 14%;
+		margin: 1.5% 0 1% 0;
+	}
+
+	.specific-album-name{
+		margin: 0;
+		font-size: 85%;
+	}
+
+	.specific-album-artist-name{
+		margin: .5% 0 1% 0;
+		font-size: 78%;
+	}
+
+	.specific-album-div-ol{
+		height: 45vh;
+		padding: 0 3% 2% 3%;
+	}
+
+	.specific-album-div-ol > li:before{
+		margin: 0 1% 0 0;
+		font-size: 82%;
+	}
+	.specific-album-div-ol > li{
+		margin-bottom: 1%;
+		padding: 1.2% 1.5%;
+	}
+
+	.specific-album-songs-li-image-container{
+		width: 6%;
+		margin: 0 0 0 1%;
+	}
+
+	.specific-album-songs-li-text-container{
+		width: 86%;
+	}
+	.specific-album-songs-li-text-container > h5{
+		margin-bottom: .5%;
+		font-size: 78%;
+	}
+	.specific-album-songs-li-text-container > h6{
+		font-size: 70%;
+	}
+
+	.specific-album-songs-li-button-container > button{
+		font-size: 130%;
 	}
 }
