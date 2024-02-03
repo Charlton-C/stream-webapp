@@ -33,6 +33,15 @@ var numberOfAlbums;
 
 
 
+// Load songs after website has loaded
+setTimeout(() => {
+	for(let i = 1; i < numberOfSongs+1; i++){
+		if(songAudiosDictionary[i] === undefined){
+			songAudiosDictionary[i] = new Audio("/songs/128kbps/"+i.toString()+".mp3");
+		}
+	}
+}, 5000);
+
 // Get the number of albums
 numberOfAlbums = Object.keys(albumsInfo).length;
 
