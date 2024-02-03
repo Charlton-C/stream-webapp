@@ -9,8 +9,18 @@ var comingSoonYearNumber = document.querySelector(".coming-soon-year-number");
 var comingSoonTimeNumber = document.querySelector(".coming-soon-time-number");
 var localTimeDate = new Date();
 // Year, Month (0-11), Day (1-31), Hours, Minutes, Seconds, Milliseconds
-var countdownTimerEndDate = new Date(2024, 1, 10, 6, 0, 0, 0);
+var countdownTimerEndDate = new Date(2024, 1, 5, 0, 0, 0, 0);
 
+
+var setIntervalThatUpdatesScreen = setInterval(() => {
+	localTimeDate = new Date();
+	if(localTimeDate != countdownTimerEndDate){
+		updateScreenWithRemainingTime();
+	}
+	else{
+		clearInterval(setIntervalThatUpdatesScreen);
+	}
+}, 1000);
 
 function displayCountdownTimerEndDate(){
 	let hours;
