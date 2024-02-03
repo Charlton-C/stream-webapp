@@ -778,4 +778,41 @@ footer{
 		margin-left: 3%;
 		font-size: 66%;
 	}
+
+
+	/* For the songs list page */
+	.songs-list-div > h3{
+		margin-top: .1%;
+		font-size: 140%;
+	}
+
+	.songs-list-div-ul{
+		height: 73vh;
+		padding: 0 3% 1% 3%;
+	}
+
+	.songs-list-div-ul > li{
+		margin-bottom: .7%;
+		padding: 1%;
+	}
+
+	.song-list-song-li-image-container{
+		width: 5%;
+		margin: 0 2% 0 0;
+	}
+
+	.song-list-song-li-text-container{
+		width: 88%;
+	}
+	.song-list-song-li-text-container > h5{
+		margin-bottom: .3%;
+		font-size: 83%;
+	}
+	.song-list-song-li-text-container > h6{
+		font-size: 73%;
+	}
+
+	.song-list-song-li-button-container > button{
+		font-size: 133%;
+	}
 }
