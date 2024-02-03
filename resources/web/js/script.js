@@ -212,6 +212,7 @@ function createSongsLiInSongsListPage(){
 
 // Function to create the albums previews when the website loads
 function createAlbumsListPreviews(){
+	albumsListDivUl.innerHTML = "";
 	for(let albumNumber = 1; albumNumber <= numberOfAlbums; albumNumber++){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
