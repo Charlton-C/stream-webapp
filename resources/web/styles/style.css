@@ -494,6 +494,10 @@ footer{
 
 
 	/* For the music previews div */
+	#music_previews_page{
+		padding: 0 2%;
+	}
+
 	.expand-songs-previews-div{
 		margin-top: 1%;
 	}
@@ -501,7 +505,7 @@ footer{
 	/* For the songs previews */
 	.songs-previews-div-ul{
 		margin-bottom: 0;
-		padding: 0 4% 0 4%;
+		padding: 0;
 	}
 
 	.songs-previews-div-ul  > li{
@@ -534,8 +538,7 @@ footer{
 	.albums-previews-div-ul{
 		display: flex;
 		width: 100%;
-		/* margin-bottom: 8%; */
-		padding: 0 4% 0 4%;
+		padding: 0;
 	}
 
 	.albums-previews-div-ul > li{
