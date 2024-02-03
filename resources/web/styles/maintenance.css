@@ -1,8 +1,9 @@
 body{
-	background-color: rgb(224, 250, 255)!important;
-	color: rgb(0, 0, 0)!important;
+	background: url("/resources/images/maintenance-background.jpg");
+	background-size: 100vw;
+	color: rgb(255, 255, 255)!important;
 }
 
 nav{
-	border-bottom: .5vh solid rgb(0, 0, 0);
+	border-bottom: .5vh solid rgb(255, 255, 255);
 }
