@@ -37,9 +37,9 @@ nav > div >h2{
 }
 
 
-/* For tablets */
+/* For tablet screens */
 
-@media only screen and (min-width: 768px) and (max-width: 1150px){	
+@media only screen and (min-width: 768px) and (max-width: 1024px){
 	nav{
 		margin-bottom: 23.5vh;
 		border-bottom: .35vh solid rgb(241, 241, 241);
@@ -63,9 +63,9 @@ nav > div >h2{
 }
 
 
-/* For Desktops and Laptops */
+/* For Desktop and Laptop screens */
 
-@media only screen and (min-width: 1151px) and (max-width: 1600px){	
+@media only screen and (min-width: 1025px) and (max-width: 1600px){
 	nav{
 		margin-bottom: 22vh;
 		border-bottom: .5vh solid rgb(241, 241, 241);
@@ -89,5 +89,35 @@ nav > div >h2{
 	
 	.coming-soon-div > p{
 		font-size: 115%;
+	}
+}
+
+
+/* For Television and large screens */
+
+@media only screen and (min-width: 1601px) and (max-width: 2280px){
+	nav{
+		margin-bottom: 24vh;
+		border-bottom: .4vh solid rgb(241, 241, 241);
+	}
+	
+	.countdown-container{
+		margin-bottom: 25vh;
+	}
+	
+	.countdown-container > div > span{
+		font-size: 110%;
+	}
+	
+	[class*="left-span"]{
+		font-size: 330%;
+	}
+	
+	.coming-soon-div > h6{
+		font-size: 130%;
+	}
+	
+	.coming-soon-div > p{
+		font-size: 160%;
 	}
 }
