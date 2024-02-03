@@ -40,7 +40,7 @@ setTimeout(() => {
 			songAudiosDictionary[i] = new Audio("/songs/128kbps/"+i.toString()+".mp3");
 		}
 	}
-}, 5000);
+}, 15000);
 
 // Get the number of albums
 numberOfAlbums = Object.keys(albumsInfo).length;
