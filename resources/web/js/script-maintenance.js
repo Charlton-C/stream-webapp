@@ -7,3 +7,4 @@ var comingSoonDateNumber = document.querySelector(".coming-soon-date-number");
 var comingSoonMonthNumber = document.querySelector(".coming-soon-month-number");
 var comingSoonYearNumber = document.querySelector(".coming-soon-year-number");
 var comingSoonTimeNumber = document.querySelector(".coming-soon-time-number");
+var localTime = new Date();
