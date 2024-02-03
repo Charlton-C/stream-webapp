@@ -686,6 +686,12 @@ footer{
 		margin-right: 2.5%;
 		font-weight: 500;
 	}
+	.nav-item{
+		padding: 0;
+	}
+	.nav-item:hover{
+		padding: 0;
+	}
 
 	/* For the song player */
 	footer{
@@ -899,5 +905,49 @@ footer{
 
 	.specific-album-songs-li-button-container > button{
 		font-size: 135%;
+	}
+}
+
+
+/* For Television and large screens */
+
+@media only screen and (min-width: 1601px) and (max-width: 2280px){
+	/* For the navbar */
+	.navbar-nav{
+		margin-right: 2.5%;
+		font-weight: 450;
+	}
+	.nav-item{
+		padding: 0;
+	}
+	.nav-item:hover{
+		padding: 0;
+	}
+
+	/* For the song player */
+	footer{
+		padding-top: .5%;
+	}
+
+	.song-player-song-name{
+		font-size: 100%;
+	}
+	.song-player-artist-name{
+		font-size: 95%;
+	}
+	
+	.song-player-elapsed-time-span{
+		font-size: 120%;
+	}
+	.song-player-progress-bar{
+		width: 79vw;
+	}
+	.song-player-remaining-time-span{
+		font-size: 120%;
+	}
+	
+	.song-player-controls-div > button{
+		margin-top: 0;
+		font-size: 140%;
 	}
 }
