@@ -37,6 +37,8 @@ body{
 }
 
 
+/* For mobile phones and devices not in the media queries */
+
 /* For the song player */
 footer{
 	padding-top: 2%;
