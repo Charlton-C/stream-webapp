@@ -707,4 +707,49 @@ footer{
 		margin-top: 0;
 		font-size: 135%;
 	}
+
+	/* For the music previews page */
+	#music_previews_page{
+		height: 77vh;
+		padding: 0 1.5%;
+	}
+
+
+	.expand-songs-previews-div{
+		margin: .5% 0 0 0;
+	}
+
+	/* For the songs previews */
+	.songs-previews-div-ul{
+		margin-bottom: 2%;
+		padding: 0;
+	}
+
+	.songs-previews-div-ul  > li{
+		width: 11.5vw;
+		height: 16vw;
+	}
+
+	.songs-previews-div-ul  > li > .image-and-image_play-container{
+		width: 100%;
+		height: 75%;
+	}
+
+	.songs-previews-div-ul  > li > .image-and-image_play-container > img{
+		width: 11.5vw;
+	}
+
+	.songs-previews-div-ul  > li > .image-and-image_play-container > span{
+		font-size: 165%;
+	}
+
+	.songs-previews-div-ul  > li > h5{
+		margin: 1% 0 2% 3%;
+		font-size: 76%;
+	}
+
+	.songs-previews-div-ul  > li > h6{
+		margin-left: 3%;
+		font-size: 66%;
+	}
 }
