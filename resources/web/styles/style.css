@@ -1013,4 +1013,40 @@ footer{
 	.albums-previews-div-ul > li > h6{
 		font-size: 88%;
 	}
+
+
+	/* For the songs list page */
+	.songs-list-div > h3{
+		margin-top: .4%;
+		font-size: 150%;
+	}
+	
+	.songs-list-div-ul{
+		height: 76vh;
+		padding: 0 3% 1% 3%;
+	}
+
+	.songs-list-div-ul > li{
+		margin-bottom: 1%;
+		padding: 1%;
+	}
+
+	.song-list-song-li-image-container{
+		width: 5.5%;
+		margin: 0 2% 0 0;
+	}
+
+	.song-list-song-li-text-container{
+		width: 87%;
+	}
+	.song-list-song-li-text-container > h5{
+		font-size: 110%;
+	}
+	.song-list-song-li-text-container > h6{
+		font-size: 100%;
+	}
+	
+	.song-list-song-li-button-container > button{
+		font-size: 175%;
+	}
 }
