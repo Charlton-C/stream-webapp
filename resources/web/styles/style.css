@@ -716,12 +716,12 @@ footer{
 
 
 	.expand-songs-previews-div{
-		margin: .5% 0 0 0;
+		margin: .3% 0 -1% 0;
 	}
 
 	/* For the songs previews */
 	.songs-previews-div-ul{
-		margin-bottom: 2%;
+		margin-bottom: 0;
 		padding: 0;
 	}
 
@@ -744,11 +744,37 @@ footer{
 	}
 
 	.songs-previews-div-ul  > li > h5{
-		margin: 1% 0 2% 3%;
+		margin: 1.5% 0 2% 3%;
 		font-size: 76%;
 	}
 
 	.songs-previews-div-ul  > li > h6{
+		margin-left: 3%;
+		font-size: 66%;
+	}
+
+
+	.expand-albums-previews-div{
+		margin: 0 0 -1% 0;
+	}
+
+	/* For the albums previews */
+	.albums-previews-div-ul{
+		margin-bottom: 0;
+		padding: 0;
+	}
+
+	.albums-previews-div-ul > li{
+		width: 11.2vw;
+		height: 15vw;
+	}
+
+	.albums-previews-div-ul > li > h5{
+		margin: 3.5% 0 2% 3%;
+		font-size: 76%;
+	} 
+
+	.albums-previews-div-ul > li > h6{
 		margin-left: 3%;
 		font-size: 66%;
 	}
