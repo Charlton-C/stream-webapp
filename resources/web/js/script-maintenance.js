@@ -14,11 +14,21 @@ var countdownTimerEndDate = new Date(2024, 1, 5, 0, 0, 0, 0);
 
 var setIntervalThatUpdatesScreen = setInterval(() => {
 	localTimeDate = new Date();
-	if(localTimeDate != countdownTimerEndDate){
+	if(Math.floor(localTimeDate.getTime()/1000) != Math.floor(countdownTimerEndDate.getTime()/1000)){
 		updateScreenWithRemainingTime();
 	}
 	else{
 		clearInterval(setIntervalThatUpdatesScreen);
+		let aElement = document.createElement("a");
+		aElement.setAttribute("href", "index.html");
+		aElement.click();
+	}
+	// Just in case it doesn't switch files
+	if(daysLeftSpan.innerText == "0-1"){
+		clearInterval(setIntervalThatUpdatesScreen);
+		let aElement = document.createElement("a");
+		aElement.setAttribute("href", "index.html");
+		aElement.click();
 	}
 }, 1000);
 
