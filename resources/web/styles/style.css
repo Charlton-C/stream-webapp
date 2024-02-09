@@ -955,15 +955,33 @@ footer{
 
 @media only screen and (min-width: 1601px) and (max-width: 2280px){
 	/* For the navbar */
+	.navbar-brand-image{
+		width: 40%;
+	}
+
 	.navbar-nav{
-		margin-right: 2.5%;
+		font-size: 120%;
 		font-weight: 450;
 	}
+
 	.nav-item{
+		margin-left: 2vw;
 		padding: 0;
 	}
 	.nav-item:hover{
 		padding: 0;
+	}
+
+	.navbar-form{
+		margin: .6vh 0 0 3vw;
+	}
+	
+	.navbar-form-text-input{
+		width: 16vw!important;
+	}
+	
+	.navbar-form-submit-button{
+		margin: 0 1.5vw 0 .5vw;
 	}
 
 	/* For the song player */
