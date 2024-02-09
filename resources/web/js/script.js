@@ -1,4 +1,7 @@
 var websiteBrandImage = document.querySelector(".navbar-brand");
+var navbarForm = document.querySelector(".navbar-form");
+var navbarFormTextInput = document.querySelector(".navbar-form-text-input");
+var navbarFormSubmitButton = document.querySelector(".navbar-form-submit-button");
 var homePageLinkButton = document.querySelector(".home-page-link-button");
 var songsPageLinkButton = document.querySelector(".songs-page-link-button");
 var albumsPageLinkButton = document.querySelector(".albums-page-link-button");
