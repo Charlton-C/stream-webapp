@@ -485,6 +485,19 @@ footer{
 		font-weight: 500;
 	}
 
+	.navbar-form{
+		margin: .9vh 0 .5vh 0;
+	}
+
+	.navbar-form-text-input{
+		display: inline!important;
+		width: 25vw!important;
+	}
+
+	.navbar-form-submit-button{
+		margin: 0 .5vw 0 .2vw;
+	}
+
 
 	/* For the song player */
 	footer{
