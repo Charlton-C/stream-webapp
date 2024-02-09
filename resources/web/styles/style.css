@@ -36,6 +36,23 @@ body{
 	background-color: rgb(104, 187, 183);
 }
 
+.navbar-form{
+	margin: 2vh 0 .5vh 0;
+}
+
+.navbar-form-text-input{
+	display: inline!important;
+	width: 70vw!important;
+}
+.navbar-form-text-input:focus{
+	border-color: transparent!important;
+	box-shadow: none!important;
+}
+
+.navbar-form-submit-button{
+	margin: 0 4vw 0 2vw;
+}
+
 
 /* For mobile phones and devices not in the media queries */
 
