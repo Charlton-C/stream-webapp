@@ -490,7 +490,6 @@ footer{
 	}
 
 	.navbar-form-text-input{
-		display: inline!important;
 		width: 25vw!important;
 	}
 
@@ -713,14 +712,27 @@ footer{
 @media only screen and (min-width: 1025px) and (max-width: 1600px){
 	/* For the navbar */
 	.navbar-nav{
-		margin-right: 2.5%;
+		/* margin-right: 2.5%; */
 		font-weight: 500;
 	}
+
 	.nav-item{
 		padding: 0;
 	}
 	.nav-item:hover{
 		padding: 0;
+	}
+
+	.navbar-form{
+		margin: .9vh 0 .5vh .8vw;
+	}
+
+	.navbar-form-text-input{
+		width: 15vw!important;
+	}
+
+	.navbar-form-submit-button{
+		margin: -.3vh 1vw 0 .2vw;
 	}
 
 	/* For the song player */
