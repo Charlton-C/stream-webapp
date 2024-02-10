@@ -38,7 +38,7 @@ var numberOfAlbums;
 
 // Load songs after 15 seconds
 setTimeout(() => {
-	for(let i = 1; i < numberOfSongs+1; i++){
+	for(let i = 1; i <= numberOfSongs; i++){
 		if(songAudiosDictionary[i] === undefined){
 			songAudiosDictionary[i] = new Audio("/songs/128kbps/"+i.toString()+".mp3");
 		}
@@ -493,6 +493,14 @@ function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Albums";
 	createAlbumsListPreviews();
+}
+
+navbarFormSubmitButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	let stringToSearch = escapeRegex(navbarFormTextInput.value);
+});
+function escapeRegex(string){
+	return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
 }
 
 
