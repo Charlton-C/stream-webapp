@@ -30,52 +30,55 @@
 		</nav>
 
 
-		<div id="music_previews_page" class="container-fluid">
-			<div class="expand-songs-previews-div">
-				<a href="javascript: void(0);">
-					<span>Songs</span>
-					<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
-				</a>
+		<!-- Div to ensure when user clicks outside the navbar, the navbar closes -->
+		<div data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show">
+			<div id="music_previews_page" class="container-fluid">
+				<div class="expand-songs-previews-div">
+					<a href="javascript: void(0);">
+						<span>Songs</span>
+						<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
+					</a>
+				</div>
+				<br>
+				<br>
+				<div class="songs-previews-div"><ul class="songs-previews-div-ul"></ul></div>
+
+
+				<div class="expand-albums-previews-div">
+					<a href="javascript: void(0);">
+						<span>Albums</span>
+						<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
+					</a>
+				</div>
+				<br>
+				<br>
+				<div class="albums-previews-div"><ul class="albums-previews-div-ul"></ul></div>
 			</div>
-			<br>
-			<br>
-			<div class="songs-previews-div"><ul class="songs-previews-div-ul"></ul></div>
 
 
-			<div class="expand-albums-previews-div">
-				<a href="javascript: void(0);">
-					<span>Albums</span>
-					<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
-				</a>
+			<div id="songs_list_page" class="container-fluid">
+				<div class="songs-list-div">
+					<h3 class="text-center">Songs</h3>
+					<ul class="songs-list-div-ul"></ul>
+				</div>
 			</div>
-			<br>
-			<br>
-			<div class="albums-previews-div"><ul class="albums-previews-div-ul"></ul></div>
-		</div>
 
 
-		<div id="songs_list_page" class="container-fluid">
-			<div class="songs-list-div">
-				<h3 class="text-center">Songs</h3>
-				<ul class="songs-list-div-ul"></ul>
+			<div id="albums_list_page" class="container-fluid">
+				<div class="albums-list-div text-center">
+					<h3 class="text-center">Albums</h3>
+					<ul class="albums-list-div-ul"></ul>
+				</div>
 			</div>
-		</div>
 
 
-		<div id="albums_list_page" class="container-fluid">
-			<div class="albums-list-div text-center">
-				<h3 class="text-center">Albums</h3>
-				<ul class="albums-list-div-ul"></ul>
-			</div>
-		</div>
-
-
-		<div id="specific_album_page" class="container-fluid">
-			<div class="specific-album-div text-center">
-				<img class="specific-album-image" src="">
-				<h5 class="specific-album-name"></h5>
-				<h6 class="specific-album-artist-name"></h6>
-				<ol class="specific-album-div-ol"></ol>
+			<div id="specific_album_page" class="container-fluid">
+				<div class="specific-album-div text-center">
+					<img class="specific-album-image" src="">
+					<h5 class="specific-album-name"></h5>
+					<h6 class="specific-album-artist-name"></h6>
+					<ol class="specific-album-div-ol"></ol>
+				</div>
 			</div>
 		</div>
 
