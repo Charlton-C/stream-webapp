@@ -468,7 +468,6 @@ footer{
 		font-weight: 500;
 	}
 
-
 	/* For the song player */
 	footer{
 		padding-top: 1%;
@@ -917,7 +916,13 @@ footer{
 		margin-right: 2.5%;
 		font-weight: 450;
 	}
+	
+	.navbar-brand-image{
+		width: 45%;
+	}
+	
 	.nav-item{
+		font-size: 140%;
 		padding: 0;
 	}
 	.nav-item:hover{
