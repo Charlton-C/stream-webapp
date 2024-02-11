@@ -1109,19 +1109,28 @@ footer{
 	}
 
 
-	/* For the specific album songs list page */	
+	/* For the specific album songs list page */
+	
+	.specific-album-div > div > button{
+		margin: 1vh 5vw 0 3.5vw;
+		font-size: 215%;
+	}
+	
 	.specific-album-image{
-		width: 11.5%;
-		margin: 1.5% 0 .5% 0;
+		width: 8.5vw;
+	}
+	
+	.specific-album-name-and-artist-name-container{
+		width: 68%;
 	}
 	
 	.specific-album-name{
-		font-size: 115%;
+		margin: 0 0 .5vh 0;
+		font-size: 125%;
 	}
 	
 	.specific-album-artist-name{
-		margin: .1% 0 .5% 0;
-		font-size: 105%;
+		font-size: 115%;
 	}
 	
 	.specific-album-div-ol{
