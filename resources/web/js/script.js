@@ -1151,10 +1151,15 @@ goToNextSongButton.addEventListener("click", () => {
 
 // Download current song button function
 downloadCurrentSongButton.addEventListener("click", ()=>{
-	let aElement = document.createElement("a");
-	aElement.setAttribute("href", "/songs/128kbps/"+playingSongNumber+".mp3");
-	aElement.download = (songPlayerSongNameH5.innerText+"-"+songPlayerArtistNameH6.innerText).replace(/\s/g, "-");
-	aElement.click();
+	if(songPlayerSongNameH5.innerText == songsInfo[playingSongNumber.toString()][0]){
+		let aElement = document.createElement("a");
+		let downloadName = ((songPlayerSongNameH5.innerText).toLowerCase()+"-"+(songPlayerArtistNameH6.innerText).toLowerCase()).replace(/\s/g, "-");
+		downloadName = downloadName.replace(/,*/g, "");
+		downloadName = downloadName.replace(/.*/g, "");
+		aElement.setAttribute("href", "/songs/128kbps/"+playingSongNumber+".mp3");
+		aElement.download = downloadName;
+		aElement.click();
+	}
 });
 
 
