@@ -840,7 +840,9 @@ goToPreviousSongButton.addEventListener("click", () => {
 // Play or pause current song button function
 playOrPauseCurrentSongButton.addEventListener("click", () => {
 	// No song plays as the user has not selected a song
-	if(songPlayerSongNameH5.innerText == "" && isASongPlaying == false && playingSongNumber == 1 && loadSongBeforePlayingSetTimeout == null){}
+	if(songPlayerSongNameH5.innerText == "" && isASongPlaying == false && playingSongNumber == 1 && loadSongBeforePlayingSetTimeout == null){
+		songLiElementClickEventListener(playingSongNumber, false, 0);
+	}
 	// To pause the current playing song
 	else if(songPlayerSongNameH5.innerText != "" && playingSongNumber != 0 && isASongPlaying == true){
 		if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
