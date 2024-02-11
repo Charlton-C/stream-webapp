@@ -27,6 +27,8 @@ var albumsArray = [];
 var playingAlbumQueue = [];
 var isASongPlaying = false;
 var isCurrentPlayingSongPlayingFromAnAlbum;
+var isAlbumOpenedFromAlbumPreview = false;
+var isAlbumOpenedFromAlbumList = false;
 var updateSongProgressInterval = null;
 var playingSongNumber = 1;
 var numberOfSongs = 25;
@@ -121,6 +123,10 @@ function createAlbumsPreviews(){
 			document.querySelector(".specific-album-image").src = liElementImg.src;
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+			isAlbumOpenedFromAlbumList = false;
+			isAlbumOpenedFromAlbumPreview = true;
+			specificAlbumBackButton.addEventListener("click", goToHomePage);
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
@@ -251,6 +257,10 @@ function createAlbumsListPreviews(){
 			document.querySelector(".specific-album-image").src = liElementImg.src;
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+			isAlbumOpenedFromAlbumPreview = false;
+			isAlbumOpenedFromAlbumList = true;
+			specificAlbumBackButton.addEventListener("click", goToAlbumsListPage);
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
