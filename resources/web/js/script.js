@@ -476,6 +476,9 @@ function goToHomePage(){
 	if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 		document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 	}
+	if(isAlbumOpenedFromAlbumPreview == true && isAlbumOpenedFromAlbumList == false){
+		specificAlbumBackButton.removeEventListener("click", goToHomePage);
+	}
 }
 
 expandSongsPreviewsDiv.addEventListener("click", goToSongsListPage);
@@ -501,6 +504,9 @@ function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Albums";
 	createAlbumsListPreviews();
+	if(isAlbumOpenedFromAlbumPreview == false && isAlbumOpenedFromAlbumList == true){
+		specificAlbumBackButton.removeEventListener("click", goToAlbumsListPage);
+	}
 }
 
 
