@@ -9,6 +9,7 @@ var expandSongsPreviewsDiv = document.querySelector(".expand-songs-previews-div"
 var expandAlbumsPreviewsDiv = document.querySelector(".expand-albums-previews-div");
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
+var specificAlbumBackButton = document.querySelector(".specific-album-back-button");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
 var songPlayerSongNameH5 = document.querySelector(".song-player-song-name");
 var songPlayerArtistNameH6 = document.querySelector(".song-player-artist-name");
