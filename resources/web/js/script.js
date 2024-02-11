@@ -9,6 +9,7 @@ var expandSongsPreviewsDiv = document.querySelector(".expand-songs-previews-div"
 var expandAlbumsPreviewsDiv = document.querySelector(".expand-albums-previews-div");
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
+var specificAlbumBackButton = document.querySelector(".specific-album-back-button");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
 var songPlayerSongNameH5 = document.querySelector(".song-player-song-name");
 var songPlayerArtistNameH6 = document.querySelector(".song-player-artist-name");
@@ -26,6 +27,8 @@ var albumsArray = [];
 var playingAlbumQueue = [];
 var isASongPlaying = false;
 var isCurrentPlayingSongPlayingFromAnAlbum;
+var isAlbumOpenedFromAlbumPreview = false;
+var isAlbumOpenedFromAlbumList = false;
 var updateSongProgressInterval = null;
 var playingSongNumber = 1;
 var numberOfSongs = 25;
@@ -120,6 +123,10 @@ function createAlbumsPreviews(){
 			document.querySelector(".specific-album-image").src = liElementImg.src;
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+			isAlbumOpenedFromAlbumList = false;
+			isAlbumOpenedFromAlbumPreview = true;
+			specificAlbumBackButton.addEventListener("click", goToHomePage);
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
@@ -250,6 +257,10 @@ function createAlbumsListPreviews(){
 			document.querySelector(".specific-album-image").src = liElementImg.src;
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+			isAlbumOpenedFromAlbumPreview = false;
+			isAlbumOpenedFromAlbumList = true;
+			specificAlbumBackButton.addEventListener("click", goToAlbumsListPage);
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
@@ -465,6 +476,9 @@ function goToHomePage(){
 	if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 		document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 	}
+	if(isAlbumOpenedFromAlbumPreview == true && isAlbumOpenedFromAlbumList == false){
+		specificAlbumBackButton.removeEventListener("click", goToHomePage);
+	}
 }
 
 expandSongsPreviewsDiv.addEventListener("click", goToSongsListPage);
@@ -490,6 +504,9 @@ function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Albums";
 	createAlbumsListPreviews();
+	if(isAlbumOpenedFromAlbumPreview == false && isAlbumOpenedFromAlbumList == true){
+		specificAlbumBackButton.removeEventListener("click", goToAlbumsListPage);
+	}
 }
 
 
