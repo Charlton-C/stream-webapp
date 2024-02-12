@@ -102,7 +102,7 @@ footer{
 
 
 #music_previews_page{
-	display: block;
+	display: none;
 	height: 74vh;
 	overflow: scroll;
 	scroll-behavior: smooth;
@@ -474,6 +474,128 @@ footer{
 .specific-album-songs-li-button-container > button{
 	font-size: 125%;
 	color: rgb(240, 251, 255);
+}
+
+
+/* For the search results page */
+#search_results_page{
+	display: block;
+}
+
+#search_results_page > p {
+	margin: 1vh 0 1vh 0;
+}
+
+.search-results-div{
+	height: 74vh;
+	overflow: scroll;
+	scroll-behavior: smooth;
+
+}
+.search-results-div::-webkit-scrollbar{
+	display: none;
+}
+
+/* The songs results */
+.songs-search-results-div-ul{
+	width: 100%;
+	padding: 0 3% 2% 3%;
+	list-style: none;
+}
+
+.songs-search-results-div-ul > li{
+	display: flex;
+	align-items: center;
+	border-radius: 1.25vw;
+	margin-bottom: 1.5%;
+	padding: 1.5% 2%;
+	background-color: rgb(16, 142, 226);
+	transition: .1s linear;
+}
+.songs-search-results-div-ul > li:hover{
+	background-color: rgb(19, 115, 184)!important;
+}
+
+.song-result-song-li-image-container{
+	width: 11%;
+	margin: 0 3.5% 0 1%;
+}
+.song-result-song-li-image-container > img{
+	width: 100%;
+	border-radius: 1vw;
+}
+
+.song-result-song-li-text-container{
+	width: 80%;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.song-result-song-li-text-container > h5{
+	margin: 0;
+	font-size: 70%;
+	color: rgb(240, 251, 255);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.song-result-song-li-text-container > h6{
+	margin: 0;
+	font-size: 60%;
+	color: rgb(210, 211, 214);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.song-result-song-li-button-container > button{
+	font-size: 125%;
+	color: rgb(240, 251, 255);
+}
+
+/* The albums results */
+.albums-search-results-div-ul{
+	display: flex;
+	width: 100%;
+	margin-bottom: 10%;
+	padding: 0 2% 0 2%;
+	list-style: none;
+	overflow: scroll;
+	scroll-behavior: smooth;
+}
+.albums-search-results-div-ul::-webkit-scrollbar{
+	display: none;
+}
+
+.albums-search-results-div-ul > li{
+	width: 23vw;
+	height: 30vw;
+	margin-right: 5%;
+}
+
+.albums-search-results-div-ul >  li > img{
+	position: relative;
+	height: 75%;
+	transition: .25s linear;
+}
+.albums-search-results-div-ul > li:hover > img{
+	filter: brightness(50%);
+}
+
+.albums-search-results-div-ul > li > h5{
+	margin: 5% 0 2% 3%;
+	font-size: 65%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+} 
+
+.albums-search-results-div-ul > li > h6{
+	margin-left: 3%;
+	font-size: 55%;
+	color: rgb(98, 100, 104);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 
