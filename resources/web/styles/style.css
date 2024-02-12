@@ -490,7 +490,6 @@ footer{
 	height: 74vh;
 	overflow: scroll;
 	scroll-behavior: smooth;
-
 }
 .search-results-div::-webkit-scrollbar{
 	display: none;
@@ -825,6 +824,68 @@ footer{
 
 	.specific-album-songs-li-button-container > button{
 		font-size: 130%;
+	}
+
+
+	/* For the search results page */
+	#search_results_page > p {
+		margin: 1vh 0 1.5vh 0;
+	}
+
+	/* The songs results */
+	.songs-search-results-div-ul{
+		padding: 0 3% 2% 3%;
+	}
+
+	.songs-search-results-div-ul > li{
+		margin-bottom: 1.3%;
+		padding: 1.5% .5%;
+	}
+
+	.song-result-song-li-image-container{
+		width: 6%;
+		margin: 0 3% 0 1%;
+	}
+
+	.song-result-song-li-text-container{
+		width: 83%;
+	}
+	.song-result-song-li-text-container > h5{
+		margin: 0 0 .3vh 0;
+		font-size: 80%;
+	}
+	.song-result-song-li-text-container > h6{
+		font-size: 70%;
+	}
+
+	.song-result-song-li-button-container > button{
+		font-size: 140%;
+	}
+
+	/* The albums results */
+	.albums-search-results-div-ul{
+		margin-bottom: 2%;
+		padding: 0 3% 0 3%;
+	}
+
+	.albums-search-results-div-ul > li{
+		width: 15vw;
+		height: 22vw;
+		margin-right: 4.5%;
+	}
+
+	.albums-search-results-div-ul >  li > img{
+		height: 75%;
+	}
+
+	.albums-search-results-div-ul > li > h5{
+		margin: 5% 0 2% 3%;
+		font-size: 76%;
+	} 
+
+	.albums-search-results-div-ul > li > h6{
+		margin-left: 3%;
+		font-size: 66%;
 	}
 }
 
