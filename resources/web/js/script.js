@@ -599,6 +599,13 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				liElement.appendChild(liElementDiv3);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, 0); });
 				songsSearchResultsDivUl.appendChild(liElement);
+
+				// To change the play, pause status of a song in the results if the song is playing
+				if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
+					if(document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+						document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+					}
+				}
 			}
 		}
 	}
