@@ -520,6 +520,29 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			songArtistNameMatchSongNumberSearchResultsArray.push(i);
 		}
 	}
+
+	// Change page being displayed
+	document.querySelector("#music_previews_page").style.display = "none";
+	document.querySelector("#songs_list_page").style.display = "none";
+	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#albums_list_page").style.display = "none";
+	document.querySelector("#search_results_page").style.display = "block";
+
+	// Change website title
+	document.querySelector("title").innerText = "Search results";
+
+
+	songsSearchResultsDivUl.innerHTML = "";
+	albumsSearchResultsDivUl.innerHTML = "";
+	searchInputTextDisplay.innerText = navbarFormTextInput.value;
+	
+	
+	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
+		// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
+		let songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
+	}
+	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0){ searchInputTextDisplay.innerText = "No match found"; }
+	else{ searchResultsDiv.innerHTML = "An error occurred"; }
 });
 function escapeRegex(string){
 	return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
