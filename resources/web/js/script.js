@@ -13,8 +13,8 @@ var expandAlbumsPreviewsDiv = document.querySelector(".expand-albums-previews-di
 var songsListDivUl = document.querySelector(".songs-list-div-ul");
 var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
-var searchResultsPage = document.querySelector("#search_results_page");
 var searchInputTextDisplay = document.querySelector(".search-input-text-display");
+var searchResultsDiv = document.querySelector(".search-results-div");
 var songsSearchResultsDivUl = document.querySelector(".songs-search-results-div-ul");
 var albumsSearchResultsDivUl = document.querySelector(".albums-search-results-div-ul");
 var songPlayerSongNameH5 = document.querySelector(".song-player-song-name");
@@ -467,6 +467,7 @@ function goToHomePage(){
 	document.querySelector("#songs_list_page").style.display = "none";
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#search_results_page").style.display = "none";
 	document.querySelector("#music_previews_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Home";
 	if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
@@ -480,6 +481,7 @@ function goToSongsListPage(){
 	document.querySelector("#music_previews_page").style.display = "none";
 	document.querySelector("#albums_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#search_results_page").style.display = "none";
 	document.querySelector("#songs_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Songs";
 	createSongsLiInSongsListPage();
@@ -494,6 +496,7 @@ function goToAlbumsListPage(){
 	document.querySelector("#music_previews_page").style.display = "none";
 	document.querySelector("#songs_list_page").style.display = "none";
 	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#search_results_page").style.display = "none";
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Albums";
 	createAlbumsListPreviews();
@@ -502,6 +505,21 @@ function goToAlbumsListPage(){
 navbarFormSubmitButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
+	let songNameMatchSongNumberSearchResultsArray = [];
+	let songArtistNameMatchSongNumberSearchResultsArray = [];
+
+	// Get all songs with stringToSearch in their name
+	for(let i = 1; i <= numberOfSongs; i++){
+		if((songsInfo[i.toString()][0]).search(new RegExp(stringToSearch, "i")) != -1){
+			songNameMatchSongNumberSearchResultsArray.push(i);
+		}
+	}
+	// Get all song artists with stringToSearch in their name
+	for(let i = 1; i <= numberOfSongs; i++){
+		if((songsInfo[i.toString()][1]).search(new RegExp(stringToSearch, "i")) != -1){
+			songArtistNameMatchSongNumberSearchResultsArray.push(i);
+		}
+	}
 });
 function escapeRegex(string){
 	return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
