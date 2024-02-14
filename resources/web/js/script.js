@@ -577,7 +577,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			}
 		}
 	}
-	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0){ searchInputTextDisplay.innerText = "No match found"; }
+	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
 	else{ searchResultsDiv.innerHTML = "An error occurred"; }
 });
 function escapeRegex(string){
