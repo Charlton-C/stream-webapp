@@ -575,7 +575,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	searchInputTextDisplay.innerText = navbarFormTextInput.value;
 	
 	
-	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
+	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
 		// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
 		let songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
 
@@ -625,8 +625,12 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				}
 			}
 		}
+
+		// Show albums search results
+		if(albumNameMatchSearchResultsArray.length != 0){
+		}
 	}
-	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
+	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
 	else{ searchResultsDiv.innerHTML = "An error occurred"; }
 });
 function escapeRegex(string){
