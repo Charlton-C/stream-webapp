@@ -532,6 +532,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
 	let songNameMatchSongNumberSearchResultsArray = [];
 	let songArtistNameMatchSongNumberSearchResultsArray = [];
+	let albumNameMatchSearchResultsArray = [];
 
 	// Get all songs with stringToSearch in their name
 	for(let i = 1; i <= numberOfSongs; i++){
@@ -545,6 +546,18 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			songArtistNameMatchSongNumberSearchResultsArray.push(i);
 		}
 	}
+	// Get all album names and album artist names with stringToSearch in their name
+	for(let i = 0; i < numberOfAlbums; i++){
+		// Get all album names with stringToSearch in their name
+		if((albumsArray[i][0]).match(new RegExp(stringToSearch, "i")) != null){
+			albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
+		}
+		// Get all album artist names with stringToSearch in their name
+		if((albumsArray[i][1][0]).match(new RegExp(stringToSearch, "i")) != null){
+			albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
+		}
+	}
+
 
 	// Change page being displayed
 	document.querySelector("#music_previews_page").style.display = "none";
@@ -565,6 +578,10 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
 		// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
 		let songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
+
+		// Remove duplicates from albumNameMatchSearchResultsArray
+		let albumNameSearchResultsArray = Array.from(new Set(albumNameMatchSearchResultsArray));
+
 
 		// Show songs search results
 		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
