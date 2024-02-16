@@ -407,9 +407,9 @@ function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, a
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			if(document.querySelector(".song-"+songNumber+"-song-result-li")){
-				if(!document.querySelector(".song-"+songNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-					document.querySelector(".song-"+songNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+			if(document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
 			if(document.querySelector(".song-"+songNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
@@ -455,9 +455,9 @@ function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, a
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
-			if(document.querySelector(".song-"+songNumber+"-song-result-li")){
-				if(!document.querySelector(".song-"+songNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-					document.querySelector(".song-"+songNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+			if(document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
 			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
