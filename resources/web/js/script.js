@@ -532,6 +532,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
 	let songNameMatchSongNumberSearchResultsArray = [];
 	let songArtistNameMatchSongNumberSearchResultsArray = [];
+	let songNumberSearchResultsArray;
 	let albumNameMatchSearchResultsArray = [];
 	let albumNumberSearchResultsArray = [];
 
@@ -547,6 +548,8 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			songArtistNameMatchSongNumberSearchResultsArray.push(i);
 		}
 	}
+	// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
+	songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
 	// Get all album names with stringToSearch in the album name and / or album artist name
 	for(let i = 0; i < numberOfAlbums; i++){
 		// Get all album names with stringToSearch in their name
@@ -587,9 +590,6 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	
 	
 	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
-		// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
-		let songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
-
 		// Show songs search results
 		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
 			for(let i = 0; i < songNumberSearchResultsArray.length; i++){
@@ -635,8 +635,6 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 
 		// Show albums search results
 		if(albumNameMatchSearchResultsArray.length != 0){
-			console.log(albumsArray);
-			console.log(albumNumberSearchResultsArray);
 			for(let i = 0; i < albumNumberSearchResultsArray.length; i++){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
