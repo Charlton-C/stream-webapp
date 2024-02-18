@@ -622,9 +622,19 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	
 	
 	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
+		// Show only 7 song search results
+		let numberOfSongSearchResultsToShow;
+		if(songNumberSearchResultsArray.length >= 7){ numberOfSongSearchResultsToShow = 7; }
+		else{ numberOfSongSearchResultsToShow = songNumberSearchResultsArray.length; }
+		// Show only 8 album search results
+		let numberOfAlbumSearchResultsToShow;
+		if(albumNumberSearchResultsArray.length >= 8){ numberOfAlbumSearchResultsToShow = 8; }
+		else{ numberOfAlbumSearchResultsToShow = albumNumberSearchResultsArray.length; }
+
+
 		// Show songs search results
 		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
-			for(let i = 0; i < songNumberSearchResultsArray.length; i++){
+			for(let i = 0; i < numberOfSongSearchResultsToShow; i++){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-song-result-li");
 				let liElementDiv1 = document.createElement("div");
@@ -667,7 +677,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 
 		// Show albums search results
 		if(albumNameMatchSearchResultsArray.length != 0){
-			for(let i = 0; i < albumNumberSearchResultsArray.length; i++){
+			for(let i = 0; i < numberOfAlbumSearchResultsToShow; i++){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
 				let liElementImg = document.createElement("img");
