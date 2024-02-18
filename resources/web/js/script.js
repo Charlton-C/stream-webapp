@@ -1622,6 +1622,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			}
 			playOrPauseSong(playingSongNumber, 0);
 			updateSongProgress(playingSongNumber, 0);
+			currentSong.currentTime = 0;
 			isASongPlaying = false;
 		}
 		else if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber < numberOfSongs){
