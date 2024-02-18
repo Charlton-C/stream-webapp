@@ -33,6 +33,7 @@ var albumsArray = [];
 var playingAlbumQueue = [];
 var isASongPlaying = false;
 var isCurrentPlayingSongPlayingFromAnAlbum;
+var isCurrentPlayingSongPlayingFromSearch;
 var updateSongProgressInterval = null;
 var playingSongNumber = 1;
 var numberOfSongs = 25;
@@ -87,7 +88,7 @@ function createSongsPreviews(){
 		liElement.appendChild(liElementDiv);
 		liElement.appendChild(liElementH5);
 		liElement.appendChild(liElementH6);
-		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, 0); });
+		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsPreviewsDivUl.appendChild(liElement);
 	}
 }
@@ -165,7 +166,7 @@ function createAlbumsPreviews(){
 				liElement.appendChild(liElementDiv2);
 				liElement.appendChild(liElementDiv3);
 				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
-				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
+				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, false, albumNumber); });
 				albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
 				oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
 				oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
@@ -233,7 +234,7 @@ function createSongsLiInSongsListPage(){
 		liElement.appendChild(liElementDiv1);
 		liElement.appendChild(liElementDiv2);
 		liElement.appendChild(liElementDiv3);
-		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, 0); });
+		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsListDivUl.appendChild(liElement);
 	}
 }
@@ -273,6 +274,8 @@ function createAlbumsListPreviews(){
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
+			let oldSongNumberAndSongTrackNumberArray = [[], []];
+			let sortedSongNumberAndSongTrackNumberArray = [[], []];
 			// Load the songs on the album page
 			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
 				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
@@ -306,14 +309,25 @@ function createAlbumsListPreviews(){
 				liElement.appendChild(liElementDiv2);
 				liElement.appendChild(liElementDiv3);
 				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
-				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
+				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, false, albumNumber); });
 				albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
+				oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
+				oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
 			}
 			// To arrange song li elements according to track number
 			let sortedAlbumTrackNumberArray = (Object.keys(albumSongsLiElementsDict)).sort((a, b) => a - b);
 			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				sortedSongNumberAndSongTrackNumberArray[1][i] = Number(sortedAlbumTrackNumberArray[i]);
 				specificAlbumDivOl.appendChild(albumSongsLiElementsDict[sortedAlbumTrackNumberArray[i]]);
 			}
+			// To arrange song numbers according to how track numbers follows each other
+			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				let oldTrackNumberIndex = oldSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+				let newTrackNumberIndex = sortedSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+				sortedSongNumberAndSongTrackNumberArray[0][newTrackNumberIndex] = oldSongNumberAndSongTrackNumberArray[0][oldTrackNumberIndex];
+			}
+			albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
+			albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
 
 
 			// To change the play, pause status of a song in the album if the song is playing
@@ -329,7 +343,7 @@ function createAlbumsListPreviews(){
 	}
 }
 
-function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, albumNumber){
+function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, isSongLiElementFromSearch, albumNumber){
 	if(songAudiosDictionary[songNumber] != undefined){
 		songLiElementClickEventListenerPlayOrPauseFunction();
 	}
@@ -483,14 +497,21 @@ function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, a
 		else{}
 
 		playingSongNumber = songNumber;
-		if(isSongLiElementFromAlbum == false){
+		if(isSongLiElementFromAlbum == false && isSongLiElementFromSearch == false){
 			isCurrentPlayingSongPlayingFromAnAlbum = false;
+			isCurrentPlayingSongPlayingFromSearch = false;
 			playingAlbumQueue = [];
 		}
 		else if(isSongLiElementFromAlbum == true){
 			isCurrentPlayingSongPlayingFromAnAlbum = true;
+			isCurrentPlayingSongPlayingFromSearch = false;
 			// To make the next songs that play to come from the same album
 			playingAlbumQueue = albumsArray[albumNumber-1][1][1];
+		}
+		else if(isSongLiElementFromAlbum == false && isSongLiElementFromSearch == true){
+			isCurrentPlayingSongPlayingFromAnAlbum = false;
+			isCurrentPlayingSongPlayingFromSearch = true;
+			playingAlbumQueue = [];
 		}
 		else{}
 	}
@@ -632,7 +653,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				liElement.appendChild(liElementDiv1);
 				liElement.appendChild(liElementDiv2);
 				liElement.appendChild(liElementDiv3);
-				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, 0); });
+				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, true, 0); });
 				songsSearchResultsDivUl.appendChild(liElement);
 
 				// To change the play, pause status of a song in the results if the song is playing
@@ -712,7 +733,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						liElement.appendChild(liElementDiv2);
 						liElement.appendChild(liElementDiv3);
 						liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
-						liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
+						liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, true, albumNumber); });
 						albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
 						oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
 						oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
@@ -1537,7 +1558,35 @@ function updateSongProgressBar(currentSong){
 // Play next song when current song ends
 function playNextSongWhenCurrentSongEnds(currentSong){
 	if(isCurrentPlayingSongPlayingFromAnAlbum == false){
-		if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber < numberOfSongs){
+		if((currentSong.duration-currentSong.currentTime) <= .5 && isCurrentPlayingSongPlayingFromSearch == true){
+			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
+				}
+			}
+			if(document.querySelector(".song-"+playingSongNumber+"-song-list-li")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-song-list-li .song-list-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill");
+				}
+			}
+			if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+				}
+			}
+			if(document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
+				if(!document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+					document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+				}
+			}
+			if(!playOrPauseCurrentSongButton.classList.contains("bi-play")){
+				playOrPauseCurrentSongButton.classList.toggle("bi-play");
+			}
+			playOrPauseSong(playingSongNumber, 0);
+			updateSongProgress(playingSongNumber, 0);
+			isASongPlaying = false;
+		}
+		else if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber < numberOfSongs){
 			// To pause and end the current song progress update
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
