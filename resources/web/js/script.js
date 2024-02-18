@@ -36,6 +36,7 @@ var isASongPlaying = false;
 var isCurrentPlayingSongPlayingFromAnAlbum;
 var isAlbumOpenedFromAlbumPreview = false;
 var isAlbumOpenedFromAlbumList = false;
+var isAlbumOpenedFromSearchResultsPage = false;
 var isCurrentPlayingSongPlayingFromSearch;
 var updateSongProgressInterval = null;
 var loadSongBeforePlayingSetTimeout = null;
@@ -133,8 +134,9 @@ function createAlbumsPreviews(){
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
-			isAlbumOpenedFromAlbumList = false;
 			isAlbumOpenedFromAlbumPreview = true;
+			isAlbumOpenedFromAlbumList = false;
+			isAlbumOpenedFromSearchResultsPage = false;
 			specificAlbumBackButton.addEventListener("click", goToHomePage);
 
 			// To arrange song li elements according to track number
@@ -282,6 +284,7 @@ function createAlbumsListPreviews(){
 
 			isAlbumOpenedFromAlbumPreview = false;
 			isAlbumOpenedFromAlbumList = true;
+			isAlbumOpenedFromSearchResultsPage = false;
 			specificAlbumBackButton.addEventListener("click", goToAlbumsListPage);
 
 			// To arrange song li elements according to track number
@@ -545,7 +548,7 @@ function goToHomePage(){
 	if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 		document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
 	}
-	if(isAlbumOpenedFromAlbumPreview == true && isAlbumOpenedFromAlbumList == false){
+	if(isAlbumOpenedFromAlbumPreview == true && isAlbumOpenedFromAlbumList == false && isAlbumOpenedFromSearchResultsPage == false){
 		specificAlbumBackButton.removeEventListener("click", goToHomePage);
 	}
 }
@@ -575,8 +578,20 @@ function goToAlbumsListPage(){
 	document.querySelector("#albums_list_page").style.display = "block";
 	document.querySelector("title").innerText = "Music - Albums";
 	createAlbumsListPreviews();
-	if(isAlbumOpenedFromAlbumPreview == false && isAlbumOpenedFromAlbumList == true){
+	if(isAlbumOpenedFromAlbumPreview == false && isAlbumOpenedFromAlbumList == true && isAlbumOpenedFromSearchResultsPage == false){
 		specificAlbumBackButton.removeEventListener("click", goToAlbumsListPage);
+	}
+}
+
+function goToSearchResultsPage(){
+	document.querySelector("#music_previews_page").style.display = "none";
+	document.querySelector("#songs_list_page").style.display = "none";
+	document.querySelector("#albums_list_page").style.display = "none";
+	document.querySelector("#specific_album_page").style.display = "none";
+	document.querySelector("#search_results_page").style.display = "block";
+	document.querySelector("title").innerText = "Search results";
+	if(isAlbumOpenedFromAlbumPreview == false && isAlbumOpenedFromAlbumList == false && isAlbumOpenedFromSearchResultsPage == true){
+		specificAlbumBackButton.removeEventListener("click", goToSearchResultsPage);
 	}
 }
 
@@ -726,6 +741,11 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					document.querySelector(".specific-album-image").src = liElementImg.src;
 					document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 					document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+					isAlbumOpenedFromAlbumPreview = false;
+					isAlbumOpenedFromAlbumList = false;
+					isAlbumOpenedFromSearchResultsPage = true;
+					specificAlbumBackButton.addEventListener("click", goToSearchResultsPage);
 
 					// To arrange song li elements according to track number
 					let albumSongsLiElementsDict = {};
