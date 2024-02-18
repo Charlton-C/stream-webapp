@@ -130,6 +130,8 @@ function createAlbumsPreviews(){
 
 			// To arrange song li elements according to track number
 			let albumSongsLiElementsDict = {};
+			let oldSongNumberAndSongTrackNumberArray = [[], []];
+			let sortedSongNumberAndSongTrackNumberArray = [[], []];
 			// Load the songs on the album page
 			for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
 				let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
@@ -165,12 +167,23 @@ function createAlbumsPreviews(){
 				liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
 				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, albumNumber); });
 				albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
+				oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
+				oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
 			}
 			// To arrange song li elements according to track number
 			let sortedAlbumTrackNumberArray = (Object.keys(albumSongsLiElementsDict)).sort((a, b) => a - b);
 			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				sortedSongNumberAndSongTrackNumberArray[1][i] = Number(sortedAlbumTrackNumberArray[i]);
 				specificAlbumDivOl.appendChild(albumSongsLiElementsDict[sortedAlbumTrackNumberArray[i]]);
 			}
+			// To arrange song numbers according to how track numbers follows each other
+			for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+				let oldTrackNumberIndex = oldSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+				let newTrackNumberIndex = sortedSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+				sortedSongNumberAndSongTrackNumberArray[0][newTrackNumberIndex] = oldSongNumberAndSongTrackNumberArray[0][oldTrackNumberIndex];
+			}
+			albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
+			albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
 
 
 			// To change the play, pause status of a song in the album if the song is playing
@@ -718,7 +731,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					}
 					albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
 					albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
-					
+
 
 					// To change the play, pause status of a song in the album if the song is playing
 					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
