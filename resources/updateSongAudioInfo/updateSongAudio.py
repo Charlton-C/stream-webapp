@@ -119,10 +119,15 @@ for i in range(numberOfSongsToAdd):
 	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "a").write(songInfoJson)
 
 	# Add song image file to the /images/songImages folder
-	if "\\x89PNG" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
-	elif "\\xff\\xd8" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+	if isImageNone:
+		shutil.copy2(parentFileDirectory+"/images/no-image.png", parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", follow_symlinks=True)
+	elif isImageNone == False:
+		if "\\x89PNG" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+		elif "\\xff\\xd8" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+		else:
+			None
 	else:
 		None
 
@@ -149,10 +154,15 @@ for i in range(numberOfSongsToAdd):
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Add album image file to the images/albumImages folder
-		if "\\x89PNG" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
-		elif "\\xff\\xd8" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
+		if isImageNone:
+			shutil.copy2(parentFileDirectory+"/images/no-image.png", parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".png", follow_symlinks=True)
+		elif isImageNone == False:
+			if "\\x89PNG" in str(songImage[:25]):
+				open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
+			elif "\\xff\\xd8" in str(songImage[:25]):
+				open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
+			else:
+				None
 		else:
 			None
 	# Add song number to an album that's already in the albumInfo dictionary
