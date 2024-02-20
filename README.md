@@ -8,7 +8,7 @@ This is made possible by hosting this website on a Raspberry Pi.
 
 
 ### Usage
-Fairy simple, just click the following link and enjoy listening to music <https://charlton-c.github.io/>
+Fairy simple, just click the following link and enjoy listening to music <https://charlton-c.github.io/stream-webapp/>
 
 
 #### License
