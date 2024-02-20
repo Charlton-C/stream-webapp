@@ -1,4 +1,4 @@
-import os, sys, json
+import os, sys, json, shutil
 # Add tinytag to import path to be able to import it
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
 from tinytag import TinyTag
