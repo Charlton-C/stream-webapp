@@ -65,12 +65,33 @@ for i in range(numberOfSongsToAdd):
 		numberOfSongsToAdd = i
 		break
 
-	songName = song.title
-	songArtist = song.artist
-	songAlbum = song.album
-	songAlbumArtist = song.albumartist
-	songTrackNumberInAlbum = int(song.track)
-	songImage = song.get_image()
+
+	isImageNone = False
+
+	if song.title:
+		songName = song.title
+	else:
+		songName = "Unknown"
+	if song.artist:
+		songArtist = song.artist
+	else:
+		songArtist = "Unknown Artist"
+	if song.album:
+		songAlbum = song.album
+	else:
+		songAlbum = "Unknown Album"
+	if song.albumartist:
+		songAlbumArtist = song.albumartist
+	else:
+		songAlbumArtist = "Unknown Artist"
+	if song.track:
+		songTrackNumberInAlbum = int(song.track)
+	else:
+		songTrackNumberInAlbum = startingSongNumber+i
+	if song.get_image():
+		songImage = song.get_image()
+	else:
+		isImageNone = True
 
 
 
