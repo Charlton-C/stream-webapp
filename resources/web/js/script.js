@@ -64,6 +64,14 @@ for(let key in albumsInfo){
 }
 
 
+
+function doesImageExist(imageURL){
+	let http = new XMLHttpRequest();
+	http.open("HEAD", imageURL, false);
+	http.send();
+	return http.status != 404;
+}
+
 // Function to create the song previews when the website loads
 function createSongsPreviews(){
 	let numberOfSongPreviewsToMake;
