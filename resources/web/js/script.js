@@ -128,6 +128,9 @@ function createSongsPreviews(){
 		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsPreviewsDivUl.appendChild(liElement);
 	}
+
+
+	lazyLoadImages();
 }
 createSongsPreviews();
 
@@ -165,7 +168,7 @@ function createAlbumsPreviews(){
 			specificAlbumDivOl.innerHTML = "";
 			document.querySelector("#music_previews_page").style.display = "none";
 			document.querySelector("#specific_album_page").style.display = "block";
-			document.querySelector(".specific-album-image").src = liElementImg.src;
+			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -241,11 +244,17 @@ function createAlbumsPreviews(){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+
+
+			lazyLoadImages();
 		});
 
 
 		albumsPreviewsDivUl.appendChild(liElement);
 	}
+
+
+	lazyLoadImages();
 }
 createAlbumsPreviews();
 
@@ -288,6 +297,9 @@ function createSongsLiInSongsListPage(){
 		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsListDivUl.appendChild(liElement);
 	}
+
+
+	lazyLoadImages();
 }
 
 
@@ -322,7 +334,7 @@ function createAlbumsListPreviews(){
 			specificAlbumDivOl.innerHTML = "";
 			document.querySelector("#albums_list_page").style.display = "none";
 			document.querySelector("#specific_album_page").style.display = "block";
-			document.querySelector(".specific-album-image").src = liElementImg.src;
+			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -398,11 +410,17 @@ function createAlbumsListPreviews(){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+
+
+			lazyLoadImages();
 		});
 
 
 		albumsListDivUl.appendChild(liElement);
 	}
+
+
+	lazyLoadImages();
 }
 
 function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, isSongLiElementFromSearch, albumNumber){
@@ -759,6 +777,9 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					}
 				}
 			}
+
+
+			lazyLoadImages();
 		}
 
 		// Show albums search results
@@ -791,7 +812,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					specificAlbumDivOl.innerHTML = "";
 					document.querySelector("#search_results_page").style.display = "none";
 					document.querySelector("#specific_album_page").style.display = "block";
-					document.querySelector(".specific-album-image").src = liElementImg.src;
+					document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
 					document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 					document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -867,6 +888,9 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 							document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 						}
 					}
+
+
+					lazyLoadImages();
 				});
 
 
@@ -874,6 +898,9 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			}
 
 		}
+
+
+		lazyLoadImages();
 	}
 	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
 	else{ searchResultsDiv.innerHTML = "An error occurred"; }
