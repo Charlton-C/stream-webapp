@@ -84,10 +84,13 @@ function createSongsPreviews(){
 		liElementDiv.setAttribute("class", "image-and-image_play-container");
 		let liElementDivImg = document.createElement("img");
 		liElementDivImg.setAttribute("class", "rounded");
-		liElementDivImg.setAttribute("src", "/resources/images/songImages/"+songNumber+".jpeg");
-		liElementDivImg.onerror = () => {
-			liElementDivImg.src = "/resources/images/songImages/"+songNumber+".png";
-		};
+		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+			liElementDivImg.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+			liElementDivImg.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+		}
+		else{}
 		let liElementDivSpan = document.createElement("span");
 		liElementDivSpan.setAttribute("class", "bi-play-fill bi-pause-fill");
 		liElementDiv.appendChild(liElementDivImg);
@@ -118,10 +121,13 @@ function createAlbumsPreviews(){
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
 		let liElementImg = document.createElement("img");
 		liElementImg.setAttribute("class", "rounded");
-		liElementImg.setAttribute("src", "/resources/images/albumImages/"+albumNumber+".jpeg");
-		liElementImg.onerror = () => {
-			liElementImg.src = "/resources/images/albumImages/"+albumNumber+".png";
-		};
+		if(doesImageExist("/resources/images/albumImages/"+albumNumber+".jpeg")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/albumImages/"+albumNumber+".png")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".png");
+		}
+		else{}
 		let liElementH5 = document.createElement("h5");
 		liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 		liElementH5.innerText = albumsArray[albumNumber-1][0];
@@ -160,10 +166,13 @@ function createAlbumsPreviews(){
 				let liElementDiv1 = document.createElement("div");
 				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
 				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".jpeg");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".png";
-				};
+				if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+				}
+				else{}
 				liElementDiv1.appendChild(liElementDiv1Img);
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
@@ -229,10 +238,13 @@ function createSongsLiInSongsListPage(){
 		let liElementDiv1 = document.createElement("div");
 		liElementDiv1.setAttribute("class", "song-list-song-li-image-container");
 		let liElementDiv1Img = document.createElement("img");
-		liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".jpeg");
-		liElementDiv1Img.onerror = () => {
-			liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".png";
-		};
+		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+			liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+			liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+		}
+		else{}
 		liElementDiv1.appendChild(liElementDiv1Img);
 		let liElementDiv2 = document.createElement("div");
 		liElementDiv2.setAttribute("class", "song-list-song-li-text-container");
@@ -266,10 +278,13 @@ function createAlbumsListPreviews(){
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
 		let liElementImg = document.createElement("img");
 		liElementImg.setAttribute("class", "rounded");
-		liElementImg.setAttribute("src", "/resources/images/albumImages/"+albumNumber+".jpeg");
-		liElementImg.onerror = () => {
-			liElementImg.src = "/resources/images/albumImages/"+albumNumber+".png";
-		};
+		if(doesImageExist("/resources/images/albumImages/"+albumNumber+".jpeg")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/albumImages/"+albumNumber+".png")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".png");
+		}
+		else{}
 		let liElementH5 = document.createElement("h5");
 		liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 		liElementH5.innerText = albumsArray[albumNumber-1][0];
@@ -308,10 +323,13 @@ function createAlbumsListPreviews(){
 				let liElementDiv1 = document.createElement("div");
 				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
 				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".jpeg");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".png";
-				};
+				if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+				}
+				else{}
 				liElementDiv1.appendChild(liElementDiv1Img);
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
@@ -684,10 +702,13 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				let liElementDiv1 = document.createElement("div");
 				liElementDiv1.setAttribute("class", "song-result-song-li-image-container");
 				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png";
-				};
+				if(doesImageExist("/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png");
+				}
+				else{}
 				liElementDiv1.appendChild(liElementDiv1Img);
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "song-result-song-li-text-container");
@@ -726,10 +747,13 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
 				let liElementImg = document.createElement("img");
 				liElementImg.setAttribute("class", "rounded");
-				liElementImg.setAttribute("src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg");
-				liElementImg.onerror = () => {
-					liElementImg.src = "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png";
-				};
+				if(doesImageExist("/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg")){
+					liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png")){
+					liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png");
+				}
+				else{}
 				let liElementH5 = document.createElement("h5");
 				liElementH5.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-album-name");
 				liElementH5.innerText = albumsArray[(albumNumberSearchResultsArray[i])][0];
@@ -768,10 +792,13 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						let liElementDiv1 = document.createElement("div");
 						liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
 						let liElementDiv1Img = document.createElement("img");
-						liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".jpeg");
-						liElementDiv1Img.onerror = () => {
-							liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".png";
-						};
+						if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+							liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+						}
+						else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+							liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+						}
+						else{}
 						liElementDiv1.appendChild(liElementDiv1Img);
 						let liElementDiv2 = document.createElement("div");
 						liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
