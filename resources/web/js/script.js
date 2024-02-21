@@ -72,6 +72,27 @@ function doesImageExist(imageURL){
 	return http.status != 404;
 }
 
+// Function to lazy load images
+function lazyLoadImages(){
+	if("IntersectionObserver" in window){
+		let lazyImages = [].slice.call(document.querySelectorAll("img"));
+		let lazyImageObserver = new IntersectionObserver(function(entries){
+			entries.forEach(function(entry){
+				if(entry.isIntersecting){
+					let lazyImage = entry.target;
+					lazyImage.src = lazyImage.dataset["src"];
+					lazyImageObserver.unobserve(lazyImage);
+				}
+			});
+		});
+
+		lazyImages.forEach(function(lazyImage){
+			lazyImageObserver.observe(lazyImage);
+		});
+	}
+}
+
+
 // Function to create the song previews when the website loads
 function createSongsPreviews(){
 	let numberOfSongPreviewsToMake;
