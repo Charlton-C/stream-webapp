@@ -43,6 +43,10 @@ body{
 	margin: 2vh 0 .5vh 0;
 }
 
+label[for="navbar-form-text-input"]{
+	display: none;
+}
+
 .navbar-form-text-input{
 	display: inline!important;
 	width: 70vw!important;
@@ -86,6 +90,9 @@ footer{
 
 .song-player-elapsed-time-span{
 	font-size: 80%;
+}
+label[for="song-player-progress-bar"]{
+	display: none;
 }
 .song-player-progress-bar{
 	width: 70vw;

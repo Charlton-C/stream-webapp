@@ -24,7 +24,8 @@
 						<li class="nav-item songs-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="javascript: void(0);">Songs</a></li>
 						<li class="nav-item albums-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="javascript: void(0);">Albums</a></li>
 						<form class="form-inline navbar-form">
-							<input class="form-control form-control-sm navbar-form-text-input" name="search" type="search" placeholder="Search songs, albums or artists" aria-label="Search" required>
+							<label for="navbar-form-text-input">Search bar for searching for songs, albums or artists</label>
+							<input id="navbar-form-text-input" class="form-control form-control-sm navbar-form-text-input" name="search" type="search" placeholder="Search songs, albums or artists" aria-label="Search for songs, albums or artists" required>
 							<button class="btn btn-sm btn-outline-info bi-search navbar-form-submit-button" type="submit" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"></button>
 						</form>
 					</ul>
@@ -115,7 +116,8 @@
 					</div>
 					<div class="song-player-progress-container-div">
 						<span class="song-player-elapsed-time-span">0:00</span>
-						<input class="song-player-progress-bar" type="range" min="0" max="100" value="0">
+						<label for="song-player-progress-bar">Playing song progress bar</label>
+						<input id="song-player-progress-bar" class="song-player-progress-bar" type="range" min="0" max="100" value="0">
 						<span class="song-player-remaining-time-span">0:00</span>
 					</div>
 				</div>
