@@ -10,7 +10,11 @@ body{
 }
 
 .navbar-brand-image{
-	width: 30%;
+	width: 22%;
+}
+
+.navbar-brand > span{
+	font-size: 80%;
 }
 
 .navbar-nav{
@@ -1248,7 +1252,12 @@ label[for="song-player-progress-bar"]{
 @media only screen and (min-width: 1601px) and (max-width: 2280px){
 	/* For the navbar */
 	.navbar-brand-image{
-		width: 45%;
+		width: 32%;
+	}
+
+	.navbar-brand > span{
+		font-size: 130%;
+		font-weight: 400;
 	}
 
 	.navbar-nav{
