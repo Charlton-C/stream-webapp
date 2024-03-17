@@ -1252,7 +1252,7 @@ label[for="song-player-progress-bar"]{
 @media only screen and (min-width: 1601px) and (max-width: 2280px){
 	/* For the navbar */
 	.navbar-brand-image{
-		width: 32%;
+		width: 30%;
 	}
 
 	.navbar-brand > span{
@@ -1276,15 +1276,17 @@ label[for="song-player-progress-bar"]{
 	}
 
 	.navbar-form{
-		margin: .6vh 0 0 3vw;
+		margin: .6vh 0 0 1vw;
 	}
 	
 	.navbar-form-text-input{
 		width: 16vw!important;
+		font-size: 90% !important;
 	}
 	
 	.navbar-form-submit-button{
 		margin: 0 1.5vw 0 .5vw;
+		font-size: 85% !important;
 	}
 
 	/* For the song player */
@@ -1293,25 +1295,25 @@ label[for="song-player-progress-bar"]{
 	}
 
 	.song-player-song-name{
-		font-size: 100%;
+		font-size: 110%;
 	}
 	.song-player-artist-name{
-		font-size: 95%;
+		font-size: 105%;
 	}
 	
 	.song-player-elapsed-time-span{
-		font-size: 120%;
+		font-size: 135%;
 	}
 	.song-player-progress-bar{
 		width: 79vw;
 	}
 	.song-player-remaining-time-span{
-		font-size: 120%;
+		font-size: 135%;
 	}
 	
 	.song-player-controls-div > button{
 		margin-top: 0;
-		font-size: 160%;
+		font-size: 175%;
 	}
 
 	#music_previews_page{
@@ -1321,6 +1323,14 @@ label[for="song-player-progress-bar"]{
 	
 	.expand-songs-previews-div{
 		margin-top: .5%;
+	}
+
+	.expand-songs-previews-div > a > span{
+		font-size: x-large;
+	}
+
+	.expand-songs-previews-div > a > button{
+		font-size: 140%;
 	}
 
 	
@@ -1345,16 +1355,24 @@ label[for="song-player-progress-bar"]{
 	
 	.songs-previews-div-ul  > li > h5{
 		margin: .9% 0 1% 3%;
-		font-size: 95%;
+		font-size: 105%;
 	}
 	
 	.songs-previews-div-ul  > li > h6{
-		font-size: 88%;
+		font-size: 98%;
 	}
 
 
 	.expand-albums-previews-div{
 		margin-top: 0;
+	}
+
+	.expand-albums-previews-div > a > span{
+		font-size: x-large;
+	}
+
+	.expand-albums-previews-div > a > button{
+		font-size: 140% !important;
 	}
 	
 	/* For the albums previews */
@@ -1370,11 +1388,11 @@ label[for="song-player-progress-bar"]{
 	
 	.albums-previews-div-ul > li > h5{
 		margin: 3% 0 1% 3%;
-		font-size: 95%;
+		font-size: 105%;
 	} 
 	
 	.albums-previews-div-ul > li > h6{
-		font-size: 88%;
+		font-size: 98%;
 	}
 
 
@@ -1386,7 +1404,7 @@ label[for="song-player-progress-bar"]{
 	
 	.songs-list-div-ul{
 		height: 76vh;
-		padding: 0 3% 1% 3%;
+		padding: 0 3% 3% 3%;
 	}
 
 	.songs-list-div-ul > li{
@@ -1422,7 +1440,7 @@ label[for="song-player-progress-bar"]{
 	
 	.albums-list-div-ul{
 		height: 76vh;
-		padding: 0 0 1% 3%;
+		padding: 0 0 3% 3%;
 	}
 	
 	.albums-list-div-ul > li{
@@ -1433,11 +1451,11 @@ label[for="song-player-progress-bar"]{
 
 	.albums-list-div-ul > li > h5{
 		margin: 4% 0 2% 0;
-		font-size: 95%;
+		font-size: 105%;
 	} 
 	
 	.albums-list-div-ul > li > h6{
-		font-size: 88%;
+		font-size: 98%;
 	}
 
 
@@ -1458,11 +1476,11 @@ label[for="song-player-progress-bar"]{
 	
 	.specific-album-name{
 		margin: 0 0 .5vh 0;
-		font-size: 125%;
+		font-size: 135%;
 	}
 	
 	.specific-album-artist-name{
-		font-size: 115%;
+		font-size: 125%;
 	}
 	
 	.specific-album-div-ol{
@@ -1472,7 +1490,7 @@ label[for="song-player-progress-bar"]{
 
 	.specific-album-div-ol > li:before{
 		margin: 0 auto 0 auto;
-		font-size: 100%;
+		font-size: 110%;
 	}
 	.specific-album-div-ol > li{
 		margin-bottom: .8%;
@@ -1488,21 +1506,21 @@ label[for="song-player-progress-bar"]{
 		width: 85%;
 	}
 	.specific-album-songs-li-text-container > h5{
-		font-size: 100%;
+		font-size: 110%;
 	}
 	.specific-album-songs-li-text-container > h6{
-		font-size: 90%;
+		font-size: 100%;
 	}
 
 	.specific-album-songs-li-button-container > button{
-		font-size: 155%;
+		font-size: 175%;
 	}
 
 
 	/* For the search results page */
 	#search_results_page > p {
 		margin: 1vh 0 1vh 0;
-		font-size: 135%;
+		font-size: 140%;
 	}
 
 	.search-results-div{
@@ -1541,20 +1559,20 @@ label[for="song-player-progress-bar"]{
 	/* The albums results */
 	.albums-search-results-div-ul{
 		margin-bottom: 2%;
-		padding: 0 3% 0 3%;
+		padding: 0 3% 3% 3%;
 	}
 
 	.albums-search-results-div-ul > li{
-		width: 15vw;
-		height: 22vw;
-		margin-right: 5%;
+		width: 13.5vw;
+		height: 18.5vw;
+		margin-right: 3%;
 	}
 
 	.albums-search-results-div-ul > li > h5{
-		font-size: 100%;
+		font-size: 110%;
 	} 
 
 	.albums-search-results-div-ul > li > h6{
-		font-size: 92%;
+		font-size: 102%;
 	}
 }
