@@ -145,9 +145,9 @@ label[for="song-player-progress-bar"]{
 }
 
 .expand-songs-previews-div > a > button{
-	float: right;
 	margin: 0;
 	padding: .3% 0 0 0;
+	float: right;
 }
 
 /* For the songs previews */
@@ -218,17 +218,28 @@ label[for="song-player-progress-bar"]{
 
 
 .expand-albums-previews-div{
-	margin-top: 2%;
+	margin: 2% 0 1.5% 0;
+}
+
+.expand-albums-previews-div > a{
+	display: block;
+	text-decoration: none;
+}
+.expand-albums-previews-div > a:hover > span, .expand-albums-previews-div > a:hover > button{
+	color: rgb(0, 119, 83);
 }
 
 .expand-albums-previews-div > a > span{
-	float: left;
+	margin: 0;
+	padding: 0;
 	font-size: large;
 	font-weight: 500;
 	color: rgb(14, 14, 14);
 }
 
 .expand-albums-previews-div > a > button{
+	margin: 0;
+	padding: .3% 0 0 0;
 	float: right;
 }
 
@@ -735,9 +746,13 @@ label[for="song-player-progress-bar"]{
 		font-size: 63%;
 	}
 
-	/* For the songs previews */
+
 	.expand-albums-previews-div{
-		margin-top: 0;
+		margin: 2% 0 1% 0;
+	}
+
+	.expand-albums-previews-div > a > button{
+		padding: 0;
 	}
 
 	/* For the albums previews */
@@ -1053,7 +1068,11 @@ label[for="song-player-progress-bar"]{
 
 
 	.expand-albums-previews-div{
-		margin: 0 0 -1% 0;
+		margin: 1.2% 0 .5% 0;
+	}
+
+	.expand-albums-previews-div > a > button{
+		padding: 0;
 	}
 
 	/* For the albums previews */
@@ -1385,7 +1404,7 @@ label[for="song-player-progress-bar"]{
 
 
 	.expand-albums-previews-div{
-		margin-top: 0;
+		margin: .6% 0 .5% 0;
 	}
 
 	.expand-albums-previews-div > a > span{
@@ -1393,7 +1412,8 @@ label[for="song-player-progress-bar"]{
 	}
 
 	.expand-albums-previews-div > a > button{
-		font-size: 140% !important;
+		padding: .1% 0 0 0;
+		font-size: 140%;
 	}
 	
 	/* For the albums previews */
