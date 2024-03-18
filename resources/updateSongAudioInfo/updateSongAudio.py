@@ -75,6 +75,7 @@ for i in range(numberOfSongsToAdd):
 	songAlbumArtist = song.albumartist
 	songTrackNumberInAlbum = int(song.track)
 	songImage = song.get_image()
+	songImageDominantColorRGB = ["", "", ""]
 
 
 
@@ -93,21 +94,24 @@ for i in range(numberOfSongsToAdd):
 	else:
 		None
 
+	# Add song image file to the /images/songImages folder
+	if "\\x89PNG" in str(songImage[:25]):
+		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+		songImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png").get_color(quality=1)
+	elif "\\xff\\xd8" in str(songImage[:25]):
+		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+		songImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg").get_color(quality=1)
+	else:
+		None
+
 	# Add the song information to songInfo dictionary
-	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
+	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum, songImageDominantColorRGB]
 
 	# Convert the songInfo dictionary to js
 	songInfoJson = json.dumps(songInfo)
 	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "w").write("var songsInfo = ")
 	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "a").write(songInfoJson)
 
-	# Add song image file to the /images/songImages folder
-	if "\\x89PNG" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
-	elif "\\xff\\xd8" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
-	else:
-		None
 
 
 	# Update Album info
