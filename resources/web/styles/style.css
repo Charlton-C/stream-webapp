@@ -360,13 +360,18 @@ footer{
 	margin: 0 4% 5% 0;
 }
 
-.albums-list-div-ul >  li > img{
-	position: relative;
+.album-list-album-preview-li-image-container{
+	width: 100%;
 	height: 75%;
 	transition: .25s linear;
 }
-.albums-list-div-ul > li:hover > img{
+.albums-list-div-ul > li:hover > div{
 	filter: brightness(50%);
+}
+
+.albums-list-div-ul > li > div > img{
+	width: 100%;
+	height: 100%;
 }
 
 .albums-list-div-ul > li > h5{
