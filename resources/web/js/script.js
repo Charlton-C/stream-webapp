@@ -144,6 +144,9 @@ function createAlbumsPreviews(){
 	for(let albumNumber = 1; albumNumber <= numberOfAlbumPreviewsToMake; albumNumber++){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
+		let liElementDiv = document.createElement("div");
+		liElementDiv.setAttribute("class", "rounded album-preview-li-image-container");
+		liElementDiv.style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 		let liElementImg = document.createElement("img");
 		liElementImg.setAttribute("class", "rounded");
 		if(doesImageExist("/resources/images/albumImages/"+albumNumber+".jpeg")){
@@ -153,13 +156,14 @@ function createAlbumsPreviews(){
 			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".png");
 		}
 		else{}
+		liElementDiv.appendChild(liElementImg);
 		let liElementH5 = document.createElement("h5");
 		liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 		liElementH5.innerText = albumsArray[albumNumber-1][0];
 		let liElementH6 = document.createElement("h6");
 		liElementH6.setAttribute("class", "album-"+albumNumber+"-artist-name");
 		liElementH6.innerText = albumsArray[albumNumber-1][1][0];
-		liElement.appendChild(liElementImg);
+		liElement.appendChild(liElementDiv);
 		liElement.appendChild(liElementH5);
 		liElement.appendChild(liElementH6);
 
