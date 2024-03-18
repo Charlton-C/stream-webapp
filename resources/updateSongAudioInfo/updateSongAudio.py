@@ -76,6 +76,7 @@ for i in range(numberOfSongsToAdd):
 	songTrackNumberInAlbum = int(song.track)
 	songImage = song.get_image()
 	songImageDominantColorRGB = ["", "", ""]
+	albumImageDominantColorRGB = ["", "", ""]
 
 
 
@@ -131,17 +132,20 @@ for i in range(numberOfSongsToAdd):
 
 	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
-		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i], [songTrackNumberInAlbum]]
-		albumInfoJson = json.dumps(albumInfo)
-		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
-		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 		# Add album image file to the images/albumImages folder
 		if "\\x89PNG" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
+			albumImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png").get_color(quality=1)
 		elif "\\xff\\xd8" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
+			albumImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg").get_color(quality=1)
 		else:
 			None
+
+		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i], [songTrackNumberInAlbum], albumImageDominantColorRGB]
+		albumInfoJson = json.dumps(albumInfo)
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
+		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
 	# Add song number to an album that's already in the albumInfo dictionary
 	elif songAlbum in albumInfo.keys():
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
@@ -154,6 +158,7 @@ for i in range(numberOfSongsToAdd):
 		nextAlbumImageFileNumber = nextAlbumImageFileNumber-1
 	else:
 		None
+
 
 
 	# # Update Artist info
