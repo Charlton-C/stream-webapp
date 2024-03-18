@@ -102,7 +102,8 @@ function createSongsPreviews(){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "song-"+songNumber+"-preview-li");
 		let liElementDiv = document.createElement("div");
-		liElementDiv.setAttribute("class", "image-and-image_play-container");
+		liElementDiv.setAttribute("class", "rounded image-and-image_play-container");
+		liElementDiv.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 		let liElementDivImg = document.createElement("img");
 		liElementDivImg.setAttribute("class", "rounded");
 		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
