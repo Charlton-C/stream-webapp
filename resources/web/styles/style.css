@@ -46,6 +46,9 @@ body{
 .navbar-form-text-input{
 	display: inline!important;
 	width: 70vw!important;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .navbar-form-text-input:focus{
 	border-color: transparent!important;
