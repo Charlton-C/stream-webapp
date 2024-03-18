@@ -173,6 +173,7 @@ function createAlbumsPreviews(){
 			specificAlbumDivOl.innerHTML = "";
 			document.querySelector("#music_previews_page").style.display = "none";
 			document.querySelector("#specific_album_page").style.display = "block";
+			document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
@@ -193,7 +194,8 @@ function createAlbumsPreviews(){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 				let liElementDiv1 = document.createElement("div");
-				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
+				liElementDiv1.setAttribute("class", "rounded specific-album-songs-li-image-container");
+				liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 				let liElementDiv1Img = document.createElement("img");
 				if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
 					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
