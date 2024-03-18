@@ -273,8 +273,10 @@ function createSongsLiInSongsListPage(){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "song-"+songNumber+"-song-list-li");
 		let liElementDiv1 = document.createElement("div");
-		liElementDiv1.setAttribute("class", "song-list-song-li-image-container");
+		liElementDiv1.setAttribute("class", "rounded song-list-song-li-image-container");
+		liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 		let liElementDiv1Img = document.createElement("img");
+		liElementDiv1Img.setAttribute("class", "rounded");
 		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
 			liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
 		}
