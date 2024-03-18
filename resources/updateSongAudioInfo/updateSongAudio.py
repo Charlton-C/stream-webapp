@@ -1,7 +1,11 @@
 import os, sys, json
-# Add tinytag to import path to be able to import it
+# Add tinytag, pillow and colorthief to import path to be able to import them
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
+sys.path.append(os.path.dirname('additionalLibraries/pillow-10.2.0/pillow'))
+sys.path.append(os.path.dirname('additionalLibraries/colorthief-0.2.1/colorthief'))
 from tinytag import TinyTag
+from pillow import PIL
+from colorthief.colorthief import ColorThief
 
 
 
