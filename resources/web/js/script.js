@@ -756,8 +756,10 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-song-result-li");
 				let liElementDiv1 = document.createElement("div");
-				liElementDiv1.setAttribute("class", "song-result-song-li-image-container");
+				liElementDiv1.setAttribute("class", "rounded song-result-song-li-image-container");
+				liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumberSearchResultsArray[i].toString()][3][0]+", "+songsInfo[songNumberSearchResultsArray[i].toString()][3][1]+", "+songsInfo[songNumberSearchResultsArray[i].toString()][3][2]+")";
 				let liElementDiv1Img = document.createElement("img");
+				liElementDiv1Img.setAttribute("class", "rounded");
 				if(doesImageExist("/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg")){
 					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg");
 				}
