@@ -806,6 +806,9 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			for(let i = 0; i < numberOfAlbumSearchResultsToShow; i++){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
+				let liElementDiv = document.createElement("div");
+				liElementDiv.setAttribute("class", "rounded album-list-search-results-li-image-container");
+				liElementDiv.style.backgroundColor = "rgb("+albumsArray[albumNumberSearchResultsArray[i]][1][3][0]+", "+albumsArray[albumNumberSearchResultsArray[i]][1][3][1]+", "+albumsArray[albumNumberSearchResultsArray[i]][1][3][2]+")";
 				let liElementImg = document.createElement("img");
 				liElementImg.setAttribute("class", "rounded");
 				if(doesImageExist("/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg")){
@@ -815,13 +818,14 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png");
 				}
 				else{}
+				liElementDiv.appendChild(liElementImg);
 				let liElementH5 = document.createElement("h5");
 				liElementH5.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-album-name");
-				liElementH5.innerText = albumsArray[(albumNumberSearchResultsArray[i])][0];
+				liElementH5.innerText = albumsArray[albumNumberSearchResultsArray[i]][0];
 				let liElementH6 = document.createElement("h6");
 				liElementH6.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-artist-name");
-				liElementH6.innerText = albumsArray[(albumNumberSearchResultsArray[i])][1][0];
-				liElement.appendChild(liElementImg);
+				liElementH6.innerText = albumsArray[albumNumberSearchResultsArray[i]][1][0];
+				liElement.appendChild(liElementDiv);
 				liElement.appendChild(liElementH5);
 				liElement.appendChild(liElementH6);
 
@@ -831,6 +835,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					specificAlbumDivOl.innerHTML = "";
 					document.querySelector("#search_results_page").style.display = "none";
 					document.querySelector("#specific_album_page").style.display = "block";
+					document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 					document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
 					document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 					document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
@@ -851,8 +856,10 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						let liElement = document.createElement("li");
 						liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 						let liElementDiv1 = document.createElement("div");
-						liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
+						liElementDiv1.setAttribute("class", "rounded specific-album-songs-li-image-container");
+						liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 						let liElementDiv1Img = document.createElement("img");
+						liElementDiv1Img.setAttribute("class", "rounded")
 						if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
 							liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
 						}
