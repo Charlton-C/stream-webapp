@@ -731,7 +731,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	document.querySelector("#search_results_page").style.display = "block";
 
 	// Change website title
-	document.querySelector("title").innerText = "Search results";
+	document.querySelector("title").innerText = "Music - Search results";
 
 
 	songsSearchResultsDivUl.innerHTML = "";
