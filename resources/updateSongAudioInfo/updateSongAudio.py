@@ -1,7 +1,9 @@
 import os, sys, json, shutil
-# Add tinytag to import path to be able to import it
+# Add tinytag and pillow to import path to be able to import them
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
+sys.path.append(os.path.dirname('additionalLibraries/pillow-10.2.0/pillow/PIL'))
 from tinytag import TinyTag
+from PIL import Image
 
 
 
@@ -13,7 +15,11 @@ parentParentFileDirectory = os.path.dirname(parentFileDirectory)
 
 
 # Get the next song to be added to the songsInfo json file
-startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
+try:
+	startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
+except FileNotFoundError:
+	startingSongNumber = 1
+	open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "w+").write(str(startingSongNumber))
 
 
 
