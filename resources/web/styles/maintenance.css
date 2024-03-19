@@ -1,5 +1,5 @@
 body{
-	background: url("/resources/images/maintenance-background.jpg");
+	background: linear-gradient(180deg, rgb(8, 36, 60), rgb(8, 36, 60));
 	background-size: 100vw;
 }
 
