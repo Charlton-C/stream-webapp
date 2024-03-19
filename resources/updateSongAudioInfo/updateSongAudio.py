@@ -130,8 +130,16 @@ for i in range(numberOfSongsToAdd):
 	elif isImageNone == False:
 		if "\\x89PNG" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+			image = Image.open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png")
+			image = image.resize((500, 500), Image.LANCZOS)
+			os.remove(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png")
+			image.save(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "png", quality=85)
 		elif "\\xff\\xd8" in str(songImage[:25]):
 			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+			image = Image.open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg")
+			image = image.resize((500, 500), Image.LANCZOS)
+			os.remove(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg")
+			image.save(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "jpeg", quality=85)
 		else:
 			None
 	else:
