@@ -168,21 +168,22 @@ label[for="song-player-progress-bar"]{
 }
 
 .songs-previews-div-ul  > li{
-	width: 25vw;
-	height: 30vw;
-	margin-right: 1.5%;
+	width: 24.5vw;
+	height: 19vh;
+	margin-right: 1.8%;
 }
 
 .songs-previews-div-ul  > li > .image-and-image_play-container{
 	display: flex;
 	position: relative;
-	width: 100%;
+	width: inherit;
 	height: 75%;
 	align-items: center;
 	justify-content: center;
 }
 
 .songs-previews-div-ul  > li > .image-and-image_play-container > img{
+	width: inherit;
 	height: 100%;
 	transition: .3s linear;
 }
