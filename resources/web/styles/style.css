@@ -395,13 +395,13 @@ label[for="song-player-progress-bar"]{
 }
 
 .albums-list-div-ul > li{
-	width: 23vw;
-	height: 30vw;
+	width: 24vw;
+	height: 18.5vh;
 	margin: 0 4% 5% 0;
 }
 
 .album-list-album-preview-li-image-container{
-	width: 100%;
+	width: inherit;
 	height: 75%;
 	transition: .25s linear;
 }
@@ -832,18 +832,18 @@ label[for="song-player-progress-bar"]{
 
 	/* For the albums list page */
 	.albums-list-div > h3{
-		margin: .5% 0 1% 0;
+		margin: .5% 0 .5% 0;
 		font-size: 130%;
 	}
 
 	.albums-list-div-ul{
-		height: 70vh;
+		height: 72vh;
 		padding: 0 0 4% 3%;
 	}
 
 	.albums-list-div-ul > li{
-		width: 19vw;
-		height: 24vw;
+		width: 18.5vw;
+		height: 33vh;
 		margin: 0 4% 0 0;
 	}
 
@@ -1143,18 +1143,18 @@ label[for="song-player-progress-bar"]{
 
 	/* For the albums list page */
 	.albums-list-div > h3{
-		margin: .5% 0 .9% 0;
+		margin: .5% 0 .2% 0;
 		font-size: 130%;
 	}
 
 	.albums-list-div-ul{
-		height: 72vh;
+		height: 75vh;
 		padding: 0 0 .5% 3%;
 	}
 
 	.albums-list-div-ul > li{
 		width: 12vw;
-		height: 15vw;
+		height: 28.5vh;
 		margin: 0 4% .5% 0;
 	}
 
@@ -1473,18 +1473,18 @@ label[for="song-player-progress-bar"]{
 
 	/* For the albums list page */
 	.albums-list-div > h3{
-		margin-top: .4%;
+		margin: .4% 0 .3% 0;
 		font-size: 150%;
 	}
 	
 	.albums-list-div-ul{
-		height: 76vh;
+		height: 78vh;
 		padding: 0 0 3% 3%;
 	}
 	
 	.albums-list-div-ul > li{
 		width: 13vw;
-		height: 16vw;
+		height: 30.55vh;
 		margin: 0 3% 0 0;
 	}
 
