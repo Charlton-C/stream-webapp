@@ -1,6 +1,5 @@
 body{
 	background: linear-gradient(180deg, rgb(8, 36, 60), rgb(8, 36, 60));
-	background-size: 100vw;
 }
 
 /* For mobile phones and devices not in the media queries */
