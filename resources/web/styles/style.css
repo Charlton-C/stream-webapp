@@ -262,13 +262,13 @@ label[for="song-player-progress-bar"]{
 }
 
 .albums-previews-div-ul > li{
-	width: 23.5vw;
-	height: 30vw;
+	width: 24.7vw;
+	height: 19vh;
 	margin-right: 1.8%;
 }
 
 .album-preview-li-image-container{
-	width: 100%;
+	width: inherit;
 	height: 75%;
 	transition: .25s linear;
 }
@@ -277,7 +277,7 @@ label[for="song-player-progress-bar"]{
 }
 
 .albums-previews-div-ul >  li > div > img{
-	position: relative;
+	width: inherit;
 	height: 100%;
 }
 
@@ -777,15 +777,13 @@ label[for="song-player-progress-bar"]{
 
 	/* For the albums previews */
 	.albums-previews-div-ul{
-		display: flex;
-		width: 100%;
-		padding: 0;
+		margin-bottom: 0;
 	}
 
 	.albums-previews-div-ul > li{
-		width: 13vw;
-		height: 19vw;
-		margin-right: 3%;
+		width: 14vw;
+		height: 25vh;
+		margin-right: 1.5%;
 	}
 
 	.albums-previews-div-ul > li > h5{
@@ -1097,12 +1095,12 @@ label[for="song-player-progress-bar"]{
 	/* For the albums previews */
 	.albums-previews-div-ul{
 		margin-bottom: 0;
-		padding: 0;
 	}
 
 	.albums-previews-div-ul > li{
-		width: 11.2vw;
-		height: 15vw;
+		width: 11.5vw;
+		height: 29.5vh;
+		margin-right: 1.2%;
 	}
 
 	.albums-previews-div-ul > li > h5{
@@ -1438,12 +1436,11 @@ label[for="song-player-progress-bar"]{
 	/* For the albums previews */
 	.albums-previews-div-ul{
 		margin-bottom: 0;
-		padding: 0;
 	}
 	
 	.albums-previews-div-ul > li{
-		width: 12vw;
-		height: 17vw;
+		width: 13vw;
+		height: 30vh;
 	}
 	
 	.albums-previews-div-ul > li > h5{
