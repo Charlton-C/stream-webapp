@@ -10,8 +10,8 @@ nav{
 	border-bottom: .5vh solid rgb(241, 241, 241);
 }
 
-nav > div >h2{
-	color: rgb(238, 238, 238)!important;
+nav > div >h2 > span{
+	color: rgb(238, 238, 238);
 }
 
 .countdown-info-container-div{
