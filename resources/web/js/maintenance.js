@@ -152,3 +152,19 @@ function updateScreenWithRemainingTime(){
 	}
 	else{}
 }
+
+
+function lazyLoadBackgroundImage(){
+	let imageURL = "/resources/images/maintenance-background.jpg";
+	let image = new Image();
+	image.src = imageURL;
+	let setIntervalForLazyLoadingBackgroundImage = setInterval(() => {
+		if(image.complete){
+			document.querySelector(".background-image-container").style.animation = "showByChangingOpacitySlowly 3s linear 0s 1 normal forwards";
+			document.querySelector(".background-image-container").style.backgroundImage = "url("+imageURL+")";
+			document.querySelector(".background-image-container").style.backgroundSize = "100vw";
+			clearInterval(setIntervalForLazyLoadingBackgroundImage);
+		}
+	}, 500);
+}
+lazyLoadBackgroundImage();
