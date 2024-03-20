@@ -1,6 +1,27 @@
+@keyframes showByChangingOpacitySlowly {
+	0% { opacity: 0; }
+	100%{ opacity: 1; }
+}
+
+
 body{
 	background: linear-gradient(180deg, rgb(8, 36, 60), rgb(8, 36, 60));
 }
+
+.background-image-container{
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+}
+
+#countdown_page{
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+	margin-top: -100vh;
+}
+
 
 /* For mobile phones and devices not in the media queries */
 
