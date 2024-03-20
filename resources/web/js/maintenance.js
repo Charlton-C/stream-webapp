@@ -116,39 +116,40 @@ function getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate){
 }
 
 function updateScreenWithRemainingTime(){
+	let getTimeUntilCountdownEndsVariable = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate);
 	// Update days remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0] < 10){
-		daysLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0];
+	if(getTimeUntilCountdownEndsVariable[0] < 10){
+		daysLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[0];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0] >= 10){
-		daysLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0];
+	else if(getTimeUntilCountdownEndsVariable[0] >= 10){
+		daysLeftSpan.innerText = getTimeUntilCountdownEndsVariable[0];
 	}
 	else{}
 
 	// Update hours remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1] < 10){
-		hoursLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1];
+	if(getTimeUntilCountdownEndsVariable[1] < 10){
+		hoursLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[1];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1] >= 10){
-		hoursLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1];
+	else if(getTimeUntilCountdownEndsVariable[1] >= 10){
+		hoursLeftSpan.innerText = getTimeUntilCountdownEndsVariable[1];
 	}
 	else{}
 
 	// Update minutes remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2] < 10){
-		minutesLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2];
+	if(getTimeUntilCountdownEndsVariable[2] < 10){
+		minutesLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[2];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2] >= 10){
-		minutesLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2];
+	else if(getTimeUntilCountdownEndsVariable[2] >= 10){
+		minutesLeftSpan.innerText = getTimeUntilCountdownEndsVariable[2];
 	}
 	else{}
 
 	// Update seconds remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3] < 10){
-		secondsLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3];
+	if(getTimeUntilCountdownEndsVariable[3] < 10){
+		secondsLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[3];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3] >= 10){
-		secondsLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3];
+	else if(getTimeUntilCountdownEndsVariable[3] >= 10){
+		secondsLeftSpan.innerText = getTimeUntilCountdownEndsVariable[3];
 	}
 	else{}
 }
