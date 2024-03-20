@@ -24,7 +24,7 @@ var setIntervalThatUpdatesScreen = setInterval(() => {
 		aElement.click();
 	}
 	// Just in case it doesn't switch files
-	if(daysLeftSpan.innerText == "0-1"){
+	if(Number(daysLeftSpan.innerText) < 0){
 		clearInterval(setIntervalThatUpdatesScreen);
 		let aElement = document.createElement("a");
 		aElement.setAttribute("href", "index.html");
@@ -118,7 +118,10 @@ function getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate){
 function updateScreenWithRemainingTime(){
 	let getTimeUntilCountdownEndsVariable = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate);
 	// Update days remaining
-	if(getTimeUntilCountdownEndsVariable[0] < 10){
+	if(getTimeUntilCountdownEndsVariable[0] < 0){
+		daysLeftSpan.innerText = getTimeUntilCountdownEndsVariable[0];
+	}
+	else if(getTimeUntilCountdownEndsVariable[0] < 10){
 		daysLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[0];
 	}
 	else if(getTimeUntilCountdownEndsVariable[0] >= 10){
