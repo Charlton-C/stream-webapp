@@ -15,6 +15,7 @@ var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumBackButton = document.querySelector(".specific-album-back-button");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
 var searchInputTextDisplay = document.querySelector(".search-input-text-display");
+var searchResultsErrorMessagesP = document.querySelector(".search-results-error-messages-p");
 var searchResultsDiv = document.querySelector(".search-results-div");
 var songsSearchResultsDivUl = document.querySelector(".songs-search-results-div-ul");
 var albumsSearchResultsDivUl = document.querySelector(".albums-search-results-div-ul");
@@ -681,6 +682,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
 	stringToSearch = stringToSearch.trim()
+	searchResultsErrorMessagesP.innerText = "";
 	if(stringToSearch != ""){
 		let songNameMatchSongNumberSearchResultsArray = [];
 		let songArtistNameMatchSongNumberSearchResultsArray = [];
@@ -930,11 +932,11 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	
 			lazyLoadImages();
 		}
-		else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
-		else{ songsSearchResultsDivUl.innerHTML = "An error occurred"; }
+		else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ searchResultsErrorMessagesP.innerText = "No matches found"; }
+		else{ searchResultsErrorMessagesP.innerHTML = "An error occurred"; }
 	}
 	else if(stringToSearch == ""){}
-	else{ songsSearchResultsDivUl.innerHTML = "An error occurred"; }
+	else{ searchResultsErrorMessagesP.innerHTML = "An error occurred"; }
 });
 function escapeRegex(string){
 	return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
