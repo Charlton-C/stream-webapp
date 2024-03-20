@@ -553,6 +553,11 @@ label[for="song-player-progress-bar"]{
 	margin: 1vh 0 1vh 0;
 }
 
+.search-results-error-messages-p {
+	margin: .5vh 0 1vh 0;
+	font-weight: 350;
+}
+
 .search-results-div{
 	width: 100vw;
 	height: 72vh;
@@ -928,6 +933,10 @@ label[for="song-player-progress-bar"]{
 		margin: 1vh 0 1.5vh 0;
 	}
 
+	.search-results-error-messages-p {
+		margin: .5vh 0 1.5vh 0;
+	}
+
 	.search-results-div{
 		padding-bottom: 3%;
 	}
@@ -1240,6 +1249,10 @@ label[for="song-player-progress-bar"]{
 
 	/* For the search results page */
 	#search_results_page > p {
+		font-size: 110%;
+	}
+
+	.search-results-error-messages-p {
 		font-size: 110%;
 	}
 
@@ -1572,6 +1585,11 @@ label[for="song-player-progress-bar"]{
 	/* For the search results page */
 	#search_results_page > p {
 		margin: 1vh 0 1vh 0;
+		font-size: 140%;
+	}
+
+	.search-results-error-messages-p {
+		margin: .5vh 0 1vh 0;
 		font-size: 140%;
 	}
 
