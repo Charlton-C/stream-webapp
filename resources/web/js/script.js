@@ -74,9 +74,9 @@ function doesImageExist(imageURL){
 }
 
 // Function to lazy load images
-function lazyLoadImages(){
+function lazyLoadImages(elementImageContainer){
 	if("IntersectionObserver" in window){
-		let lazyImages = [].slice.call(document.querySelectorAll("img"));
+		let lazyImages = [].slice.call(document.querySelectorAll(elementImageContainer+" > img"));
 		let lazyImageObserver = new IntersectionObserver(function(entries){
 			entries.forEach(function(entry){
 				if(entry.isIntersecting){
@@ -131,8 +131,7 @@ function createSongsPreviews(){
 		songsPreviewsDivUl.appendChild(liElement);
 	}
 
-
-	lazyLoadImages();
+	lazyLoadImages(".image-and-image_play-container");
 }
 createSongsPreviews();
 
@@ -176,6 +175,7 @@ function createAlbumsPreviews(){
 			document.querySelector("#specific_album_page").style.display = "block";
 			document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+			lazyLoadImages(".specific-album-image-container");
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -255,7 +255,7 @@ function createAlbumsPreviews(){
 			}
 
 
-			lazyLoadImages();
+			lazyLoadImages(".specific-album-songs-li-image-container");
 		});
 
 
@@ -263,7 +263,7 @@ function createAlbumsPreviews(){
 	}
 
 
-	lazyLoadImages();
+	lazyLoadImages(".albums-previews-div-ul >  li > div");
 }
 createAlbumsPreviews();
 
@@ -309,8 +309,7 @@ function createSongsLiInSongsListPage(){
 		songsListDivUl.appendChild(liElement);
 	}
 
-
-	lazyLoadImages();
+	lazyLoadImages(".song-list-song-li-image-container");
 }
 
 
@@ -351,6 +350,7 @@ function createAlbumsListPreviews(){
 			document.querySelector("#specific_album_page").style.display = "block";
 			document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+			lazyLoadImages(".specific-album-image-container");
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -429,16 +429,14 @@ function createAlbumsListPreviews(){
 				}
 			}
 
-
-			lazyLoadImages();
+			lazyLoadImages(".specific-album-songs-li-image-container");
 		});
 
 
 		albumsListDivUl.appendChild(liElement);
 	}
 
-
-	lazyLoadImages();
+	lazyLoadImages(".albums-list-div-ul > li > div");
 }
 
 function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, isSongLiElementFromSearch, albumNumber){
@@ -725,24 +723,24 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 				}
 			}
 		}
-	
-	
+
+
 		// Change page being displayed
 		document.querySelector("#music_previews_page").style.display = "none";
 		document.querySelector("#songs_list_page").style.display = "none";
 		document.querySelector("#specific_album_page").style.display = "none";
 		document.querySelector("#albums_list_page").style.display = "none";
 		document.querySelector("#search_results_page").style.display = "block";
-	
+
 		// Change website title
 		document.querySelector("title").innerText = "Music - Search results";
-	
-	
+
+
 		songsSearchResultsDivUl.innerHTML = "";
 		albumsSearchResultsDivUl.innerHTML = "";
 		searchInputTextDisplay.innerText = navbarFormTextInput.value.trim();
-		
-		
+
+
 		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
 			// Show only 7 song search results
 			let numberOfSongSearchResultsToShow;
@@ -752,8 +750,8 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 			let numberOfAlbumSearchResultsToShow;
 			if(albumNumberSearchResultsArray.length >= 8){ numberOfAlbumSearchResultsToShow = 8; }
 			else{ numberOfAlbumSearchResultsToShow = albumNumberSearchResultsArray.length; }
-	
-	
+
+
 			// Show songs search results
 			if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
 				for(let i = 0; i < numberOfSongSearchResultsToShow; i++){
@@ -792,7 +790,7 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 					liElement.appendChild(liElementDiv3);
 					liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, true, 0); });
 					songsSearchResultsDivUl.appendChild(liElement);
-	
+
 					// To change the play, pause status of a song in the results if the song is playing
 					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
 						if(document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
@@ -800,11 +798,11 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						}
 					}
 				}
-	
-	
-				lazyLoadImages();
+
+
+				lazyLoadImages(".song-result-song-li-image-container");
 			}
-	
+
 			// Show albums search results
 			if(albumNameMatchSearchResultsArray.length != 0){
 				for(let i = 0; i < numberOfAlbumSearchResultsToShow; i++){
@@ -841,14 +839,15 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						document.querySelector("#specific_album_page").style.display = "block";
 						document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 						document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+						lazyLoadImages(".specific-album-image-container");
 						document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 						document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
-	
+
 						isAlbumOpenedFromAlbumPreview = false;
 						isAlbumOpenedFromAlbumList = false;
 						isAlbumOpenedFromSearchResultsPage = true;
 						specificAlbumBackButton.addEventListener("click", goToSearchResultsPage);
-	
+
 						// To arrange song li elements according to track number
 						let albumSongsLiElementsDict = {};
 						let oldSongNumberAndSongTrackNumberArray = [[], []];
@@ -910,27 +909,26 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 						}
 						albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
 						albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
-	
-	
+
+
 						// To change the play, pause status of a song in the album if the song is playing
 						if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
 							if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
 								document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 							}
 						}
-	
-	
-						lazyLoadImages();
+
+
+						lazyLoadImages(".specific-album-songs-li-image-container");
 					});
-	
-	
+
+
 					albumsSearchResultsDivUl.appendChild(liElement);
 				}
-	
 			}
-	
-	
-			lazyLoadImages();
+
+
+			lazyLoadImages(".albums-search-results-div-ul >  li > div");
 		}
 		else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ searchResultsErrorMessagesP.innerText = "No matches found"; }
 		else{ searchResultsErrorMessagesP.innerHTML = "An error occurred"; }
