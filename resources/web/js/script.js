@@ -679,7 +679,8 @@ function goToSearchResultsPage(){
 navbarFormSubmitButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
-	stringToSearch = stringToSearch.trim()
+	stringToSearch = stringToSearch.trim();
+	stringToSearch = stringToSearch.replace(/\s/g, "");
 	searchResultsErrorMessagesP.innerText = "";
 	if(stringToSearch != ""){
 		let songNameMatchSongNumberSearchResultsArray = [];
@@ -690,13 +691,13 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 	
 		// Get all songs with stringToSearch in their name
 		for(let i = 1; i <= numberOfSongs; i++){
-			if((songsInfo[i.toString()][0]).search(new RegExp(stringToSearch, "i")) != -1){
+			if(((songsInfo[i.toString()][0]).replace(/\s/g, "")).search(new RegExp(stringToSearch, "i")) != -1){
 				songNameMatchSongNumberSearchResultsArray.push(i);
 			}
 		}
 		// Get all song artists with stringToSearch in their name
 		for(let i = 1; i <= numberOfSongs; i++){
-			if((songsInfo[i.toString()][1]).search(new RegExp(stringToSearch, "i")) != -1){
+			if(((songsInfo[i.toString()][1]).replace(/\s/g, "")).search(new RegExp(stringToSearch, "i")) != -1){
 				songArtistNameMatchSongNumberSearchResultsArray.push(i);
 			}
 		}
@@ -705,11 +706,11 @@ navbarFormSubmitButton.addEventListener("click", (e) => {
 		// Get all album names with stringToSearch in the album name and / or album artist name
 		for(let i = 0; i < numberOfAlbums; i++){
 			// Get all album names with stringToSearch in their name
-			if((albumsArray[i][0]).match(new RegExp(stringToSearch, "i")) != null){
+			if(((albumsArray[i][0]).replace(/\s/g, "")).match(new RegExp(stringToSearch, "i")) != null){
 				albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
 			}
 			// Get all album artist names with stringToSearch in their name
-			if((albumsArray[i][1][0]).match(new RegExp(stringToSearch, "i")) != null){
+			if(((albumsArray[i][1][0]).replace(/\s/g, "")).match(new RegExp(stringToSearch, "i")) != null){
 				albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
 			}
 		}
