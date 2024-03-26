@@ -1,7 +1,11 @@
-import os, sys, json
-# Add tinytag to import path to be able to import it
+import os, sys, json, shutil
+# Add tinytag, pillow and colorthief to import path to be able to import them
 sys.path.append(os.path.dirname('additionalLibraries/tinytag-1.10.1/tinytag'))
+sys.path.append(os.path.dirname('additionalLibraries/pillow-10.2.0/pillow/PIL'))
+sys.path.append(os.path.dirname('additionalLibraries/colorthief-0.2.1/colorthief'))
 from tinytag import TinyTag
+from PIL import Image
+from colorthief.colorthief import ColorThief
 
 
 
@@ -13,7 +17,11 @@ parentParentFileDirectory = os.path.dirname(parentFileDirectory)
 
 
 # Get the next song to be added to the songsInfo json file
-startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
+try:
+	startingSongNumber = (int(open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "r").readline()))
+except FileNotFoundError:
+	startingSongNumber = 1
+	open(parentFileDirectory+"/songAudioInfo/txt/nextSongUpdateFileNumber.txt", "w+").write(str(startingSongNumber))
 
 
 
@@ -65,12 +73,35 @@ for i in range(numberOfSongsToAdd):
 		numberOfSongsToAdd = i
 		break
 
-	songName = song.title
-	songArtist = song.artist
-	songAlbum = song.album
-	songAlbumArtist = song.albumartist
-	songTrackNumberInAlbum = int(song.track)
-	songImage = song.get_image()
+
+	isImageNone = False
+
+	if song.title:
+		songName = song.title
+	else:
+		songName = "Unknown"
+	if song.artist:
+		songArtist = song.artist
+	else:
+		songArtist = "Unknown Artist"
+	if song.album:
+		songAlbum = song.album
+	else:
+		songAlbum = "Unknown Album"
+	if song.albumartist:
+		songAlbumArtist = song.albumartist
+	else:
+		songAlbumArtist = "Unknown Artist"
+	if song.track:
+		songTrackNumberInAlbum = int(song.track)
+	else:
+		songTrackNumberInAlbum = startingSongNumber+i
+	if song.get_image():
+		songImage = song.get_image()
+	else:
+		isImageNone = True
+	songImageDominantColorRGB = ["", "", ""]
+	albumImageDominantColorRGB = ["", "", ""]
 
 
 
@@ -89,21 +120,38 @@ for i in range(numberOfSongsToAdd):
 	else:
 		None
 
+	# Add song image file to the /images/songImages folder
+	if isImageNone:
+		shutil.copy2(parentFileDirectory+"/images/no-image.png", parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", follow_symlinks=True)
+	elif isImageNone == False:
+		if "\\x89PNG" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
+			image = Image.open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png")
+			image = image.resize((500, 500), Image.LANCZOS)
+			os.remove(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png")
+			image.save(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "png", quality=85)
+			songImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png").get_color(quality=1)
+		elif "\\xff\\xd8" in str(songImage[:25]):
+			open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
+			image = Image.open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg")
+			image = image.resize((500, 500), Image.LANCZOS)
+			os.remove(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg")
+			image.save(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "jpeg", quality=85)
+			songImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg").get_color(quality=1)
+		else:
+			None
+	else:
+		None
+
 	# Add the song information to songInfo dictionary
-	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum]
+	songInfo[str(startingSongNumber+i)] = [songName, songArtist, songAlbum, songImageDominantColorRGB]
 
 	# Convert the songInfo dictionary to js
 	songInfoJson = json.dumps(songInfo)
 	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "w").write("var songsInfo = ")
 	open(parentFileDirectory+"/songAudioInfo/js/songsInfo.js", "a").write(songInfoJson)
 
-	# Add song image file to the /images/songImages folder
-	if "\\x89PNG" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".png", "wb").write(songImage)
-	elif "\\xff\\xd8" in str(songImage[:25]):
-		open(parentFileDirectory+"/images/songImages/"+str(startingSongNumber+i)+".jpeg", "wb").write(songImage)
-	else:
-		None
+	
 
 
 	# Update Album info
@@ -123,17 +171,32 @@ for i in range(numberOfSongsToAdd):
 
 	# Add album information to the albumInfo dictionary if it does not exist
 	if songAlbum not in albumInfo.keys():
-		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i], [songTrackNumberInAlbum]]
+		# Add album image file to the images/albumImages folder
+		if isImageNone:
+			shutil.copy2(parentFileDirectory+"/images/no-image.png", parentFileDirectory+"/images/albumImages/"+str(startingSongNumber+i)+".png", follow_symlinks=True)
+		elif isImageNone == False:
+			if "\\x89PNG" in str(songImage[:25]):
+				open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
+				image = Image.open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png")
+				image = image.resize((500, 500), Image.LANCZOS)
+				os.remove(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png")
+				image.save(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "png", quality=85)
+				albumImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png").get_color(quality=1)
+			elif "\\xff\\xd8" in str(songImage[:25]):
+				open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
+				image = Image.open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg")
+				image = image.resize((500, 500), Image.LANCZOS)
+				os.remove(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg")
+				image.save(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "jpeg", quality=85)
+				albumImageDominantColorRGB = ColorThief(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg").get_color(quality=1)
+			else:
+				None
+		else:
+			None
+		albumInfo[songAlbum] = [songAlbumArtist, [startingSongNumber+i], [songTrackNumberInAlbum], albumImageDominantColorRGB]
 		albumInfoJson = json.dumps(albumInfo)
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "w").write("var albumsInfo = ")
 		open(parentFileDirectory+"/songAudioInfo/js/albumsInfo.js", "a").write(albumInfoJson)
-		# Add album image file to the images/albumImages folder
-		if "\\x89PNG" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".png", "wb").write(songImage)
-		elif "\\xff\\xd8" in str(songImage[:25]):
-			open(parentFileDirectory+"/images/albumImages/"+str(nextAlbumImageFileNumber+i)+".jpeg", "wb").write(songImage)
-		else:
-			None
 	# Add song number to an album that's already in the albumInfo dictionary
 	elif songAlbum in albumInfo.keys():
 		if startingSongNumber+i not in albumInfo[songAlbum][1]:
@@ -146,6 +209,7 @@ for i in range(numberOfSongsToAdd):
 		nextAlbumImageFileNumber = nextAlbumImageFileNumber-1
 	else:
 		None
+
 
 
 	# # Update Artist info

@@ -15,6 +15,7 @@ var albumsListDivUl = document.querySelector(".albums-list-div-ul");
 var specificAlbumBackButton = document.querySelector(".specific-album-back-button");
 var specificAlbumDivOl = document.querySelector(".specific-album-div-ol");
 var searchInputTextDisplay = document.querySelector(".search-input-text-display");
+var searchResultsErrorMessagesP = document.querySelector(".search-results-error-messages-p");
 var searchResultsDiv = document.querySelector(".search-results-div");
 var songsSearchResultsDivUl = document.querySelector(".songs-search-results-div-ul");
 var albumsSearchResultsDivUl = document.querySelector(".albums-search-results-div-ul");
@@ -64,6 +65,35 @@ for(let key in albumsInfo){
 }
 
 
+
+function doesImageExist(imageURL){
+	let http = new XMLHttpRequest();
+	http.open("HEAD", imageURL, false);
+	http.send();
+	return http.status != 404;
+}
+
+// Function to lazy load images
+function lazyLoadImages(elementImageContainer){
+	if("IntersectionObserver" in window){
+		let lazyImages = [].slice.call(document.querySelectorAll(elementImageContainer+" > img"));
+		let lazyImageObserver = new IntersectionObserver(function(entries){
+			entries.forEach(function(entry){
+				if(entry.isIntersecting){
+					let lazyImage = entry.target;
+					lazyImage.src = lazyImage.dataset["src"];
+					lazyImageObserver.unobserve(lazyImage);
+				}
+			});
+		});
+
+		lazyImages.forEach(function(lazyImage){
+			lazyImageObserver.observe(lazyImage);
+		});
+	}
+}
+
+
 // Function to create the song previews when the website loads
 function createSongsPreviews(){
 	let numberOfSongPreviewsToMake;
@@ -73,13 +103,17 @@ function createSongsPreviews(){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "song-"+songNumber+"-preview-li");
 		let liElementDiv = document.createElement("div");
-		liElementDiv.setAttribute("class", "image-and-image_play-container");
+		liElementDiv.setAttribute("class", "rounded image-and-image_play-container");
+		liElementDiv.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 		let liElementDivImg = document.createElement("img");
 		liElementDivImg.setAttribute("class", "rounded");
-		liElementDivImg.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-		liElementDivImg.onerror = () => {
-			liElementDivImg.src = "/resources/images/songImages/"+songNumber+".jpeg";
-		};
+		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+			liElementDivImg.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+			liElementDivImg.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+		}
+		else{}
 		let liElementDivSpan = document.createElement("span");
 		liElementDivSpan.setAttribute("class", "bi-play-fill bi-pause-fill");
 		liElementDiv.appendChild(liElementDivImg);
@@ -96,6 +130,8 @@ function createSongsPreviews(){
 		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsPreviewsDivUl.appendChild(liElement);
 	}
+
+	lazyLoadImages(".image-and-image_play-container");
 }
 createSongsPreviews();
 
@@ -108,19 +144,26 @@ function createAlbumsPreviews(){
 	for(let albumNumber = 1; albumNumber <= numberOfAlbumPreviewsToMake; albumNumber++){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
+		let liElementDiv = document.createElement("div");
+		liElementDiv.setAttribute("class", "rounded album-preview-li-image-container");
+		liElementDiv.style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 		let liElementImg = document.createElement("img");
 		liElementImg.setAttribute("class", "rounded");
-		liElementImg.setAttribute("src", "/resources/images/albumImages/"+albumNumber+".png");
-		liElementImg.onerror = () => {
-			liElementImg.src = "/resources/images/albumImages/"+albumNumber+".jpeg";
-		};
+		if(doesImageExist("/resources/images/albumImages/"+albumNumber+".jpeg")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/albumImages/"+albumNumber+".png")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".png");
+		}
+		else{}
+		liElementDiv.appendChild(liElementImg);
 		let liElementH5 = document.createElement("h5");
 		liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 		liElementH5.innerText = albumsArray[albumNumber-1][0];
 		let liElementH6 = document.createElement("h6");
 		liElementH6.setAttribute("class", "album-"+albumNumber+"-artist-name");
 		liElementH6.innerText = albumsArray[albumNumber-1][1][0];
-		liElement.appendChild(liElementImg);
+		liElement.appendChild(liElementDiv);
 		liElement.appendChild(liElementH5);
 		liElement.appendChild(liElementH6);
 
@@ -130,7 +173,9 @@ function createAlbumsPreviews(){
 			specificAlbumDivOl.innerHTML = "";
 			document.querySelector("#music_previews_page").style.display = "none";
 			document.querySelector("#specific_album_page").style.display = "block";
-			document.querySelector(".specific-album-image").src = liElementImg.src;
+			document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
+			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+			lazyLoadImages(".specific-album-image-container");
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -150,12 +195,17 @@ function createAlbumsPreviews(){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 				let liElementDiv1 = document.createElement("div");
-				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
+				liElementDiv1.setAttribute("class", "rounded specific-album-songs-li-image-container");
+				liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".jpeg";
-				};
+				liElementDiv1Img.setAttribute("class", "rounded");
+				if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+				}
+				else{}
 				liElementDiv1.appendChild(liElementDiv1Img);
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
@@ -203,11 +253,17 @@ function createAlbumsPreviews(){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+
+
+			lazyLoadImages(".specific-album-songs-li-image-container");
 		});
 
 
 		albumsPreviewsDivUl.appendChild(liElement);
 	}
+
+
+	lazyLoadImages(".albums-previews-div-ul >  li > div");
 }
 createAlbumsPreviews();
 
@@ -219,12 +275,17 @@ function createSongsLiInSongsListPage(){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "song-"+songNumber+"-song-list-li");
 		let liElementDiv1 = document.createElement("div");
-		liElementDiv1.setAttribute("class", "song-list-song-li-image-container");
+		liElementDiv1.setAttribute("class", "rounded song-list-song-li-image-container");
+		liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 		let liElementDiv1Img = document.createElement("img");
-		liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-		liElementDiv1Img.onerror = () => {
-			liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".jpeg";
-		};
+		liElementDiv1Img.setAttribute("class", "rounded");
+		if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+			liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+			liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+		}
+		else{}
 		liElementDiv1.appendChild(liElementDiv1Img);
 		let liElementDiv2 = document.createElement("div");
 		liElementDiv2.setAttribute("class", "song-list-song-li-text-container");
@@ -247,6 +308,8 @@ function createSongsLiInSongsListPage(){
 		liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, false, false, 0); });
 		songsListDivUl.appendChild(liElement);
 	}
+
+	lazyLoadImages(".song-list-song-li-image-container");
 }
 
 
@@ -256,19 +319,26 @@ function createAlbumsListPreviews(){
 	for(let albumNumber = 1; albumNumber <= numberOfAlbums; albumNumber++){
 		let liElement = document.createElement("li");
 		liElement.setAttribute("class", "album-"+albumNumber+"-preview-li");
+		let liElementDiv = document.createElement("div");
+		liElementDiv.setAttribute("class", "rounded album-list-album-preview-li-image-container");
+		liElementDiv.style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
 		let liElementImg = document.createElement("img");
 		liElementImg.setAttribute("class", "rounded");
-		liElementImg.setAttribute("src", "/resources/images/albumImages/"+albumNumber+".png");
-		liElementImg.onerror = () => {
-			liElementImg.src = "/resources/images/albumImages/"+albumNumber+".jpeg";
-		};
+		if(doesImageExist("/resources/images/albumImages/"+albumNumber+".jpeg")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".jpeg");
+		}
+		else if(doesImageExist("/resources/images/albumImages/"+albumNumber+".png")){
+			liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+albumNumber+".png");
+		}
+		else{}
+		liElementDiv.appendChild(liElementImg);
 		let liElementH5 = document.createElement("h5");
 		liElementH5.setAttribute("class", "album-"+albumNumber+"-album-name");
 		liElementH5.innerText = albumsArray[albumNumber-1][0];
 		let liElementH6 = document.createElement("h6");
 		liElementH6.setAttribute("class", "album-"+albumNumber+"-artist-name");
 		liElementH6.innerText = albumsArray[albumNumber-1][1][0];
-		liElement.appendChild(liElementImg);
+		liElement.appendChild(liElementDiv);
 		liElement.appendChild(liElementH5);
 		liElement.appendChild(liElementH6);
 
@@ -278,7 +348,9 @@ function createAlbumsListPreviews(){
 			specificAlbumDivOl.innerHTML = "";
 			document.querySelector("#albums_list_page").style.display = "none";
 			document.querySelector("#specific_album_page").style.display = "block";
-			document.querySelector(".specific-album-image").src = liElementImg.src;
+			document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
+			document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+			lazyLoadImages(".specific-album-image-container");
 			document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
 			document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
 
@@ -298,12 +370,17 @@ function createAlbumsListPreviews(){
 				let liElement = document.createElement("li");
 				liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
 				let liElementDiv1 = document.createElement("div");
-				liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
+				liElementDiv1.setAttribute("class", "rounded specific-album-songs-li-image-container");
+				liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
 				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".jpeg";
-				};
+				liElementDiv1Img.setAttribute("class", "rounded");
+				if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+				}
+				else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+					liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+				}
+				else{}
 				liElementDiv1.appendChild(liElementDiv1Img);
 				let liElementDiv2 = document.createElement("div");
 				liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
@@ -351,11 +428,15 @@ function createAlbumsListPreviews(){
 					document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 				}
 			}
+
+			lazyLoadImages(".specific-album-songs-li-image-container");
 		});
 
 
 		albumsListDivUl.appendChild(liElement);
 	}
+
+	lazyLoadImages(".albums-list-div-ul > li > div");
 }
 
 function songLiElementClickEventListener(songNumber, isSongLiElementFromAlbum, isSongLiElementFromSearch, albumNumber){
@@ -598,229 +679,263 @@ function goToSearchResultsPage(){
 navbarFormSubmitButton.addEventListener("click", (e) => {
 	e.preventDefault();
 	let stringToSearch = escapeRegex(navbarFormTextInput.value);
-	let songNameMatchSongNumberSearchResultsArray = [];
-	let songArtistNameMatchSongNumberSearchResultsArray = [];
-	let songNumberSearchResultsArray;
-	let albumNameMatchSearchResultsArray = [];
-	let albumNumberSearchResultsArray = [];
-
-	// Get all songs with stringToSearch in their name
-	for(let i = 1; i <= numberOfSongs; i++){
-		if((songsInfo[i.toString()][0]).search(new RegExp(stringToSearch, "i")) != -1){
-			songNameMatchSongNumberSearchResultsArray.push(i);
-		}
-	}
-	// Get all song artists with stringToSearch in their name
-	for(let i = 1; i <= numberOfSongs; i++){
-		if((songsInfo[i.toString()][1]).search(new RegExp(stringToSearch, "i")) != -1){
-			songArtistNameMatchSongNumberSearchResultsArray.push(i);
-		}
-	}
-	// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
-	songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
-	// Get all album names with stringToSearch in the album name and / or album artist name
-	for(let i = 0; i < numberOfAlbums; i++){
-		// Get all album names with stringToSearch in their name
-		if((albumsArray[i][0]).match(new RegExp(stringToSearch, "i")) != null){
-			albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
-		}
-		// Get all album artist names with stringToSearch in their name
-		if((albumsArray[i][1][0]).match(new RegExp(stringToSearch, "i")) != null){
-			albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
-		}
-	}
-	// Remove duplicates from albumNameMatchSearchResultsArray
-	albumNameMatchSearchResultsArray = Array.from(new Set(albumNameMatchSearchResultsArray));
-	// Get album number from album name
-	for(let i = 0; i < albumNameMatchSearchResultsArray.length; i++){
-		for(let albumNumber = 0; albumNumber < albumsArray.length; albumNumber++){
-			if(albumsArray[albumNumber][0] == albumNameMatchSearchResultsArray[i]){
-				albumNumberSearchResultsArray.push(albumNumber)
+	stringToSearch = stringToSearch.trim();
+	stringToSearch = stringToSearch.replace(/\s/g, "");
+	searchResultsErrorMessagesP.innerText = "";
+	if(stringToSearch != ""){
+		let songNameMatchSongNumberSearchResultsArray = [];
+		let songArtistNameMatchSongNumberSearchResultsArray = [];
+		let songNumberSearchResultsArray;
+		let albumNameMatchSearchResultsArray = [];
+		let albumNumberSearchResultsArray = [];
+	
+		// Get all songs with stringToSearch in their name
+		for(let i = 1; i <= numberOfSongs; i++){
+			if(((songsInfo[i.toString()][0]).replace(/\s/g, "")).search(new RegExp(stringToSearch, "i")) != -1){
+				songNameMatchSongNumberSearchResultsArray.push(i);
 			}
 		}
-	}
-
-
-	// Change page being displayed
-	document.querySelector("#music_previews_page").style.display = "none";
-	document.querySelector("#songs_list_page").style.display = "none";
-	document.querySelector("#specific_album_page").style.display = "none";
-	document.querySelector("#albums_list_page").style.display = "none";
-	document.querySelector("#search_results_page").style.display = "block";
-
-	// Change website title
-	document.querySelector("title").innerText = "Search results";
-
-
-	songsSearchResultsDivUl.innerHTML = "";
-	albumsSearchResultsDivUl.innerHTML = "";
-	searchInputTextDisplay.innerText = navbarFormTextInput.value;
-	
-	
-	if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
-		// Show only 7 song search results
-		let numberOfSongSearchResultsToShow;
-		if(songNumberSearchResultsArray.length >= 7){ numberOfSongSearchResultsToShow = 7; }
-		else{ numberOfSongSearchResultsToShow = songNumberSearchResultsArray.length; }
-		// Show only 8 album search results
-		let numberOfAlbumSearchResultsToShow;
-		if(albumNumberSearchResultsArray.length >= 8){ numberOfAlbumSearchResultsToShow = 8; }
-		else{ numberOfAlbumSearchResultsToShow = albumNumberSearchResultsArray.length; }
-
-
-		// Show songs search results
-		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
-			for(let i = 0; i < numberOfSongSearchResultsToShow; i++){
-				let liElement = document.createElement("li");
-				liElement.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-song-result-li");
-				let liElementDiv1 = document.createElement("div");
-				liElementDiv1.setAttribute("class", "song-result-song-li-image-container");
-				let liElementDiv1Img = document.createElement("img");
-				liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png");
-				liElementDiv1Img.onerror = () => {
-					liElementDiv1Img.src = "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg";
-				};
-				liElementDiv1.appendChild(liElementDiv1Img);
-				let liElementDiv2 = document.createElement("div");
-				liElementDiv2.setAttribute("class", "song-result-song-li-text-container");
-				let liElementDiv2H5 = document.createElement("h5");
-				liElementDiv2H5.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-result-song-name");
-				liElementDiv2H5.innerText = songsInfo[songNumberSearchResultsArray[i].toString()][0];
-				let liElementDiv2H6 = document.createElement("h6");
-				liElementDiv2H6.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-result-artist-name");
-				liElementDiv2H6.innerText = songsInfo[songNumberSearchResultsArray[i].toString()][1];
-				liElementDiv2.appendChild(liElementDiv2H5);
-				liElementDiv2.appendChild(liElementDiv2H6);
-				let liElementDiv3 = document.createElement("div");
-				liElementDiv3.setAttribute("class", "song-result-song-li-button-container");
-				let liElementDiv3Button = document.createElement("button");
-				liElementDiv3Button.setAttribute("class", "btn bi-play-fill bi-pause-fill");
-				liElementDiv3.appendChild(liElementDiv3Button);
-				liElement.appendChild(liElementDiv1);
-				liElement.appendChild(liElementDiv2);
-				liElement.appendChild(liElementDiv3);
-				liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, true, 0); });
-				songsSearchResultsDivUl.appendChild(liElement);
-
-				// To change the play, pause status of a song in the results if the song is playing
-				if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
-					if(document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-						document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
-					}
+		// Get all song artists with stringToSearch in their name
+		for(let i = 1; i <= numberOfSongs; i++){
+			if(((songsInfo[i.toString()][1]).replace(/\s/g, "")).search(new RegExp(stringToSearch, "i")) != -1){
+				songArtistNameMatchSongNumberSearchResultsArray.push(i);
+			}
+		}
+		// Merge the songNameMatchSongNumberSearchResultsArray and songArtistNameMatchSongNumberSearchResultsArray while removing duplicates
+		songNumberSearchResultsArray = Array.from(new Set(songNameMatchSongNumberSearchResultsArray.concat(songArtistNameMatchSongNumberSearchResultsArray)));
+		// Get all album names with stringToSearch in the album name and / or album artist name
+		for(let i = 0; i < numberOfAlbums; i++){
+			// Get all album names with stringToSearch in their name
+			if(((albumsArray[i][0]).replace(/\s/g, "")).match(new RegExp(stringToSearch, "i")) != null){
+				albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
+			}
+			// Get all album artist names with stringToSearch in their name
+			if(((albumsArray[i][1][0]).replace(/\s/g, "")).match(new RegExp(stringToSearch, "i")) != null){
+				albumNameMatchSearchResultsArray.push(albumsArray[i][0]);
+			}
+		}
+		// Remove duplicates from albumNameMatchSearchResultsArray
+		albumNameMatchSearchResultsArray = Array.from(new Set(albumNameMatchSearchResultsArray));
+		// Get album number from album name
+		for(let i = 0; i < albumNameMatchSearchResultsArray.length; i++){
+			for(let albumNumber = 0; albumNumber < albumsArray.length; albumNumber++){
+				if(albumsArray[albumNumber][0] == albumNameMatchSearchResultsArray[i]){
+					albumNumberSearchResultsArray.push(albumNumber)
 				}
 			}
 		}
 
-		// Show albums search results
-		if(albumNameMatchSearchResultsArray.length != 0){
-			for(let i = 0; i < numberOfAlbumSearchResultsToShow; i++){
-				let liElement = document.createElement("li");
-				liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
-				let liElementImg = document.createElement("img");
-				liElementImg.setAttribute("class", "rounded");
-				liElementImg.setAttribute("src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png");
-				liElementImg.onerror = () => {
-					liElementImg.src = "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg";
-				};
-				let liElementH5 = document.createElement("h5");
-				liElementH5.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-album-name");
-				liElementH5.innerText = albumsArray[(albumNumberSearchResultsArray[i])][0];
-				let liElementH6 = document.createElement("h6");
-				liElementH6.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-artist-name");
-				liElementH6.innerText = albumsArray[(albumNumberSearchResultsArray[i])][1][0];
-				liElement.appendChild(liElementImg);
-				liElement.appendChild(liElementH5);
-				liElement.appendChild(liElementH6);
 
-				// Add click event listener for the album previews to open the album page when clicked
-				liElement.addEventListener("click", () => {
-					let albumNumber = (Number(liElement.classList[0].replace(/\D/g, "")));
-					specificAlbumDivOl.innerHTML = "";
-					document.querySelector("#search_results_page").style.display = "none";
-					document.querySelector("#specific_album_page").style.display = "block";
-					document.querySelector(".specific-album-image").src = liElementImg.src;
-					document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
-					document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+		// Change page being displayed
+		document.querySelector("#music_previews_page").style.display = "none";
+		document.querySelector("#songs_list_page").style.display = "none";
+		document.querySelector("#specific_album_page").style.display = "none";
+		document.querySelector("#albums_list_page").style.display = "none";
+		document.querySelector("#search_results_page").style.display = "block";
 
-					isAlbumOpenedFromAlbumPreview = false;
-					isAlbumOpenedFromAlbumList = false;
-					isAlbumOpenedFromSearchResultsPage = true;
-					specificAlbumBackButton.addEventListener("click", goToSearchResultsPage);
+		// Change website title
+		document.querySelector("title").innerText = "Music - Search results";
 
-					// To arrange song li elements according to track number
-					let albumSongsLiElementsDict = {};
-					let oldSongNumberAndSongTrackNumberArray = [[], []];
-					let sortedSongNumberAndSongTrackNumberArray = [[], []];
-					// Load the songs on the album page
-					for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
-						let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
-						let songNumber = albumsArray[albumNumber-1][1][1][i];
-						let liElement = document.createElement("li");
-						liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
-						let liElementDiv1 = document.createElement("div");
-						liElementDiv1.setAttribute("class", "specific-album-songs-li-image-container");
-						let liElementDiv1Img = document.createElement("img");
-						liElementDiv1Img.setAttribute("src", "/resources/images/songImages/"+songNumber+".png");
-						liElementDiv1Img.onerror = () => {
-							liElementDiv1Img.src = "/resources/images/songImages/"+songNumber+".jpeg";
-						};
-						liElementDiv1.appendChild(liElementDiv1Img);
-						let liElementDiv2 = document.createElement("div");
-						liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
-						let liElementDiv2H5 = document.createElement("h5");
-						liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-name");
-						liElementDiv2H5.innerText = songsInfo[songNumber.toString()][0];
-						let liElementDiv2H6 = document.createElement("h6");
-						liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-artist-name");
-						liElementDiv2H6.innerText = songsInfo[songNumber.toString()][1];
-						liElementDiv2.appendChild(liElementDiv2H5);
-						liElementDiv2.appendChild(liElementDiv2H6);
-						let liElementDiv3 = document.createElement("div");
-						liElementDiv3.setAttribute("class", "specific-album-songs-li-button-container");
-						let liElementDiv3Button = document.createElement("button");
-						liElementDiv3Button.setAttribute("class", "btn bi-play-fill bi-pause-fill");
-						liElementDiv3.appendChild(liElementDiv3Button);
-						liElement.appendChild(liElementDiv1);
-						liElement.appendChild(liElementDiv2);
-						liElement.appendChild(liElementDiv3);
-						liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
-						liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, true, albumNumber); });
-						albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
-						oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
-						oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
+
+		songsSearchResultsDivUl.innerHTML = "";
+		albumsSearchResultsDivUl.innerHTML = "";
+		searchInputTextDisplay.innerText = navbarFormTextInput.value.trim();
+
+
+		if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0 || albumNameMatchSearchResultsArray.length != 0){
+			// Show only 7 song search results
+			let numberOfSongSearchResultsToShow;
+			if(songNumberSearchResultsArray.length >= 7){ numberOfSongSearchResultsToShow = 7; }
+			else{ numberOfSongSearchResultsToShow = songNumberSearchResultsArray.length; }
+			// Show only 8 album search results
+			let numberOfAlbumSearchResultsToShow;
+			if(albumNumberSearchResultsArray.length >= 8){ numberOfAlbumSearchResultsToShow = 8; }
+			else{ numberOfAlbumSearchResultsToShow = albumNumberSearchResultsArray.length; }
+
+
+			// Show songs search results
+			if(songNameMatchSongNumberSearchResultsArray.length != 0 || songArtistNameMatchSongNumberSearchResultsArray.length != 0){
+				for(let i = 0; i < numberOfSongSearchResultsToShow; i++){
+					let liElement = document.createElement("li");
+					liElement.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-song-result-li");
+					let liElementDiv1 = document.createElement("div");
+					liElementDiv1.setAttribute("class", "rounded song-result-song-li-image-container");
+					liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumberSearchResultsArray[i].toString()][3][0]+", "+songsInfo[songNumberSearchResultsArray[i].toString()][3][1]+", "+songsInfo[songNumberSearchResultsArray[i].toString()][3][2]+")";
+					let liElementDiv1Img = document.createElement("img");
+					liElementDiv1Img.setAttribute("class", "rounded");
+					if(doesImageExist("/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg")){
+						liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".jpeg");
 					}
-					// To arrange song li elements according to track number
-					let sortedAlbumTrackNumberArray = (Object.keys(albumSongsLiElementsDict)).sort((a, b) => a - b);
-					for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
-						sortedSongNumberAndSongTrackNumberArray[1][i] = Number(sortedAlbumTrackNumberArray[i]);
-						specificAlbumDivOl.appendChild(albumSongsLiElementsDict[sortedAlbumTrackNumberArray[i]]);
+					else if(doesImageExist("/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png")){
+						liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumberSearchResultsArray[i]+".png");
 					}
-					// To arrange song numbers according to how track numbers follows each other
-					for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
-						let oldTrackNumberIndex = oldSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
-						let newTrackNumberIndex = sortedSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
-						sortedSongNumberAndSongTrackNumberArray[0][newTrackNumberIndex] = oldSongNumberAndSongTrackNumberArray[0][oldTrackNumberIndex];
-					}
-					albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
-					albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
+					else{}
+					liElementDiv1.appendChild(liElementDiv1Img);
+					let liElementDiv2 = document.createElement("div");
+					liElementDiv2.setAttribute("class", "song-result-song-li-text-container");
+					let liElementDiv2H5 = document.createElement("h5");
+					liElementDiv2H5.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-result-song-name");
+					liElementDiv2H5.innerText = songsInfo[songNumberSearchResultsArray[i].toString()][0];
+					let liElementDiv2H6 = document.createElement("h6");
+					liElementDiv2H6.setAttribute("class", "song-"+songNumberSearchResultsArray[i]+"-result-artist-name");
+					liElementDiv2H6.innerText = songsInfo[songNumberSearchResultsArray[i].toString()][1];
+					liElementDiv2.appendChild(liElementDiv2H5);
+					liElementDiv2.appendChild(liElementDiv2H6);
+					let liElementDiv3 = document.createElement("div");
+					liElementDiv3.setAttribute("class", "song-result-song-li-button-container");
+					let liElementDiv3Button = document.createElement("button");
+					liElementDiv3Button.setAttribute("class", "btn bi-play-fill bi-pause-fill");
+					liElementDiv3.appendChild(liElementDiv3Button);
+					liElement.appendChild(liElementDiv1);
+					liElement.appendChild(liElementDiv2);
+					liElement.appendChild(liElementDiv3);
+					liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumberSearchResultsArray[i], false, true, 0); });
+					songsSearchResultsDivUl.appendChild(liElement);
 
-
-					// To change the play, pause status of a song in the album if the song is playing
-					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
-						if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
-							document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+					// To change the play, pause status of a song in the results if the song is playing
+					if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-song-result-li")){
+						if(document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+							document.querySelector(".song-"+playingSongNumber+"-song-result-li .song-result-song-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
 						}
 					}
-				});
+				}
 
 
-				albumsSearchResultsDivUl.appendChild(liElement);
+				lazyLoadImages(".song-result-song-li-image-container");
 			}
 
+			// Show albums search results
+			if(albumNameMatchSearchResultsArray.length != 0){
+				for(let i = 0; i < numberOfAlbumSearchResultsToShow; i++){
+					let liElement = document.createElement("li");
+					liElement.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-li");
+					let liElementDiv = document.createElement("div");
+					liElementDiv.setAttribute("class", "rounded album-list-search-results-li-image-container");
+					liElementDiv.style.backgroundColor = "rgb("+albumsArray[albumNumberSearchResultsArray[i]][1][3][0]+", "+albumsArray[albumNumberSearchResultsArray[i]][1][3][1]+", "+albumsArray[albumNumberSearchResultsArray[i]][1][3][2]+")";
+					let liElementImg = document.createElement("img");
+					liElementImg.setAttribute("class", "rounded");
+					if(doesImageExist("/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg")){
+						liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".jpeg");
+					}
+					else if(doesImageExist("/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png")){
+						liElementImg.setAttribute("data-src", "/resources/images/albumImages/"+(albumNumberSearchResultsArray[i]+1)+".png");
+					}
+					else{}
+					liElementDiv.appendChild(liElementImg);
+					let liElementH5 = document.createElement("h5");
+					liElementH5.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-album-name");
+					liElementH5.innerText = albumsArray[albumNumberSearchResultsArray[i]][0];
+					let liElementH6 = document.createElement("h6");
+					liElementH6.setAttribute("class", "album-"+(albumNumberSearchResultsArray[i]+1)+"-result-artist-name");
+					liElementH6.innerText = albumsArray[albumNumberSearchResultsArray[i]][1][0];
+					liElement.appendChild(liElementDiv);
+					liElement.appendChild(liElementH5);
+					liElement.appendChild(liElementH6);
+	
+					// Add click event listener for the album previews to open the album page when clicked
+					liElement.addEventListener("click", () => {
+						let albumNumber = (Number(liElement.classList[0].replace(/\D/g, "")));
+						specificAlbumDivOl.innerHTML = "";
+						document.querySelector("#search_results_page").style.display = "none";
+						document.querySelector("#specific_album_page").style.display = "block";
+						document.querySelector(".specific-album-image-container").style.backgroundColor = "rgb("+albumsArray[albumNumber-1][1][3][0]+", "+albumsArray[albumNumber-1][1][3][1]+", "+albumsArray[albumNumber-1][1][3][2]+")";
+						document.querySelector(".specific-album-image").dataset["src"] = liElementImg.dataset["src"];
+						lazyLoadImages(".specific-album-image-container");
+						document.querySelector(".specific-album-name").innerText = albumsArray[albumNumber-1][0];
+						document.querySelector(".specific-album-artist-name").innerText = albumsArray[albumNumber-1][1][0];
+
+						isAlbumOpenedFromAlbumPreview = false;
+						isAlbumOpenedFromAlbumList = false;
+						isAlbumOpenedFromSearchResultsPage = true;
+						specificAlbumBackButton.addEventListener("click", goToSearchResultsPage);
+
+						// To arrange song li elements according to track number
+						let albumSongsLiElementsDict = {};
+						let oldSongNumberAndSongTrackNumberArray = [[], []];
+						let sortedSongNumberAndSongTrackNumberArray = [[], []];
+						// Load the songs on the album page
+						for(let i = 0; i < (albumsArray[albumNumber-1][1][1]).length; i++){
+							let songTrackNumberInAlbum = albumsArray[albumNumber-1][1][2][i];
+							let songNumber = albumsArray[albumNumber-1][1][1][i];
+							let liElement = document.createElement("li");
+							liElement.setAttribute("class", "song-"+songNumber+"-in-specific-album-song-li-from-songs-list song-"+(songTrackNumberInAlbum)+"-in-specific-album-song-li");
+							let liElementDiv1 = document.createElement("div");
+							liElementDiv1.setAttribute("class", "rounded specific-album-songs-li-image-container");
+							liElementDiv1.style.backgroundColor = "rgb("+songsInfo[songNumber.toString()][3][0]+", "+songsInfo[songNumber.toString()][3][1]+", "+songsInfo[songNumber.toString()][3][2]+")";
+							let liElementDiv1Img = document.createElement("img");
+							liElementDiv1Img.setAttribute("class", "rounded")
+							if(doesImageExist("/resources/images/songImages/"+songNumber+".jpeg")){
+								liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".jpeg");
+							}
+							else if(doesImageExist("/resources/images/songImages/"+songNumber+".png")){
+								liElementDiv1Img.setAttribute("data-src", "/resources/images/songImages/"+songNumber+".png");
+							}
+							else{}
+							liElementDiv1.appendChild(liElementDiv1Img);
+							let liElementDiv2 = document.createElement("div");
+							liElementDiv2.setAttribute("class", "specific-album-songs-li-text-container");
+							let liElementDiv2H5 = document.createElement("h5");
+							liElementDiv2H5.setAttribute("class", "song-"+songNumber+"-song-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-name");
+							liElementDiv2H5.innerText = songsInfo[songNumber.toString()][0];
+							let liElementDiv2H6 = document.createElement("h6");
+							liElementDiv2H6.setAttribute("class", "song-"+songNumber+"-artist-name song-"+(songTrackNumberInAlbum)+"-specific-album-songs-artist-name");
+							liElementDiv2H6.innerText = songsInfo[songNumber.toString()][1];
+							liElementDiv2.appendChild(liElementDiv2H5);
+							liElementDiv2.appendChild(liElementDiv2H6);
+							let liElementDiv3 = document.createElement("div");
+							liElementDiv3.setAttribute("class", "specific-album-songs-li-button-container");
+							let liElementDiv3Button = document.createElement("button");
+							liElementDiv3Button.setAttribute("class", "btn bi-play-fill bi-pause-fill");
+							liElementDiv3.appendChild(liElementDiv3Button);
+							liElement.appendChild(liElementDiv1);
+							liElement.appendChild(liElementDiv2);
+							liElement.appendChild(liElementDiv3);
+							liElement.style.setProperty("--track-number-for-album", `"${songTrackNumberInAlbum.toString()}"`);
+							liElement.addEventListener("click", () => { songLiElementClickEventListener(songNumber, true, true, albumNumber); });
+							albumSongsLiElementsDict[songTrackNumberInAlbum] = liElement;
+							oldSongNumberAndSongTrackNumberArray[0][i] = songNumber;
+							oldSongNumberAndSongTrackNumberArray[1][i] = songTrackNumberInAlbum;
+						}
+						// To arrange song li elements according to track number
+						let sortedAlbumTrackNumberArray = (Object.keys(albumSongsLiElementsDict)).sort((a, b) => a - b);
+						for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+							sortedSongNumberAndSongTrackNumberArray[1][i] = Number(sortedAlbumTrackNumberArray[i]);
+							specificAlbumDivOl.appendChild(albumSongsLiElementsDict[sortedAlbumTrackNumberArray[i]]);
+						}
+						// To arrange song numbers according to how track numbers follows each other
+						for(let i = 0; i < sortedAlbumTrackNumberArray.length; i++) {
+							let oldTrackNumberIndex = oldSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+							let newTrackNumberIndex = sortedSongNumberAndSongTrackNumberArray[1].indexOf(oldSongNumberAndSongTrackNumberArray[1][i]);
+							sortedSongNumberAndSongTrackNumberArray[0][newTrackNumberIndex] = oldSongNumberAndSongTrackNumberArray[0][oldTrackNumberIndex];
+						}
+						albumsArray[albumNumber-1][1][1] = sortedSongNumberAndSongTrackNumberArray[0];
+						albumsArray[albumNumber-1][1][2] = sortedSongNumberAndSongTrackNumberArray[1];
+
+
+						// To change the play, pause status of a song in the album if the song is playing
+						if(isASongPlaying == true && document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list")){
+							if(document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.contains("bi-play-fill")){
+								document.querySelector(".song-"+playingSongNumber+"-in-specific-album-song-li-from-songs-list .specific-album-songs-li-button-container .bi-pause-fill").classList.toggle("bi-play-fill")
+							}
+						}
+
+
+						lazyLoadImages(".specific-album-songs-li-image-container");
+					});
+
+
+					albumsSearchResultsDivUl.appendChild(liElement);
+				}
+			}
+
+
+			lazyLoadImages(".albums-search-results-div-ul >  li > div");
 		}
+		else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ searchResultsErrorMessagesP.innerText = "No matches found"; }
+		else{ searchResultsErrorMessagesP.innerHTML = "An error occurred"; }
 	}
-	else if(songNameMatchSongNumberSearchResultsArray.length == 0 && songArtistNameMatchSongNumberSearchResultsArray.length == 0 && albumNameMatchSearchResultsArray.length == 0){ songsSearchResultsDivUl.innerText = "No matches found"; }
-	else{ searchResultsDiv.innerHTML = "An error occurred"; }
+	else if(stringToSearch == ""){}
+	else{ searchResultsErrorMessagesP.innerHTML = "An error occurred"; }
 });
 function escapeRegex(string){
 	return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
@@ -1616,7 +1731,7 @@ function updateSongProgressBar(currentSong){
 // Play next song when current song ends
 function playNextSongWhenCurrentSongEnds(currentSong){
 	if(isCurrentPlayingSongPlayingFromAnAlbum == false){
-		if((currentSong.duration-currentSong.currentTime) <= .5 && isCurrentPlayingSongPlayingFromSearch == true){
+		if(currentSong.ended && isCurrentPlayingSongPlayingFromSearch == true){
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 					document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
@@ -1645,7 +1760,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			currentSong.currentTime = 0;
 			isASongPlaying = false;
 		}
-		else if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber < numberOfSongs){
+		else if(currentSong.ended && playingSongNumber < numberOfSongs){
 			// To pause and end the current song progress update
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
@@ -1719,7 +1834,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			}
 		}
 		// To end songs playing when played the last song available on the songs list
-		else if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber == numberOfSongs){
+		else if(currentSong.ended && playingSongNumber == numberOfSongs){
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 					document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");
@@ -1750,7 +1865,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 		else{}
 	}
 	else if(isCurrentPlayingSongPlayingFromAnAlbum == true){
-		if((currentSong.duration-currentSong.currentTime) <= .5 && playingAlbumQueue.indexOf(playingSongNumber) < playingAlbumQueue.indexOf(playingAlbumQueue[Number(playingAlbumQueue.length - 1)])){
+		if(currentSong.ended && playingAlbumQueue.indexOf(playingSongNumber) < playingAlbumQueue.indexOf(playingAlbumQueue[Number(playingAlbumQueue.length - 1)])){
 			// To pause and end the current song progress update
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
@@ -1824,7 +1939,7 @@ function playNextSongWhenCurrentSongEnds(currentSong){
 			}
 		}
 		// To end songs playing when played the last song available on the album
-		else if((currentSong.duration-currentSong.currentTime) <= .5 && playingSongNumber == playingAlbumQueue[Number(playingAlbumQueue.length - 1)]){
+		else if(currentSong.ended && playingSongNumber == playingAlbumQueue[Number(playingAlbumQueue.length - 1)]){
 			if(document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill")){
 				if(!document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.contains("bi-play-fill")){
 					document.querySelector(".song-"+playingSongNumber+"-preview-li .image-and-image_play-container .bi-pause-fill").classList.toggle("bi-play-fill");

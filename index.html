@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
+		<meta name="description" content="A web app to stream songs">
 		<link rel="stylesheet" href="/resources/web/styles/style.css">
 		<link rel="stylesheet" href="/resources/bootstrap-5.2.3-dist/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/resources/icons/bootstrap-icons-1.11.2/font/bootstrap-icons.min.css">
@@ -16,16 +17,17 @@
 
 		<nav class="navbar navbar-expand-lg">
 			 <div class="container-fluid">
-				<a class="navbar-brand" href="javascript: void(0);" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><img class="navbar-brand-image" src="resources/icons/audio-wave-true-blue-icon-100.png"></a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems">Library</button>
+				<a class="navbar-brand" href="#music_previews_page" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><img class="navbar-brand-image" data-src="resources/icons/audio-wave-true-blue-icon-100.png" src="resources/icons/audio-wave-true-blue-icon-100.png"><span>&nbsp;&nbsp;Stream</span></a>
+				<button class="navbar-toggler" type="button" name="Expand/shrink options view" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems">Library</button>
 				<div id="navBarToggleItems" class="collapse navbar-collapse">
 					<ul class="navbar-nav ms-auto">
-						<li class="nav-item home-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="javascript: void(0);">Home</a></li>
-						<li class="nav-item songs-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="javascript: void(0);">Songs</a></li>
-						<li class="nav-item albums-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="javascript: void(0);">Albums</a></li>
+						<li class="nav-item home-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="#music_previews_page">Home</a></li>
+						<li class="nav-item songs-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="#songs_list_page">Songs</a></li>
+						<li class="nav-item albums-page-link-button" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"><a class="nav-link active" href="#albums_list_page">Albums</a></li>
 						<form class="form-inline navbar-form">
-							<input class="form-control form-control-sm navbar-form-text-input" name="search" type="search" placeholder="Search songs, albums or artists" aria-label="Search" required>
-							<button class="btn btn-sm btn-outline-info bi-search navbar-form-submit-button" type="submit" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"></button>
+							<label for="navbar-form-text-input">Search bar for searching for songs, albums or artists</label>
+							<input id="navbar-form-text-input" class="form-control form-control-sm navbar-form-text-input" name="search" type="search" placeholder="Search songs, albums or artists" required>
+							<button class="btn btn-sm btn-outline-info bi-search navbar-form-submit-button" type="submit" name="Search" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show"></button>
 						</form>
 					</ul>
 				</div>
@@ -34,27 +36,23 @@
 
 
 		<!-- Div to ensure when user clicks outside the navbar, the navbar closes -->
-		<div data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show">
+		<div id="music_pages_container" data-bs-toggle="collapse" data-bs-target="#navBarToggleItems.show">
 			<div id="music_previews_page" class="container-fluid">
 				<div class="expand-songs-previews-div">
-					<a href="javascript: void(0);">
+					<a href="#songs_list_page">
 						<span>Songs</span>
-						<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
+						<button class="btn" type="button" name="Expand songs view"><span class="bi-chevron-right"></span></button>
 					</a>
 				</div>
-				<br>
-				<br>
 				<div class="songs-previews-div"><ul class="songs-previews-div-ul"></ul></div>
 
 
 				<div class="expand-albums-previews-div">
-					<a href="javascript: void(0);">
+					<a href="#albums_list_page">
 						<span>Albums</span>
-						<button class="btn" type="button"><span class="bi-chevron-right"></span></button>
+						<button class="btn" type="button" name="Expand albums view"><span class="bi-chevron-right"></span></button>
 					</a>
 				</div>
-				<br>
-				<br>
 				<div class="albums-previews-div"><ul class="albums-previews-div-ul"></ul></div>
 			</div>
 
@@ -79,7 +77,9 @@
 				<div class="specific-album-div">
 					<div class="specific-album-info-container">
 						<button class="btn btn-lg bi-chevron-left specific-album-back-button"></button>
-						<img class="specific-album-image" src="">
+						<div class="rounded specific-album-image-container">
+							<img class="rounded specific-album-image">
+						</div>
 						<div class="specific-album-name-and-artist-name-container">
 							<h5 class="specific-album-name"></h5>
 							<h6 class="specific-album-artist-name"></h6>
@@ -92,6 +92,7 @@
 
 			<div id="search_results_page" class="container-fluid">
 				<p class="text-center">Showing results for:&numsp;"<span class="search-input-text-display"></span>"</p>
+				<p class="text-center search-results-error-messages-p"></p>
 				<div class="container-fluid search-results-div">
 					<div class="songs-search-results-div">
 						<ul class="songs-search-results-div-ul"></ul>
@@ -115,15 +116,16 @@
 					</div>
 					<div class="song-player-progress-container-div">
 						<span class="song-player-elapsed-time-span">0:00</span>
-						<input class="song-player-progress-bar" type="range" min="0" max="100" value="0">
+						<label for="song-player-progress-bar">Playing song progress bar</label>
+						<input id="song-player-progress-bar" class="song-player-progress-bar" type="range" min="0" max="100" value="0">
 						<span class="song-player-remaining-time-span">0:00</span>
 					</div>
 				</div>
 				<div class="song-player-controls-div">
-					<button class="btn btn-lg bi-download download-current-song-button"></button>
-					<button class="btn btn-lg bi-skip-backward go-to-previous-song-button"></button>
-					<button class="btn btn-lg bi-play bi-pause play-or-pause-current-song-button"></button>
-					<button class="btn btn-lg bi-skip-forward go-to-next-song-button"></button>
+					<button class="btn btn-lg bi-download download-current-song-button" type="button" name="Download current song"></button>
+					<button class="btn btn-lg bi-skip-backward go-to-previous-song-button" type="button" name="Go to previous song"></button>
+					<button class="btn btn-lg bi-play bi-pause play-or-pause-current-song-button" type="button" name="Play or pause current song" autofocus></button>
+					<button class="btn btn-lg bi-skip-forward go-to-next-song-button" type="button" name="Go to next song"></button>
 				</div>
 			</div>
 		</footer>

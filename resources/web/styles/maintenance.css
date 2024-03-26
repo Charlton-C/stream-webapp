@@ -1,8 +1,27 @@
-body{
-	background: url("/resources/images/maintenance-background.jpg");
-	background-size: 100vw;
-	color: rgb(255, 255, 255)!important;
+@keyframes showByChangingOpacitySlowly {
+	0% { opacity: 0; }
+	100%{ opacity: 1; }
 }
+
+
+body{
+	background: linear-gradient(180deg, rgb(8, 36, 60), rgb(8, 36, 60));
+}
+
+.background-image-container{
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+}
+
+#countdown_page{
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	z-index: 2;
+	margin-top: -100vh;
+}
+
 
 /* For mobile phones and devices not in the media queries */
 
@@ -11,15 +30,19 @@ nav{
 	border-bottom: .5vh solid rgb(241, 241, 241);
 }
 
-nav > div >h2{
-	color: rgb(238, 238, 238)!important;
+nav > div >h2 > span{
+	color: rgb(238, 238, 238);
 }
 
-.countdown-container{
+.countdown-info-container-div{
+	color: rgb(255, 255, 255);
+}
+
+.countdown-digits-container-div{
 	margin-bottom: 12vh;
 }
 
-.countdown-container > div > span{
+.countdown-digits-container-div > div > span{
 	font-size: 80%;
 }
 
@@ -45,7 +68,7 @@ nav > div >h2{
 		border-bottom: .35vh solid rgb(241, 241, 241);
 	}
 	
-	.countdown-container{
+	.countdown-digits-container-div{
 		margin-bottom: 16.5vh;
 	}
 	
@@ -68,14 +91,13 @@ nav > div >h2{
 @media only screen and (min-width: 1025px) and (max-width: 1600px){
 	nav{
 		margin-bottom: 22vh;
-		border-bottom: .5vh solid rgb(241, 241, 241);
 	}
 	
-	.countdown-container{
+	.countdown-digits-container-div{
 		margin-bottom: 18.5vh;
 	}
 	
-	.countdown-container > div > span{
+	.countdown-digits-container-div > div > span{
 		font-size: 85%;
 	}
 	
@@ -101,11 +123,11 @@ nav > div >h2{
 		border-bottom: .4vh solid rgb(241, 241, 241);
 	}
 	
-	.countdown-container{
+	.countdown-digits-container-div{
 		margin-bottom: 25vh;
 	}
 	
-	.countdown-container > div > span{
+	.countdown-digits-container-div > div > span{
 		font-size: 110%;
 	}
 	

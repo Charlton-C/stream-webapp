@@ -24,7 +24,7 @@ var setIntervalThatUpdatesScreen = setInterval(() => {
 		aElement.click();
 	}
 	// Just in case it doesn't switch files
-	if(daysLeftSpan.innerText == "0-1"){
+	if(Number(daysLeftSpan.innerText) < 0){
 		clearInterval(setIntervalThatUpdatesScreen);
 		let aElement = document.createElement("a");
 		aElement.setAttribute("href", "index.html");
@@ -116,39 +116,59 @@ function getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate){
 }
 
 function updateScreenWithRemainingTime(){
+	let getTimeUntilCountdownEndsVariable = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate);
 	// Update days remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0] < 10){
-		daysLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0];
+	if(getTimeUntilCountdownEndsVariable[0] < 0){
+		daysLeftSpan.innerText = getTimeUntilCountdownEndsVariable[0];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0] >= 10){
-		daysLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[0];
+	else if(getTimeUntilCountdownEndsVariable[0] < 10){
+		daysLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[0];
+	}
+	else if(getTimeUntilCountdownEndsVariable[0] >= 10){
+		daysLeftSpan.innerText = getTimeUntilCountdownEndsVariable[0];
 	}
 	else{}
 
 	// Update hours remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1] < 10){
-		hoursLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1];
+	if(getTimeUntilCountdownEndsVariable[1] < 10){
+		hoursLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[1];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1] >= 10){
-		hoursLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[1];
+	else if(getTimeUntilCountdownEndsVariable[1] >= 10){
+		hoursLeftSpan.innerText = getTimeUntilCountdownEndsVariable[1];
 	}
 	else{}
 
 	// Update minutes remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2] < 10){
-		minutesLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2];
+	if(getTimeUntilCountdownEndsVariable[2] < 10){
+		minutesLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[2];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2] >= 10){
-		minutesLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[2];
+	else if(getTimeUntilCountdownEndsVariable[2] >= 10){
+		minutesLeftSpan.innerText = getTimeUntilCountdownEndsVariable[2];
 	}
 	else{}
 
 	// Update seconds remaining
-	if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3] < 10){
-		secondsLeftSpan.innerText = "0"+getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3];
+	if(getTimeUntilCountdownEndsVariable[3] < 10){
+		secondsLeftSpan.innerText = "0"+getTimeUntilCountdownEndsVariable[3];
 	}
-	else if(getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3] >= 10){
-		secondsLeftSpan.innerText = getTimeUntilCountdownEnds(countdownTimerEndDate, localTimeDate)[3];
+	else if(getTimeUntilCountdownEndsVariable[3] >= 10){
+		secondsLeftSpan.innerText = getTimeUntilCountdownEndsVariable[3];
 	}
 	else{}
 }
+
+
+function lazyLoadBackgroundImage(){
+	let imageURL = "/resources/images/maintenance-background.jpg";
+	let image = new Image();
+	image.src = imageURL;
+	let setIntervalForLazyLoadingBackgroundImage = setInterval(() => {
+		if(image.complete){
+			document.querySelector(".background-image-container").style.animation = "showByChangingOpacitySlowly 3s linear 0s 1 normal forwards";
+			document.querySelector(".background-image-container").style.backgroundImage = "url("+imageURL+")";
+			document.querySelector(".background-image-container").style.backgroundSize = "100vw";
+			clearInterval(setIntervalForLazyLoadingBackgroundImage);
+		}
+	}, 500);
+}
+lazyLoadBackgroundImage();
